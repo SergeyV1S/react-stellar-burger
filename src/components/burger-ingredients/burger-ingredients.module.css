@@ -1,0 +1,13 @@
+.container {
+  margin-top: 40px;
+}
+
+.ingredients {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  height: 100%;
+  max-height: 660px;
+  overflow-y: scroll;
+  margin-top: 40px;
+}
