@@ -1,7 +1,6 @@
 .wrapper {
   margin: 0 auto;
   background-color: #1c1c21;
-  /* padding: 16px 0; */
 }
 
 .container {
@@ -26,6 +25,10 @@
   /* padding: 16px 20px; */
   gap: 8px;
   color: #8585ad;
+}
+
+.active_link {
+  color: "#ffff";
 }
 
 .account {

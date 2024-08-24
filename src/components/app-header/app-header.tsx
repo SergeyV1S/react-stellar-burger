@@ -13,9 +13,7 @@ export const AppHeader = () => (
       <nav className={appHeader.nav}>
         <a className={appHeader.link + " pl-5 pr-5 pb-4 pt-4"} href='/'>
           <BurgerIcon type='primary' />
-          <p className='text text_type_main-default' style={{ color: "#ffff" }}>
-            Конструктор
-          </p>
+          <p className={appHeader.active_link + " text text_type_main-default"}>Конструктор</p>
         </a>
         <a className={appHeader.link + " pl-5 pr-5 pb-4 pt-4"} href='/'>
           <ListIcon type='secondary' />

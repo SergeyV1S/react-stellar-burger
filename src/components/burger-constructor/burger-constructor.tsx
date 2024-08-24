@@ -9,27 +9,24 @@ import {
 import burgerConstructor from "./burger-constructor.module.css";
 
 const ingredients = data.filter((ingredient) => ingredient.type !== "bun");
-const buns = data.filter((item) => item.type === "bun");
+const bun = data.filter((item) => item.type === "bun")[0];
 
 export const BurgerConstructor = () => (
-  <section style={{ marginTop: 100 }}>
-    <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
-      <div style={{ paddingLeft: 32 }}>
+  <section className={burgerConstructor.wrapper}>
+    <div className={burgerConstructor.burger_constructor_wrapper}>
+      <div className={burgerConstructor.bun_wrapper}>
         <ConstructorElement
           type='top'
           isLocked={true}
-          text={buns[0].name + " (верх)"}
-          price={buns[0].price}
-          thumbnail={buns[0].image}
+          text={bun.name + " (верх)"}
+          price={bun.price}
+          thumbnail={bun.image}
         />
       </div>
-      <div className={burgerConstructor.ingredients}>
+      <div className={burgerConstructor.ingredients_wrapper}>
         {ingredients.map((ingredient) => (
-          <div
-            key={ingredient._id}
-            style={{ paddingLeft: 32, paddingRight: 8, position: "relative" }}
-          >
-            <div style={{ position: "absolute", left: 0, top: "35%" }}>
+          <div key={ingredient._id} className={burgerConstructor.ingredients_container}>
+            <div className={burgerConstructor.drag_icon_wrapper}>
               <DragIcon type='primary' />
             </div>
             <ConstructorElement
@@ -40,13 +37,13 @@ export const BurgerConstructor = () => (
           </div>
         ))}
       </div>
-      <div style={{ paddingLeft: 32 }}>
+      <div className={burgerConstructor.bun_wrapper}>
         <ConstructorElement
           type='bottom'
           isLocked={true}
-          text={buns[1].name + " (низ)"}
-          price={buns[1].price}
-          thumbnail={buns[1].image}
+          text={bun.name + " (низ)"}
+          price={bun.price}
+          thumbnail={bun.image}
         />
       </div>
     </div>
