@@ -1,5 +1,6 @@
+import checkmark from "@images/checkmark.webp";
+
 import orderDetails from "./order-details.module.css";
-import checkmark from "/checkmark.webp";
 
 export const OrderDetails = () => (
   <div className={orderDetails.container}>

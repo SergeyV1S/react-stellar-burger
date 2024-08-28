@@ -21,9 +21,18 @@
   top: 0;
 }
 
-.close {
+.header_with_title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.header_without_title {
   display: flex;
   justify-content: end;
+}
+
+.close {
   & :hover {
     cursor: pointer;
   }

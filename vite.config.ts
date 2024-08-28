@@ -9,7 +9,8 @@ export default defineConfig({
       "@components": path.resolve(__dirname, "./src/components"),
       "@fonts": path.resolve(__dirname, "./src/fonts"),
       "@images": path.resolve(__dirname, "./src/images"),
-      "@utils": path.resolve(__dirname, "./src/utils")
+      "@utils": path.resolve(__dirname, "./src/utils"),
+      "@interfaces": path.resolve(__dirname, "./src/interfaces")
     }
   },
   build: {

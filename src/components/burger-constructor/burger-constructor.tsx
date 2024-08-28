@@ -1,4 +1,4 @@
-import type { IDataType } from "@utils/data";
+import type { IIngredient } from "@interfaces/ingredient";
 import {
   Button,
   ConstructorElement,
@@ -7,19 +7,14 @@ import {
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useState } from "react";
 
-import { Modal } from "@components/modal/modal";
+import { Modal } from "@components/modal";
 import { OrderDetails } from "@components/order-details";
 
 import burgerConstructor from "./burger-constructor.module.css";
-
-const filterCategories = (data: IDataType[]) => {
-  const ingredients = data.filter((ingredient) => ingredient.type !== "bun");
-  const bun = data.filter((item) => item.type === "bun")[0];
-  return { ingredients, bun };
-};
+import { filterCategories } from "./filter-categories";
 
 interface IBurgerConstructorProps {
-  products: IDataType[];
+  products: IIngredient[];
 }
 
 export const BurgerConstructor = ({ products }: IBurgerConstructorProps) => {

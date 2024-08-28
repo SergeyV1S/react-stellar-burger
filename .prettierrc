@@ -12,6 +12,5 @@
   "importOrderSeparation": true,
   "importOrderGroupNamespaceSpecifiers": true,
   "importOrderSortSpecifiers": true,
-  "tailwindFunctions": ["cn", "cva"],
   "plugins": ["@trivago/prettier-plugin-sort-imports"]
 }

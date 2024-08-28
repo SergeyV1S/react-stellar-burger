@@ -1,4 +1,4 @@
-import type { IDataType } from "@utils/data";
+import type { IIngredient } from "@interfaces/ingredient";
 import { useEffect, useState } from "react";
 
 import { AppHeader } from "@components/app-header";
@@ -8,7 +8,7 @@ import { BurgerIngredients } from "@components/burger-ingredients";
 import app from "./app.module.css";
 
 interface IState {
-  data: IDataType[] | null;
+  data: IIngredient[] | null;
   isSuccess: boolean;
   isError: boolean;
   isLoading: boolean;
@@ -48,6 +48,7 @@ export const App = () => {
           </>
         )}
         {state.isLoading && <div>Загрузка...</div>}
+        {state.isError && <div>Ошибка при получении данных</div>}
       </main>
     </>
   );

@@ -24,7 +24,8 @@
       "@components/*": ["src/components/*"],
       "@fonts/*": ["src/fonts/*"],
       "@images/*": ["src/images/*"],
-      "@utils/*": ["src/utils/*"]
+      "@utils/*": ["src/utils/*"],
+      "@interfaces/*": ["src/interfaces/*"]
     }
   },
   "include": ["**/*.ts", "**/*.tsx"]

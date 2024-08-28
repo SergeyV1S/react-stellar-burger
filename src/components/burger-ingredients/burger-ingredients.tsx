@@ -1,18 +1,12 @@
-import type { IDataType } from "@utils/data";
+import type { IIngredient } from "@interfaces/ingredient";
 
 import { TabMenu } from "../ui";
 import burgerIngredients from "./burger-ingredients.module.css";
 import { BurgerTypeBlock } from "./burger-type-block";
-
-const filterCategories = (data: IDataType[]) => {
-  const buns = data.filter((item) => item.type === "bun");
-  const mains = data.filter((item) => item.type === "main");
-  const sauces = data.filter((item) => item.type === "sauce");
-  return { buns, mains, sauces };
-};
+import { filterCategories } from "./filter-categories";
 
 interface IBurgerIngredientsProps {
-  products: IDataType[];
+  products: IIngredient[];
 }
 
 export const BurgerIngredients = ({ products }: IBurgerIngredientsProps) => {
