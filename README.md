@@ -1,9 +1,10 @@
 # Stellar-Burgers
 
+Add enviroment variable VITE_API_URL=https://norma.nomoreparties.space/api/ingredients to get data from server.
+
 To run project in dev mode use:
 
 - yarn dev
-- npm run dev
 
 To lint project use:
 
