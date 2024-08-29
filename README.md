@@ -1,5 +1,7 @@
 # Stellar-Burgers
 
+Befor run project you should:
+
 1. Create .env file in the root directory
 2. Add enviroment variable VITE_API_URL=https://norma.nomoreparties.space/api to get data from server.
 

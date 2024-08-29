@@ -9,7 +9,8 @@ import { BurgerIngredients } from "@components/burger-ingredients";
 import app from "./app.module.css";
 
 interface IState {
-  data: IIngredient[] | null | Error;
+  data: IIngredient[] | null;
+  error: Error | string;
   isSuccess: boolean;
   isError: boolean;
   isLoading: boolean;
@@ -18,6 +19,7 @@ interface IState {
 export const App = () => {
   const [state, setState] = useState<IState>({
     data: null,
+    error: "",
     isSuccess: false,
     isError: false,
     isLoading: false
@@ -31,14 +33,15 @@ export const App = () => {
     <>
       <AppHeader />
       <main className={app.container}>
-        {state.isSuccess && state.data && Array.isArray(state.data) && (
+        {state.isSuccess && state.data && (
           <>
             <BurgerIngredients products={state.data} />
             <BurgerConstructor products={state.data} />
           </>
         )}
         {state.isLoading && <div>Загрузка...</div>}
-        {state.isError && state.data && "message" in state.data && <div>{state.data.message}</div>}
+        {state.isError && typeof state.error === "object" && <div>{state.error.message}</div>}
+        {state.isError && typeof state.error === "string" && <div>{state.error}</div>}
       </main>
     </>
   );
