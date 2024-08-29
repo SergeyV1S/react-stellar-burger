@@ -1,6 +1,7 @@
 # Stellar-Burgers
 
-Add enviroment variable VITE_API_URL=https://norma.nomoreparties.space/api/ingredients to get data from server.
+1. Create .env file in the root directory
+2. Add enviroment variable VITE_API_URL=https://norma.nomoreparties.space/api to get data from server.
 
 To run project in dev mode use:
 
