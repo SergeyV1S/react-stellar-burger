@@ -14,13 +14,12 @@ interface IModalProps {
 }
 
 export const Modal = ({ children, closeModal, title }: IModalProps) => {
-  const checkEscapeButton = (e: KeyboardEvent) => {
-    if (e.key == "Escape") {
-      closeModal();
-    }
-  };
-
   useEffect(() => {
+    const checkEscapeButton = (e: KeyboardEvent) => {
+      if (e.key == "Escape") {
+        closeModal();
+      }
+    };
     document.addEventListener("keydown", checkEscapeButton);
 
     return () => {

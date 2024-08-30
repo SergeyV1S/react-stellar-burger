@@ -5,9 +5,8 @@ import {
   CurrencyIcon,
   DragIcon
 } from "@ya.praktikum/react-developer-burger-ui-components";
-import { useState } from "react";
 
-import { Modal } from "@components/modal";
+import { Modal, useModal } from "@components/modal";
 import { OrderDetails } from "@components/order-details";
 
 import burgerConstructor from "./burger-constructor.module.css";
@@ -18,7 +17,7 @@ interface IBurgerConstructorProps {
 }
 
 export const BurgerConstructor = ({ products }: IBurgerConstructorProps) => {
-  const [isModal, setIsModal] = useState(false);
+  const { isModal, openModal, closeModal } = useModal();
   const { ingredients, bun } = filterCategories(products);
 
   return (
@@ -61,12 +60,12 @@ export const BurgerConstructor = ({ products }: IBurgerConstructorProps) => {
         <p className='text text_type_digits-medium'>
           610 <CurrencyIcon type='primary' />
         </p>
-        <Button onClick={() => setIsModal(true)} htmlType='button' type='primary' size='large'>
+        <Button onClick={openModal} htmlType='button' type='primary' size='large'>
           Оформить заказ
         </Button>
       </div>
       {isModal && (
-        <Modal closeModal={() => setIsModal(false)}>
+        <Modal closeModal={closeModal}>
           <OrderDetails />
         </Modal>
       )}

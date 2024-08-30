@@ -1,9 +1,8 @@
 import type { IIngredient } from "@interfaces/ingredient";
 import { Counter, CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
-import { useState } from "react";
 
 import { IngredientDetails } from "@components/ingredient-details";
-import { Modal } from "@components/modal";
+import { Modal, useModal } from "@components/modal";
 
 import burgerItem from "./burger-item.module.css";
 
@@ -13,10 +12,10 @@ interface IBurgerItemProps {
 }
 
 export const BurgerItem = ({ count, item }: IBurgerItemProps) => {
-  const [isModal, setIsModal] = useState(false);
+  const { isModal, openModal, closeModal } = useModal();
   return (
     <div className={burgerItem.wrapper}>
-      <div className={burgerItem.container} onClick={() => setIsModal(true)}>
+      <div className={burgerItem.container} onClick={openModal}>
         <div className={burgerItem.image_container}>
           <img src={item.image} alt={item.name} />
           <Counter count={count} size='default' extraClass='m-1' />
@@ -28,8 +27,8 @@ export const BurgerItem = ({ count, item }: IBurgerItemProps) => {
         <p className='text text_type_main-default'>{item.name}</p>
       </div>
       {isModal && (
-        <Modal closeModal={() => setIsModal(false)} title='Детали ингредиента'>
-          <IngredientDetails {...item} />
+        <Modal closeModal={closeModal} title='Детали ингредиента'>
+          <IngredientDetails ingredient={item} />
         </Modal>
       )}
     </div>
