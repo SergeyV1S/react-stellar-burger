@@ -1,0 +1,39 @@
+.wrapper {
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 100%;
+  min-height: 100%;
+  top: 0;
+  left: 0;
+}
+
+.container {
+  position: relative;
+  border-radius: 30px;
+  z-index: 10;
+  background-color: #1c1c21;
+}
+
+.content {
+  padding: 40px;
+  top: 0;
+}
+
+.header_with_title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.header_without_title {
+  display: flex;
+  justify-content: end;
+}
+
+.close {
+  & :hover {
+    cursor: pointer;
+  }
+}

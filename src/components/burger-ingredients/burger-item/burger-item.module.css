@@ -1,0 +1,26 @@
+.wrapper {
+  display: flex;
+  gap: 4px;
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 4px;
+}
+
+.image_container {
+  position: relative;
+  padding: 0 16px;
+}
+
+.price_container {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}

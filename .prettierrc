@@ -1,0 +1,16 @@
+{
+  "printWidth": 100,
+  "singleQuote": false,
+  "jsxSingleQuote": true,
+  "trailingComma": "none",
+  "semi": true,
+  "tabWidth": 2,
+  "useTabs": false,
+  "endOfLine": "lf",
+  "arrowParens": "always",
+  "importOrder": ["^@images/(.*)$", "^@components/(.*)$", "^@fonts/(.*)$", "^[./]"],
+  "importOrderSeparation": true,
+  "importOrderGroupNamespaceSpecifiers": true,
+  "importOrderSortSpecifiers": true,
+  "plugins": ["@trivago/prettier-plugin-sort-imports"]
+}
