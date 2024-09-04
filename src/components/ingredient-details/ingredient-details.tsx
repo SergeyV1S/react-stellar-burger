@@ -26,9 +26,7 @@ export const IngredientDetails = ({ ingredient }: IIngredientDetailsProps) => (
         </div>
         <div className={ingredientDetails.compound_item}>
           <p className='text text_type_main-small text_color_inactive'>Углеводы, г</p>
-          <p className='text text_type_digits-default text_color_inactive'>
-            {ingredient.carbohydrates}
-          </p>
+          <p className='text text_type_digits-default text_color_inactive'>{ingredient.carbohydrates}</p>
         </div>
       </div>
     </div>

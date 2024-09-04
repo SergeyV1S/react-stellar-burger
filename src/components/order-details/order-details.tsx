@@ -9,9 +9,7 @@ export const OrderDetails = () => (
     <img src={checkmark} alt='checkmark' />
     <div className={orderDetails.text_group}>
       <p className='text text_type_main-small'>Ваш заказ начали готовить</p>
-      <p className='text text_type_main-small text_color_inactive'>
-        Дождитесь готовности на орбитальной станции
-      </p>
+      <p className='text text_type_main-small text_color_inactive'>Дождитесь готовности на орбитальной станции</p>
     </div>
   </div>
 );

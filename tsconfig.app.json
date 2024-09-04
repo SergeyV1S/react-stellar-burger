@@ -25,6 +25,7 @@
       "@fonts/*": ["src/fonts/*"],
       "@images/*": ["src/images/*"],
       "@utils/*": ["src/utils/*"],
+      "@services/*": ["src/services/*"],
       "@interfaces/*": ["src/interfaces/*"]
     }
   },

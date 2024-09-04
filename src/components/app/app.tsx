@@ -1,6 +1,8 @@
-import type { IIngredient } from "@interfaces/ingredient";
+/* eslint-disable @typescript-eslint/ban-ts-comment */
+import type { TRootReducerState } from "@services/reducers";
 import { getInrgedients } from "@utils/api";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 import { AppHeader } from "@components/app-header";
 import { BurgerConstructor } from "@components/burger-constructor";
@@ -8,40 +10,28 @@ import { BurgerIngredients } from "@components/burger-ingredients";
 
 import app from "./app.module.css";
 
-interface IState {
-  data: IIngredient[] | null;
-  error: Error | string;
-  isSuccess: boolean;
-  isError: boolean;
-  isLoading: boolean;
-}
-
 export const App = () => {
-  const [state, setState] = useState<IState>({
-    data: null,
-    error: "",
-    isSuccess: false,
-    isError: false,
-    isLoading: false
-  });
+  const dispatch = useDispatch();
+  const { data, error, isError, isLoading, isSuccess } = useSelector((store: TRootReducerState) => store.ingrediets);
 
   useEffect(() => {
-    getInrgedients(setState);
+    // @ts-expect-error
+    dispatch(getInrgedients());
   }, []);
 
   return (
     <>
       <AppHeader />
       <main className={app.container}>
-        {state.isSuccess && state.data && (
+        {isSuccess && data && (
           <>
-            <BurgerIngredients products={state.data} />
-            <BurgerConstructor products={state.data} />
+            <BurgerIngredients products={data} />
+            <BurgerConstructor products={data} />
           </>
         )}
-        {state.isLoading && <div>Загрузка...</div>}
-        {state.isError && typeof state.error === "object" && <div>{state.error.message}</div>}
-        {state.isError && typeof state.error === "string" && <div>{state.error}</div>}
+        {isLoading && <div>Загрузка...</div>}
+        {isError && typeof error === "object" && <div>{error.message}</div>}
+        {isError && typeof error === "string" && <div>{error}</div>}
       </main>
     </>
   );

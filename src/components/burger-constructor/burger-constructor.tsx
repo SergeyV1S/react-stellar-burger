@@ -1,10 +1,5 @@
 import type { IIngredient } from "@interfaces/ingredient";
-import {
-  Button,
-  ConstructorElement,
-  CurrencyIcon,
-  DragIcon
-} from "@ya.praktikum/react-developer-burger-ui-components";
+import { Button, ConstructorElement, CurrencyIcon, DragIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 
 import { Modal, useModal } from "@components/modal";
 import { OrderDetails } from "@components/order-details";
@@ -38,11 +33,7 @@ export const BurgerConstructor = ({ products }: IBurgerConstructorProps) => {
               <div className={burgerConstructor.drag_icon_wrapper}>
                 <DragIcon type='primary' />
               </div>
-              <ConstructorElement
-                text={ingredient.name}
-                price={ingredient.price}
-                thumbnail={ingredient.image}
-              />
+              <ConstructorElement text={ingredient.name} price={ingredient.price} thumbnail={ingredient.image} />
             </div>
           ))}
         </div>
