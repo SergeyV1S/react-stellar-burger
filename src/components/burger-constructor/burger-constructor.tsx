@@ -1,28 +1,42 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 import type { IIngredient } from "@interfaces/ingredient";
 import { REMOVE_INGREDIENT_FROM_CONSTRUCTOR } from "@services/actions/consructor";
+import { TOGGLE_ORDER_MODAL } from "@services/actions/order";
 import type { TRootReducerState } from "@services/reducers";
 import type { TAppDispatch } from "@services/store";
+import { postOrder } from "@services/thunks/postOrder";
 import { Button, ConstructorElement, CurrencyIcon, DragIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import { Modal, useModal } from "@components/modal";
+import { Modal } from "@components/modal";
 import { OrderDetails } from "@components/order-details";
 
 import burgerConstructor from "./burger-constructor.module.css";
 
 export const BurgerConstructor = () => {
-  const { isModal, openModal, closeModal } = useModal();
-
   const dispatch = useDispatch<TAppDispatch>();
 
   const bun = useSelector((store: TRootReducerState) => store.constructorData.bun);
   const ingredients = useSelector((store: TRootReducerState) => store.constructorData.ingredients);
+  const isModal = useSelector((store: TRootReducerState) => store.order.isOrderModalOpen);
+
+  const createOrder = () => {
+    if (bun) {
+      const idArr = [bun._id, ...ingredients.map((ingredient) => ingredient._id), bun._id];
+      // @ts-expect-error
+      dispatch(postOrder(idArr));
+    }
+  };
 
   const totalCoast = useMemo(
     () => (bun ? bun.price * 2 : 0) + ingredients.reduce((acc, ingredient) => acc + ingredient.price, 0),
     [bun, ingredients]
   );
+
+  const closeModal = () => {
+    dispatch({ type: TOGGLE_ORDER_MODAL, isOpen: false });
+  };
 
   const removeIngredientFromConstructor = (ingredient: IIngredient) => {
     dispatch({ type: REMOVE_INGREDIENT_FROM_CONSTRUCTOR, ingredient: ingredient });
@@ -87,7 +101,13 @@ export const BurgerConstructor = () => {
         <p className='text text_type_digits-medium'>
           {totalCoast} <CurrencyIcon type='primary' />
         </p>
-        <Button onClick={openModal} htmlType='button' type='primary' size='large'>
+        <Button
+          disabled={!bun || ingredients.length === 0}
+          onClick={createOrder}
+          htmlType='button'
+          type='primary'
+          size='large'
+        >
           Оформить заказ
         </Button>
       </div>

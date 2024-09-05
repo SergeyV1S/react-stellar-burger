@@ -6,9 +6,8 @@ import { addUuidToIngredient } from "@services/thunks/addUuidToIngredient";
 import { Counter, CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useDispatch, useSelector } from "react-redux";
 
-import { IngredientDetails } from "@components/ingredient-details";
-import { Modal, useModal } from "@components/modal";
-
+// import { IngredientDetails } from "@components/ingredient-details";
+// import { Modal } from "@components/modal";
 import burgerItem from "./burger-item.module.css";
 
 interface IBurgerItemProps {
@@ -16,7 +15,7 @@ interface IBurgerItemProps {
 }
 
 export const BurgerItem = ({ item }: IBurgerItemProps) => {
-  const { isModal, closeModal } = useModal();
+  // const { isModal, closeModal } = useModal();
 
   const dispatch = useDispatch<TAppDispatch>();
   const bun = useSelector((store: TRootReducerState) => store.constructorData.bun);
@@ -42,11 +41,11 @@ export const BurgerItem = ({ item }: IBurgerItemProps) => {
         </div>
         <p className='text text_type_main-default'>{item.name}</p>
       </div>
-      {isModal && (
+      {/* {isModal && (
         <Modal closeModal={closeModal} title='Детали ингредиента'>
           <IngredientDetails ingredient={item} />
         </Modal>
-      )}
+      )} */}
     </div>
   );
 };
