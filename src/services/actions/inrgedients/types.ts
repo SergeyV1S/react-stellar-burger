@@ -1,6 +1,6 @@
 import type { IIngredient } from "@interfaces/ingredient";
 
-import type { GET_INGREDIENTS, GET_INGREDIENTS_FAILED, GET_INGREDIENTS_SUCCESS } from "./ingredient";
+import type { GET_INGREDIENTS, GET_INGREDIENTS_FAILED, GET_INGREDIENTS_SUCCESS } from ".";
 
 export interface IGetInrgedientsAction {
   type: typeof GET_INGREDIENTS;

@@ -2,6 +2,13 @@
   margin-top: 40px;
 }
 
+.type_block_container {
+  display: grid;
+  grid-template-columns: repeat(2, 272px);
+  gap: 24px 32px;
+  margin-top: 24px;
+}
+
 .ingredients {
   display: flex;
   flex-direction: column;

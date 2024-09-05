@@ -1,8 +1,4 @@
-import {
-  GET_INGREDIENTS,
-  GET_INGREDIENTS_FAILED,
-  GET_INGREDIENTS_SUCCESS
-} from "@services/actions/inrgedients/ingredient";
+import { GET_INGREDIENTS, GET_INGREDIENTS_FAILED, GET_INGREDIENTS_SUCCESS } from "@services/actions/inrgedients";
 
 import type { IIngredientInitialState, TIngredientActions } from "./types";
 
@@ -19,7 +15,6 @@ export const ingredietReducer = (state = initialState, action: TIngredientAction
     case GET_INGREDIENTS:
       return {
         ...state,
-        isLoading: true,
         isError: false
       };
     case GET_INGREDIENTS_SUCCESS:

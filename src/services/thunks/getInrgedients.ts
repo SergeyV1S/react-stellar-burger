@@ -1,10 +1,8 @@
-import {
-  GET_INGREDIENTS,
-  GET_INGREDIENTS_FAILED,
-  GET_INGREDIENTS_SUCCESS
-} from "@services/actions/inrgedients/ingredient";
+import { GET_INGREDIENTS, GET_INGREDIENTS_FAILED, GET_INGREDIENTS_SUCCESS } from "@services/actions/inrgedients";
+import type { TIngredientActions } from "@services/reducers/ingredient/types";
+import type { Dispatch } from "react";
 
-export const getInrgedients = () => (dispatch: any) => {
+export const getInrgedients = () => (dispatch: Dispatch<TIngredientActions>) => {
   dispatch({ type: GET_INGREDIENTS });
   fetch(import.meta.env.VITE_API_URL + "/ingredients")
     .then((res) => {
