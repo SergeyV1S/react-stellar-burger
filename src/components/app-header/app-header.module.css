@@ -6,8 +6,8 @@
 .container {
   width: 100%;
   width: 1280px;
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: 383px 1fr 207px;
   align-items: center;
   margin: 0 auto;
 }
@@ -22,13 +22,16 @@
 .link {
   display: flex;
   align-items: center;
-  /* padding: 16px 20px; */
   gap: 8px;
   color: #8585ad;
 }
 
 .active_link {
   color: "#ffff";
+}
+
+.logo {
+  margin-left: 112px;
 }
 
 .account {
