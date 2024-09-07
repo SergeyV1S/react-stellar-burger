@@ -14,6 +14,5 @@ export interface IRemoveInregientToConstructorAction {
 
 export interface IMoveItemAction {
   type: typeof MOVE_ITEM;
-  dragIndex: number;
-  hoverIndex: number;
+  payload: { dragIndex: number; hoverIndex: number };
 }

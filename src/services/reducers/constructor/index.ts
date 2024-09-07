@@ -1,4 +1,8 @@
-import { ADD_INGREDIENT_TO_CONSTRUCTOR, REMOVE_INGREDIENT_FROM_CONSTRUCTOR } from "@services/actions/consructor";
+import {
+  ADD_INGREDIENT_TO_CONSTRUCTOR,
+  MOVE_ITEM,
+  REMOVE_INGREDIENT_FROM_CONSTRUCTOR
+} from "@services/actions/consructor";
 
 import type { IConstructorInitialState, TConstructorActions } from "./types";
 
@@ -26,6 +30,15 @@ export const constructorRuducer = (state = initialState, action: TConstructorAct
       return {
         ...state,
         ingredients: [...state.ingredients].filter((ingredient) => ingredient.uuid !== action.ingredient.uuid)
+      };
+    }
+    case MOVE_ITEM: {
+      const updatedIngredients = [...state.ingredients];
+      const [draggedIngredient] = updatedIngredients.splice(action.payload.dragIndex, 1);
+      updatedIngredients.splice(action.payload.hoverIndex, 0, draggedIngredient);
+      return {
+        ...state,
+        ingredients: updatedIngredients
       };
     }
     default: {

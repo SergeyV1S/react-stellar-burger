@@ -21,18 +21,6 @@
   overflow-y: scroll;
 }
 
-.ingredients_container {
-  padding-left: 32px;
-  padding-right: 8px;
-  position: relative;
-}
-
-.drag_icon_wrapper {
-  position: absolute;
-  left: 0;
-  top: 35%;
-}
-
 .button_container {
   display: flex;
   align-items: center;
@@ -50,10 +38,16 @@
   background-color: #1c1c21;
   border-radius: 40px;
   height: 48px;
+  border: 1px solid transparent;
 }
 
 .no_ingredients {
   padding-left: 80px;
+}
+
+.no_ingredients_dnd_hover {
+  padding-left: 80px;
+  border: 1px dashed green;
 }
 
 .no_bun_top {
@@ -62,4 +56,8 @@
 
 .no_bun_bottom {
   border-radius: 40px 40px 88px 88px;
+}
+
+.no_bun_dnd_hover {
+  border: 1px dashed green;
 }

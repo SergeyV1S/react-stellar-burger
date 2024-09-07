@@ -1,8 +1,13 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
+import { TOGGLE_SELECTED_INGREDIENT_MODAL } from "@services/actions/inrgedients";
 import type { TRootReducerState } from "@services/reducers";
+import type { TAppDispatch } from "@services/store";
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useRef, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+
+import { IngredientDetails } from "@components/ingredient-details";
+import { Modal } from "@components/modal";
 
 import burgerIngredients from "./burger-ingredients.module.css";
 import { BurgerItem } from "./burger-item";
@@ -10,13 +15,17 @@ import { BurgerItem } from "./burger-item";
 export const BurgerIngredients = () => {
   const [currentTab, setCurrentTab] = useState("bun");
 
-  const products = useSelector((store: TRootReducerState) => store.ingrediets.data);
+  const { data, isSelectedIngredientModalOpen, selectedIngredient } = useSelector(
+    (store: TRootReducerState) => store.ingrediets
+  );
+  const dispatch = useDispatch<TAppDispatch>();
+
   const bunsRef = useRef<HTMLDivElement>(null);
   const mainsRef = useRef<HTMLDivElement>(null);
   const saucesRef = useRef<HTMLDivElement>(null);
   const ingredientsRef = useRef<HTMLDivElement>(null);
 
-  const ingredientTypes = [
+  const ingredientTypesData = [
     { name: "Булки", type: "bun", ref: bunsRef },
     { name: "Основное", type: "main", ref: mainsRef },
     { name: "Соусы", type: "sauce", ref: saucesRef }
@@ -26,6 +35,8 @@ export const BurgerIngredients = () => {
     document.getElementById(tab)?.scrollIntoView({ behavior: "smooth" });
     setCurrentTab(tab);
   };
+
+  const closeModal = () => dispatch({ type: TOGGLE_SELECTED_INGREDIENT_MODAL, isOpen: false });
 
   const checkPosition = () => {
     if (
@@ -57,20 +68,25 @@ export const BurgerIngredients = () => {
         </Tab>
       </div>
       <div ref={ingredientsRef} onScroll={checkPosition} className={burgerIngredients.ingredients}>
-        {ingredientTypes.map((ingredientType) => (
+        {ingredientTypesData.map((ingredientType) => (
           <div key={ingredientType.type}>
             <h2 ref={ingredientType.ref} id={ingredientType.type} className='text text_type_main-medium'>
               {ingredientType.name}
             </h2>
             <div className={burgerIngredients.type_block_container}>
-              {products &&
-                products.map(
+              {data &&
+                data.map(
                   (product) => product.type === ingredientType.type && <BurgerItem item={product} key={product._id} />
                 )}
             </div>
           </div>
         ))}
       </div>
+      {isSelectedIngredientModalOpen && (
+        <Modal closeModal={closeModal} title='Детали ингредиента'>
+          <IngredientDetails ingredient={selectedIngredient} />
+        </Modal>
+      )}
     </section>
   );
 };

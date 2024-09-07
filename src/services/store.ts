@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 // @ts-nocheck
-import { applyMiddleware, createStore } from "redux";
+import { applyMiddleware, compose, createStore } from "redux";
 import { thunk } from "redux-thunk";
 
 import { rootReducer } from "./reducers";

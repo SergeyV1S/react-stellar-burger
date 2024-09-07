@@ -1,13 +1,20 @@
-import { GET_INGREDIENTS, GET_INGREDIENTS_FAILED, GET_INGREDIENTS_SUCCESS } from "@services/actions/inrgedients";
+import {
+  GET_INGREDIENTS,
+  GET_INGREDIENTS_FAILED,
+  GET_INGREDIENTS_SUCCESS,
+  SET_SELECTED_INGREDIENT,
+  TOGGLE_SELECTED_INGREDIENT_MODAL
+} from "@services/actions/inrgedients";
 
 import type { IIngredientInitialState, TIngredientActions } from "./types";
 
 const initialState: IIngredientInitialState = {
   data: [],
+  selectedIngredient: null,
   error: "",
   isSuccess: false,
-  isError: false,
-  isLoading: false
+  isLoading: false,
+  isSelectedIngredientModalOpen: false
 };
 
 export const ingredietReducer = (state = initialState, action: TIngredientActions): IIngredientInitialState => {
@@ -15,7 +22,7 @@ export const ingredietReducer = (state = initialState, action: TIngredientAction
     case GET_INGREDIENTS:
       return {
         ...state,
-        isError: false
+        error: ""
       };
     case GET_INGREDIENTS_SUCCESS:
       return {
@@ -28,8 +35,18 @@ export const ingredietReducer = (state = initialState, action: TIngredientAction
       return {
         ...state,
         error: action.error,
-        isLoading: false,
-        isError: true
+        isLoading: false
+      };
+    case SET_SELECTED_INGREDIENT:
+      return {
+        ...state,
+        isSelectedIngredientModalOpen: true,
+        selectedIngredient: action.ingredient
+      };
+    case TOGGLE_SELECTED_INGREDIENT_MODAL:
+      return {
+        ...state,
+        isSelectedIngredientModalOpen: action.isOpen
       };
     default: {
       return state;
