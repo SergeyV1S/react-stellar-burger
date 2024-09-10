@@ -1,17 +1,17 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
-// @ts-nocheck
-import { applyMiddleware, compose, createStore } from "redux";
-import { thunk } from "redux-thunk";
+import { configureStore as createStore } from "@reduxjs/toolkit";
+import { useDispatch, useSelector } from "react-redux";
 
-import { rootReducer } from "./reducers";
+import { rootReducer } from "./rootReducer";
 
-const composeEnhancers =
-  typeof window === "object" && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
-    ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({})
-    : compose;
+const store = createStore({
+  devTools: true,
+  reducer: rootReducer
+});
 
-const store = createStore(rootReducer, composeEnhancers(applyMiddleware(thunk)));
-
+export type TRootState = ReturnType<typeof store.getState>;
 export type TAppDispatch = typeof store.dispatch;
+
+export const useAppDispatch = useDispatch.withTypes<TAppDispatch>();
+export const useAppSelector = useSelector.withTypes<TRootState>();
 
 export default store;

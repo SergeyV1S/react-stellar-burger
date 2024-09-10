@@ -11,7 +11,8 @@ export default defineConfig({
       "@images": path.resolve(__dirname, "./src/images"),
       "@utils": path.resolve(__dirname, "./src/utils"),
       "@services": path.resolve(__dirname, "./src/services"),
-      "@interfaces": path.resolve(__dirname, "./src/interfaces")
+      "@interfaces": path.resolve(__dirname, "./src/interfaces"),
+      "@api": path.resolve(__dirname, "./src/api")
     }
   },
   build: {

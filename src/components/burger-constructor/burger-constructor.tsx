@@ -1,55 +1,52 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
 import type { IIngredient } from "@interfaces/ingredient";
-import { MOVE_ITEM, REMOVE_INGREDIENT_FROM_CONSTRUCTOR } from "@services/actions/consructor";
-import { TOGGLE_ORDER_MODAL } from "@services/actions/order";
-import type { TRootReducerState } from "@services/reducers";
-import type { TAppDispatch } from "@services/store";
-import { addUuidToIngredient } from "@services/thunks/addUuidToIngredient";
-import { postOrder } from "@services/thunks/postOrder";
+import {
+  addIngredientToConstructor,
+  getConstructorState,
+  moveItem,
+  removeIngredientFromConstructor
+} from "@services/constructor";
+import { createOrderAction, getIsModalOrder, toggleOrderModal } from "@services/order";
+import { useAppDispatch, useAppSelector } from "@services/store";
 import { Button, ConstructorElement, CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useMemo } from "react";
 import { useDrop } from "react-dnd";
-import { useDispatch, useSelector } from "react-redux";
 
 import { Modal } from "@components/modal";
 import { OrderDetails } from "@components/order-details";
 
 import burgerConstructor from "./burger-constructor.module.css";
 import { IngredientElement } from "./ingredient-element/ingedient-element";
+import { countTotalCost, formatIngredientsForRequest } from "./utils";
 
 export const BurgerConstructor = () => {
-  const dispatch = useDispatch<TAppDispatch>();
-
-  const { bun, ingredients } = useSelector((store: TRootReducerState) => store.constructorData);
-  const { isOrderModalOpen } = useSelector((store: TRootReducerState) => store.order);
+  // Хуки
+  const dispatch = useAppDispatch();
+  const { bun, ingredients } = useAppSelector(getConstructorState);
+  const isOrderModalOpen = useAppSelector(getIsModalOrder);
 
   const [{ isOver, isBun }, dropTargetConstructorRef] = useDrop({
     accept: "burger-item",
-    // @ts-expect-error
-    drop: (ingredient: IIngredient) => dispatch(addUuidToIngredient(ingredient)),
+    drop: (ingredient: IIngredient) => dispatch(addIngredientToConstructor(ingredient)),
     collect: (monitor) => ({
       isOver: monitor.isOver(),
       isBun: monitor.getItem() && monitor.getItem().type === "bun"
     })
   });
 
+  // Функции
+  const closeModal = () => dispatch(toggleOrderModal({ isOpen: false }));
+
+  const moveIngredient = (dragIndex: number, hoverIndex: number) => dispatch(moveItem({ dragIndex, hoverIndex }));
+
   const createOrder = () => {
     if (bun) {
-      // @ts-expect-error
-      dispatch(postOrder([bun._id, ...ingredients.map((ingredient) => ingredient._id), bun._id]));
+      dispatch(createOrderAction(formatIngredientsForRequest(bun._id, ingredients)));
     }
   };
 
-  const totalCoast = useMemo(
-    () => (bun ? bun.price * 2 : 0) + ingredients.reduce((acc, ingredient) => acc + ingredient.price, 0),
-    [bun, ingredients]
-  );
+  const removeIngredient = (ingredient: IIngredient) => dispatch(removeIngredientFromConstructor(ingredient));
 
-  const closeModal = () => dispatch({ type: TOGGLE_ORDER_MODAL, isOpen: false });
-
-  const removeIngredientFromConstructor = (ingredient: IIngredient) =>
-    dispatch({ type: REMOVE_INGREDIENT_FROM_CONSTRUCTOR, ingredient: ingredient });
-
+  // Стили при перетаскивании
   const ingredientDndStyles = useMemo(
     () => (!isBun && isOver ? burgerConstructor.no_ingredients_dnd_hover : burgerConstructor.no_ingredients),
     [isBun, isOver]
@@ -57,12 +54,8 @@ export const BurgerConstructor = () => {
 
   const bunDndtyles = useMemo(() => isBun && isOver && burgerConstructor.no_bun_dnd_hover, [isBun, isOver]);
 
-  const moveIngredient = (dragIndex: number, hoverIndex: number) => {
-    dispatch({
-      type: MOVE_ITEM,
-      payload: { dragIndex, hoverIndex }
-    });
-  };
+  // Рассчет итоговой стоимости
+  const totalCoast = useMemo(() => countTotalCost(bun, ingredients), [bun, ingredients]);
 
   return (
     <section className={burgerConstructor.wrapper}>
@@ -89,7 +82,7 @@ export const BurgerConstructor = () => {
             ingredients.map((ingredient, index) => (
               <IngredientElement
                 key={ingredient.uuid}
-                removeIngredientFromConstructor={removeIngredientFromConstructor}
+                removeIngredient={removeIngredient}
                 ingredient={ingredient}
                 index={index}
                 moveIngredient={moveIngredient}

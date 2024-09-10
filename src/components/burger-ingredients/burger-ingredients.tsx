@@ -1,56 +1,52 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
-import { TOGGLE_SELECTED_INGREDIENT_MODAL } from "@services/actions/inrgedients";
-import type { TRootReducerState } from "@services/reducers";
-import type { TAppDispatch } from "@services/store";
+import { getIngredientModal, getIngredientsState, toggleIngredientModal } from "@services/ingredient";
+import { type TAppDispatch, useAppDispatch, useAppSelector } from "@services/store";
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useRef, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
 
 import { IngredientDetails } from "@components/ingredient-details";
 import { Modal } from "@components/modal";
 
 import burgerIngredients from "./burger-ingredients.module.css";
 import { BurgerItem } from "./burger-item";
+import { checkTabPosition } from "./utils";
 
 export const BurgerIngredients = () => {
+  // Хуки
   const [currentTab, setCurrentTab] = useState("bun");
 
-  const { data, isSelectedIngredientModalOpen, selectedIngredient } = useSelector(
-    (store: TRootReducerState) => store.ingrediets
-  );
-  const dispatch = useDispatch<TAppDispatch>();
+  const { data } = useAppSelector(getIngredientsState);
+  const { isSelectedIngredientModalOpen, selectedIngredient } = useAppSelector(getIngredientModal);
+  const dispatch = useAppDispatch<TAppDispatch>();
 
   const bunsRef = useRef<HTMLDivElement>(null);
   const mainsRef = useRef<HTMLDivElement>(null);
   const saucesRef = useRef<HTMLDivElement>(null);
   const ingredientsRef = useRef<HTMLDivElement>(null);
 
+  // Данные для отрисовки ингредиентов по типам и скролла
   const ingredientTypesData = [
     { name: "Булки", type: "bun", ref: bunsRef },
     { name: "Основное", type: "main", ref: mainsRef },
     { name: "Соусы", type: "sauce", ref: saucesRef }
   ];
 
+  // Функционал
+
   const selectTab = (tab: string) => {
     document.getElementById(tab)?.scrollIntoView({ behavior: "smooth" });
     setCurrentTab(tab);
   };
 
-  const closeModal = () => dispatch({ type: TOGGLE_SELECTED_INGREDIENT_MODAL, isOpen: false });
+  const closeModal = () => dispatch(toggleIngredientModal({ isOpen: false }));
 
   const checkPosition = () => {
-    if (
-      ingredientsRef.current!.getBoundingClientRect().top - mainsRef.current!.getBoundingClientRect().top >
-      bunsRef.current!.getBoundingClientRect().top - ingredientsRef.current!.getBoundingClientRect().top
-    ) {
-      setCurrentTab("main");
-    }
-    if (bunsRef.current!.getBoundingClientRect().top > 180) {
-      setCurrentTab("bun");
-    }
-    if (saucesRef.current!.getBoundingClientRect().top - ingredientsRef.current!.getBoundingClientRect().top < 400) {
-      setCurrentTab("sauce");
-    }
+    const ingredientsTop = ingredientsRef.current!.getBoundingClientRect().top;
+    const bunsTop = bunsRef.current!.getBoundingClientRect().top;
+    const mainsTop = mainsRef.current!.getBoundingClientRect().top;
+    const saucesTop = saucesRef.current!.getBoundingClientRect().top;
+
+    setCurrentTab(checkTabPosition(ingredientsTop, bunsTop, mainsTop, saucesTop));
   };
 
   return (

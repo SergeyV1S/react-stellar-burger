@@ -6,21 +6,17 @@ import { useDrag, useDrop } from "react-dnd";
 import burgerIngredientElement from "./ingredient-element.module.css";
 
 interface IIngredientElementProps {
-  removeIngredientFromConstructor: (ingredient: IIngredient) => {
-    type: "REMOVE_INGREDIENT_FROM_CONSTRUCTOR";
-    ingredient: IIngredient;
+  removeIngredient: (ingredient: IIngredient) => {
+    payload: IIngredient;
+    type: "constructorSlice/removeIngredientFromConstructor";
   };
   ingredient: IIngredient;
   index: number;
   moveIngredient: (dragIndex: number, hoverIndex: number) => void;
 }
 
-export const IngredientElement = ({
-  removeIngredientFromConstructor,
-  ingredient,
-  index,
-  moveIngredient
-}: IIngredientElementProps) => {
+export const IngredientElement = ({ removeIngredient, ingredient, index, moveIngredient }: IIngredientElementProps) => {
+  // Хуки
   const ingredientElementRef = useRef<HTMLDivElement>(null);
 
   const [, dropTargetIngredientsRef] = useDrop({
@@ -46,27 +42,28 @@ export const IngredientElement = ({
     }
   });
 
-  const [{ isDragging }, dragIngredientRef, dragPreviewIngredientRef] = useDrag({
+  const [{ opacity }, dragIngredientRef, dragPreviewIngredientRef] = useDrag({
     type: "switch-ingredient-position",
     item: { ...ingredient, index },
     collect: (monitor) => ({
-      isDragging: monitor.isDragging()
+      opacity: monitor.isDragging() ? 0.5 : 1
     })
   });
 
+  // Обёртка над ingredientElementRef
   dragPreviewIngredientRef(dropTargetIngredientsRef(dragIngredientRef(ingredientElementRef)));
 
   return (
     <div
       ref={ingredientElementRef}
       className={burgerIngredientElement.ingredients_container}
-      style={{ opacity: isDragging ? 0.5 : 1 }}
+      style={{ opacity: opacity }}
     >
       <div className={burgerIngredientElement.drag_icon_wrapper}>
         <DragIcon type='primary' />
       </div>
       <ConstructorElement
-        handleClose={() => removeIngredientFromConstructor(ingredient)}
+        handleClose={() => removeIngredient(ingredient)}
         text={ingredient.name}
         price={ingredient.price}
         thumbnail={ingredient.image}

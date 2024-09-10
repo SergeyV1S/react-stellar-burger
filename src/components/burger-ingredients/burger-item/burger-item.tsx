@@ -1,10 +1,9 @@
 import type { IIngredient } from "@interfaces/ingredient";
-import { SET_SELECTED_INGREDIENT } from "@services/actions/inrgedients";
-import type { TRootReducerState } from "@services/reducers";
-import type { TAppDispatch } from "@services/store";
+import { getConstructorState } from "@services/constructor";
+import { setSelectedIngredient } from "@services/ingredient";
+import { type TAppDispatch, useAppDispatch, useAppSelector } from "@services/store";
 import { Counter, CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useDrag } from "react-dnd";
-import { useDispatch, useSelector } from "react-redux";
 
 import burgerItem from "./burger-item.module.css";
 
@@ -13,13 +12,9 @@ interface IBurgerItemProps {
 }
 
 export const BurgerItem = ({ item }: IBurgerItemProps) => {
-  const dispatch = useDispatch<TAppDispatch>();
-  const bun = useSelector((store: TRootReducerState) => store.constructorData.bun);
-  const ingredients = useSelector((store: TRootReducerState) => store.constructorData.ingredients);
-
-  const count = ingredients.filter((element) => item._id === element._id);
-
-  const openModal = () => dispatch({ type: SET_SELECTED_INGREDIENT, ingredient: item });
+  // Хуки
+  const dispatch = useAppDispatch<TAppDispatch>();
+  const { bun, ingredients } = useAppSelector(getConstructorState);
 
   const [{ isDragging }, dragRef, dragPreviewRef] = useDrag({
     type: "burger-item",
@@ -29,6 +24,12 @@ export const BurgerItem = ({ item }: IBurgerItemProps) => {
       isDragging: monitor.isDragging()
     })
   });
+
+  // Подсчет кол-ва выбранных элементов
+  const count = ingredients.filter((element) => item._id === element._id);
+
+  // Открытие модального окна
+  const openModal = () => dispatch(setSelectedIngredient(item));
 
   return (
     <div className={`${burgerItem.wrapper} ${isDragging && burgerItem.dragCard}`} ref={dragRef}>

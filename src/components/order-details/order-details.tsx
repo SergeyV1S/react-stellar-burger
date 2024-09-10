@@ -1,12 +1,12 @@
-import type { TRootReducerState } from "@services/reducers";
-import { useSelector } from "react-redux";
+import { getOrderStore } from "@services/order";
+import { useAppSelector } from "@services/store";
 
 import checkmark from "@images/checkmark.webp";
 
 import orderDetails from "./order-details.module.css";
 
 export const OrderDetails = () => {
-  const { error, order, isLoading } = useSelector((store: TRootReducerState) => store.order);
+  const { error, order, isLoading } = useAppSelector(getOrderStore);
 
   return (
     <>
