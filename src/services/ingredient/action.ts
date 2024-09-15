@@ -1,6 +1,6 @@
 import { getInrgedientsQuery } from "@api/index";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
-export const getInrgedientsAction = createAsyncThunk("ingredientSlice/getInrgedients", async () =>
+export const getIngredientsAction = createAsyncThunk("ingredientSlice/getIngredients", async () =>
   getInrgedientsQuery()
 );

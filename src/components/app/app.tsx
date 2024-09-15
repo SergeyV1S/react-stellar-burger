@@ -1,4 +1,4 @@
-import { getInrgedientsAction } from "@services/ingredient";
+import { getIngredientsAction } from "@services/ingredient";
 import { getIngredientsState } from "@services/ingredient";
 import { type TAppDispatch, useAppDispatch, useAppSelector } from "@services/store";
 import { useEffect } from "react";
@@ -16,7 +16,7 @@ export const App = () => {
   const { data, isLoading, error } = useAppSelector(getIngredientsState);
 
   useEffect(() => {
-    dispatch(getInrgedientsAction());
+    dispatch(getIngredientsAction());
   }, [dispatch]);
 
   return (

@@ -52,7 +52,7 @@ export const BurgerConstructor = () => {
     [isBun, isOver]
   );
 
-  const bunDndtyles = useMemo(() => isBun && isOver && burgerConstructor.no_bun_dnd_hover, [isBun, isOver]);
+  const bunDndtyles = isBun && isOver && burgerConstructor.no_bun_dnd_hover;
 
   // Рассчет итоговой стоимости
   const totalCoast = useMemo(() => countTotalCost(bun, ingredients), [bun, ingredients]);

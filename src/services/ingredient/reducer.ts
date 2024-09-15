@@ -2,7 +2,7 @@ import type { IIngredient } from "@interfaces/ingredient";
 import type { PayloadAction } from "@reduxjs/toolkit";
 import { createSlice } from "@reduxjs/toolkit";
 
-import { getInrgedientsAction } from "./action";
+import { getIngredientsAction } from "./action";
 import type { IIngredientInitialState } from "./types";
 
 const initialState: IIngredientInitialState = {
@@ -34,15 +34,15 @@ export const ingredietSlice = createSlice({
   // если есть готовый экшенк реатор
   extraReducers: (builder) => {
     builder
-      .addCase(getInrgedientsAction.fulfilled, (state, action: PayloadAction<{ data: IIngredient[] }>) => {
+      .addCase(getIngredientsAction.fulfilled, (state, action: PayloadAction<{ data: IIngredient[] }>) => {
         state.data = action.payload.data;
         state.isLoading = false;
       })
-      .addCase(getInrgedientsAction.rejected, (state, action) => {
+      .addCase(getIngredientsAction.rejected, (state, action) => {
         state.error = action.error.message;
         state.isLoading = false;
       })
-      .addCase(getInrgedientsAction.pending, (state) => {
+      .addCase(getIngredientsAction.pending, (state) => {
         state.error = undefined;
         state.isLoading = true;
         state.data = [];
