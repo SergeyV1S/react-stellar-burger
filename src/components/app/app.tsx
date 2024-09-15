@@ -1,6 +1,9 @@
-import type { IIngredient } from "@interfaces/ingredient";
-import { getInrgedients } from "@utils/api";
-import { useEffect, useState } from "react";
+import { getIngredientsAction } from "@services/ingredient";
+import { getIngredientsState } from "@services/ingredient";
+import { type TAppDispatch, useAppDispatch, useAppSelector } from "@services/store";
+import { useEffect } from "react";
+import { DndProvider } from "react-dnd";
+import { HTML5Backend } from "react-dnd-html5-backend";
 
 import { AppHeader } from "@components/app-header";
 import { BurgerConstructor } from "@components/burger-constructor";
@@ -8,40 +11,26 @@ import { BurgerIngredients } from "@components/burger-ingredients";
 
 import app from "./app.module.css";
 
-interface IState {
-  data: IIngredient[] | null;
-  error: Error | string;
-  isSuccess: boolean;
-  isError: boolean;
-  isLoading: boolean;
-}
-
 export const App = () => {
-  const [state, setState] = useState<IState>({
-    data: null,
-    error: "",
-    isSuccess: false,
-    isError: false,
-    isLoading: false
-  });
+  const dispatch = useAppDispatch<TAppDispatch>();
+  const { data, isLoading, error } = useAppSelector(getIngredientsState);
 
   useEffect(() => {
-    getInrgedients(setState);
-  }, []);
+    dispatch(getIngredientsAction());
+  }, [dispatch]);
 
   return (
     <>
       <AppHeader />
       <main className={app.container}>
-        {state.isSuccess && state.data && (
-          <>
-            <BurgerIngredients products={state.data} />
-            <BurgerConstructor products={state.data} />
-          </>
+        {data && (
+          <DndProvider backend={HTML5Backend}>
+            <BurgerIngredients />
+            <BurgerConstructor />
+          </DndProvider>
         )}
-        {state.isLoading && <div>Загрузка...</div>}
-        {state.isError && typeof state.error === "object" && <div>{state.error.message}</div>}
-        {state.isError && typeof state.error === "string" && <div>{state.error}</div>}
+        {isLoading && <div>Загрузка...</div>}
+        {error && <div>{error}</div>}
       </main>
     </>
   );

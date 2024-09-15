@@ -25,7 +25,9 @@
       "@fonts/*": ["src/fonts/*"],
       "@images/*": ["src/images/*"],
       "@utils/*": ["src/utils/*"],
-      "@interfaces/*": ["src/interfaces/*"]
+      "@services/*": ["src/services/*"],
+      "@interfaces/*": ["src/interfaces/*"],
+      "@api/*": ["src/api/*"]
     }
   },
   "include": ["**/*.ts", "**/*.tsx"]

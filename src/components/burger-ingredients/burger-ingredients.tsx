@@ -1,25 +1,88 @@
-import type { IIngredient } from "@interfaces/ingredient";
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
+import { getIngredientModal, getIngredientsState, toggleIngredientModal } from "@services/ingredient";
+import { type TAppDispatch, useAppDispatch, useAppSelector } from "@services/store";
+import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
+import { useRef, useState } from "react";
 
-import { TabMenu } from "../ui";
+import { IngredientDetails } from "@components/ingredient-details";
+import { Modal } from "@components/modal";
+
 import burgerIngredients from "./burger-ingredients.module.css";
-import { BurgerTypeBlock } from "./burger-type-block";
-import { filterCategories } from "./filter-categories";
+import { BurgerItem } from "./burger-item";
+import { checkTabPosition } from "./utils";
 
-interface IBurgerIngredientsProps {
-  products: IIngredient[];
-}
+export const BurgerIngredients = () => {
+  // Хуки
+  const [currentTab, setCurrentTab] = useState("bun");
 
-export const BurgerIngredients = ({ products }: IBurgerIngredientsProps) => {
-  const { buns, mains, sauces } = filterCategories(products);
+  const { data } = useAppSelector(getIngredientsState);
+  const { isSelectedIngredientModalOpen, selectedIngredient } = useAppSelector(getIngredientModal);
+  const dispatch = useAppDispatch<TAppDispatch>();
+
+  const bunsRef = useRef<HTMLDivElement>(null);
+  const mainsRef = useRef<HTMLDivElement>(null);
+  const saucesRef = useRef<HTMLDivElement>(null);
+  const ingredientsRef = useRef<HTMLDivElement>(null);
+
+  // Данные для отрисовки ингредиентов по типам и скролла
+  const ingredientTypesData = [
+    { name: "Булки", type: "bun", ref: bunsRef },
+    { name: "Основное", type: "main", ref: mainsRef },
+    { name: "Соусы", type: "sauce", ref: saucesRef }
+  ];
+
+  // Функционал
+
+  const selectTab = (tab: string) => {
+    document.getElementById(tab)?.scrollIntoView({ behavior: "smooth" });
+    setCurrentTab(tab);
+  };
+
+  const closeModal = () => dispatch(toggleIngredientModal({ isOpen: false }));
+
+  const checkPosition = () => {
+    const ingredientsTop = ingredientsRef.current!.getBoundingClientRect().top;
+    const bunsTop = bunsRef.current!.getBoundingClientRect().top;
+    const mainsTop = mainsRef.current!.getBoundingClientRect().top;
+    const saucesTop = saucesRef.current!.getBoundingClientRect().top;
+
+    setCurrentTab(checkTabPosition(ingredientsTop, bunsTop, mainsTop, saucesTop));
+  };
+
   return (
     <section className={burgerIngredients.container}>
       <h1 className='text text_type_main-large'>Соберите бургер</h1>
-      <TabMenu />
-      <div className={burgerIngredients.ingredients}>
-        <BurgerTypeBlock blockName='Булки' items={buns} />
-        <BurgerTypeBlock blockName='Основное' items={mains} />
-        <BurgerTypeBlock blockName='Соусы' items={sauces} />
+      <div className={burgerIngredients.tab_menu_container}>
+        <Tab value='bun' active={currentTab === "bun"} onClick={selectTab}>
+          Булки
+        </Tab>
+        <Tab value='main' active={currentTab === "main"} onClick={selectTab}>
+          Начинки
+        </Tab>
+        <Tab value='sauce' active={currentTab === "sauce"} onClick={selectTab}>
+          Соусы
+        </Tab>
       </div>
+      <div ref={ingredientsRef} onScroll={checkPosition} className={burgerIngredients.ingredients}>
+        {ingredientTypesData.map((ingredientType) => (
+          <div key={ingredientType.type}>
+            <h2 ref={ingredientType.ref} id={ingredientType.type} className='text text_type_main-medium'>
+              {ingredientType.name}
+            </h2>
+            <div className={burgerIngredients.type_block_container}>
+              {data &&
+                data.map(
+                  (product) => product.type === ingredientType.type && <BurgerItem item={product} key={product._id} />
+                )}
+            </div>
+          </div>
+        ))}
+      </div>
+      {isSelectedIngredientModalOpen && (
+        <Modal closeModal={closeModal} title='Детали ингредиента'>
+          <IngredientDetails ingredient={selectedIngredient} />
+        </Modal>
+      )}
     </section>
   );
 };

@@ -10,7 +10,9 @@ export default defineConfig({
       "@fonts": path.resolve(__dirname, "./src/fonts"),
       "@images": path.resolve(__dirname, "./src/images"),
       "@utils": path.resolve(__dirname, "./src/utils"),
-      "@interfaces": path.resolve(__dirname, "./src/interfaces")
+      "@services": path.resolve(__dirname, "./src/services"),
+      "@interfaces": path.resolve(__dirname, "./src/interfaces"),
+      "@api": path.resolve(__dirname, "./src/api")
     }
   },
   build: {

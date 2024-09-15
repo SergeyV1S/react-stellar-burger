@@ -1,0 +1,13 @@
+.ingredients_container {
+  padding-left: 32px;
+  padding-right: 8px;
+  position: relative;
+  cursor: grab;
+  transition: transform 0.3s ease;
+}
+
+.drag_icon_wrapper {
+  position: absolute;
+  left: 0;
+  top: 35%;
+}
