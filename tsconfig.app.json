@@ -27,7 +27,8 @@
       "@utils/*": ["src/utils/*"],
       "@services/*": ["src/services/*"],
       "@interfaces/*": ["src/interfaces/*"],
-      "@api/*": ["src/api/*"]
+      "@api/*": ["src/api/*"],
+      "@pages/*": ["src/pages/*"]
     }
   },
   "include": ["**/*.ts", "**/*.tsx"]
