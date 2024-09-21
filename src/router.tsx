@@ -1,4 +1,5 @@
-import { IndexLayout } from "@pages/layouts";
+import { IndexLayout } from "@pages/layouts/main-layout";
+import { ProfileLayout } from "@pages/layouts/profile-layout";
 import { Route, Routes } from "react-router-dom";
 
 import {
@@ -16,7 +17,10 @@ export const AppRoutes = () => (
     <Route path='/' element={<IndexLayout />}>
       <Route index element={<HomePage />} />
       <Route path='ingredients/:id' element={<CurrentIngredientPage />} />
-      <Route path='profile' element={<ProfilePage />} />
+      <Route path='profile' element={<ProfileLayout />}>
+        <Route index element={<ProfilePage />} />
+        <Route path='order-history' element={<ProfilePage />} />
+      </Route>
       <Route path='reset-password' element={<ResetPasswordPage />} />
       <Route path='forgot-password' element={<ForgotPasswordPage />} />
       <Route path='login' element={<LoginPage />} />
