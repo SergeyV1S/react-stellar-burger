@@ -19,7 +19,7 @@ export const AppHeader = () => (
           )}
         </NavLink>
         <NavLink
-          to='/'
+          to='order-list'
           className={({ isActive }) => (isActive ? appHeader.active_link : appHeader.link) + " pl-5 pr-5 pb-4 pt-4"}
         >
           {({ isActive }) => (

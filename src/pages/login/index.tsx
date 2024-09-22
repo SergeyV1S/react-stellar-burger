@@ -1,8 +1,8 @@
-import { useAppDispatch } from "@services/store";
-import { loginUserAction } from "@services/user";
+import { useAppDispatch, useAppSelector } from "@services/store";
+import { getUserStore, loginUserAction } from "@services/user";
 import { Button, EmailInput, PasswordInput } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useState } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, Navigate, useLocation, useNavigate } from "react-router-dom";
 
 import { defaultFormValue } from "./constants/defultFormValue";
 import loginPageStyles from "./login.module.css";
@@ -10,13 +10,18 @@ import type { ILoginForm } from "./types";
 
 export const LoginPage = () => {
   const dispatch = useAppDispatch();
+  const { user } = useAppSelector(getUserStore);
   const [loginForm, setLoginForm] = useState<ILoginForm>(defaultFormValue);
   const { state }: { state: { url: string } } = useLocation();
-  const navigation = useNavigate();
+  const navigate = useNavigate();
 
   const submitHandler = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    dispatch(loginUserAction(loginForm)).then(() => navigation(state.url || "/"));
+    dispatch(loginUserAction(loginForm)).then(() =>
+      navigate(state.url || "/", {
+        replace: true
+      })
+    );
   };
 
   const inputOnChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -28,6 +33,8 @@ export const LoginPage = () => {
       setLoginForm((prev) => ({ ...prev, password: inputValue }));
     }
   };
+
+  if (user) return <Navigate to='/' replace />;
 
   return (
     <form onSubmit={submitHandler} className={loginPageStyles.container}>

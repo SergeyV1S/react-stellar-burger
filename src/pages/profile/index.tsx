@@ -36,10 +36,10 @@ export const ProfilePage = () => {
   useEffect(() => {
     if (user) {
       setProfileForm({
-        email: user.email || "",
-        name: user.name || "",
-        defaultName: user.name || "",
-        defaultMail: user.email || ""
+        email: user.email,
+        name: user.name,
+        defaultName: user.name,
+        defaultMail: user.email
       });
     }
   }, [user]);
@@ -72,12 +72,18 @@ export const ProfilePage = () => {
         name='password'
       />
       <div className={profilePageStyles.button_container}>
-        <Button onClick={resetForm} htmlType='reset' type='secondary' extraClass='mb-20'>
+        <Button
+          onClick={resetForm}
+          disabled={profileForm.email === profileForm.defaultMail && profileForm.name === profileForm.defaultName}
+          htmlType='reset'
+          type='secondary'
+          extraClass='mb-20'
+        >
           Отмена
         </Button>
         <Button
           htmlType='submit'
-          disabled={profileForm.email !== profileForm.defaultMail || profileForm.name !== profileForm.defaultName}
+          disabled={profileForm.email === profileForm.defaultMail && profileForm.name === profileForm.defaultName}
           extraClass='mb-20'
         >
           Сохранить

@@ -5,3 +5,6 @@ export * from "./login";
 export * from "./profile";
 export * from "./register";
 export * from "./reset-password";
+export * from "./order-history";
+export * from "./order-list";
+export * from "./not-found";
