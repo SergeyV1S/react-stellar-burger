@@ -1,35 +1,55 @@
+import { useAppSelector } from "@services/store";
+import { getUserStore } from "@services/user";
 import { Button, EmailInput, Input, PasswordInput } from "@ya.praktikum/react-developer-burger-ui-components";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
-import { defaultFormValue } from "./constants/defaultFormValue";
 import profilePageStyles from "./profile.module.css";
 import type { IProfileForm } from "./types/profileForm";
 
 export const ProfilePage = () => {
-  const [registerForm, setRegisterForm] = useState<IProfileForm>(defaultFormValue);
+  const { user } = useAppSelector(getUserStore);
+
+  const [profileForm, setProfileForm] = useState<IProfileForm>({
+    email: "",
+    name: "",
+    defaultName: "",
+    defaultMail: ""
+  });
+
   const [password, setPassword] = useState("");
 
   const submitHandler = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(registerForm);
+    console.log(profileForm);
   };
 
   const inputOnChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const inputValue = e.target.value;
-    if (e.target.name === "email") setRegisterForm((prev) => ({ ...prev, email: inputValue }));
-
-    if (e.target.name === "password") setPassword(e.target.value);
-    if (e.target.name === "name") setRegisterForm((prev) => ({ ...prev, name: inputValue }));
+    if (e.target.name === "password") {
+      setPassword(e.target.value);
+      return;
+    }
+    setProfileForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
-  const resetForm = () => setRegisterForm(defaultFormValue);
+  const resetForm = () => setProfileForm((prev) => ({ ...prev, email: prev.defaultMail, name: prev.defaultName }));
+
+  useEffect(() => {
+    if (user) {
+      setProfileForm({
+        email: user.email || "",
+        name: user.name || "",
+        defaultName: user.name || "",
+        defaultMail: user.email || ""
+      });
+    }
+  }, [user]);
 
   return (
     <form onSubmit={submitHandler} className={profilePageStyles.container}>
       <Input
         name='name'
         placeholder='Имя'
-        value={registerForm.name}
+        value={profileForm.name}
         onChange={inputOnChangeHandler}
         icon='EditIcon'
         extraClass='mt-6 mb-6'
@@ -39,7 +59,7 @@ export const ProfilePage = () => {
       <EmailInput
         placeholder='Логин'
         onChange={inputOnChangeHandler}
-        value={registerForm.email}
+        value={profileForm.email}
         isIcon
         name='email'
         extraClass='mb-6'
@@ -55,7 +75,11 @@ export const ProfilePage = () => {
         <Button onClick={resetForm} htmlType='reset' type='secondary' extraClass='mb-20'>
           Отмена
         </Button>
-        <Button htmlType='submit' disabled={!registerForm.email || !registerForm.name} extraClass='mb-20'>
+        <Button
+          htmlType='submit'
+          disabled={profileForm.email !== profileForm.defaultMail || profileForm.name !== profileForm.defaultName}
+          extraClass='mb-20'
+        >
           Сохранить
         </Button>
       </div>

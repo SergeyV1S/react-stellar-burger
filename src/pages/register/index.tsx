@@ -1,6 +1,8 @@
+import { useAppDispatch, useAppSelector } from "@services/store";
+import { getUserStore, registerUserAction } from "@services/user";
 import { Button, EmailInput, Input, PasswordInput } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import { defaultFormValue } from "./constants/defultFormValue";
 import registerPageStyles from "./register.module.css";
@@ -8,19 +10,18 @@ import type { IRegisterForm } from "./types/registerForm";
 
 export const RegisterPage = () => {
   const [registerForm, setRegisterForm] = useState<IRegisterForm>(defaultFormValue);
+  const dispatch = useAppDispatch();
+  const { isLoading } = useAppSelector(getUserStore);
+  const navigate = useNavigate();
 
-  const submitHandler = (e: React.FormEvent<HTMLFormElement>) => {
+  const submitHandler = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(registerForm);
+    await dispatch(registerUserAction(registerForm));
+    navigate("/profile");
   };
 
-  const inputOnChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const inputValue = e.target.value;
-    if (e.target.name === "email") setRegisterForm((prev) => ({ ...prev, email: inputValue }));
-
-    if (e.target.name === "password") setRegisterForm((prev) => ({ ...prev, password: inputValue }));
-    if (e.target.name === "name") setRegisterForm((prev) => ({ ...prev, name: inputValue }));
-  };
+  const inputOnChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) =>
+    setRegisterForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
 
   return (
     <form onSubmit={submitHandler} className={registerPageStyles.container}>
@@ -50,7 +51,7 @@ export const RegisterPage = () => {
       />
       <Button
         htmlType='submit'
-        disabled={!registerForm.email || !registerForm.password || !registerForm.name}
+        disabled={!registerForm.email || !registerForm.password || !registerForm.name || isLoading}
         extraClass='mb-20'
       >
         Зарегистрироваться

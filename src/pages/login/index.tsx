@@ -1,17 +1,22 @@
+import { useAppDispatch } from "@services/store";
+import { loginUserAction } from "@services/user";
 import { Button, EmailInput, PasswordInput } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 import { defaultFormValue } from "./constants/defultFormValue";
 import loginPageStyles from "./login.module.css";
 import type { ILoginForm } from "./types";
 
 export const LoginPage = () => {
+  const dispatch = useAppDispatch();
   const [loginForm, setLoginForm] = useState<ILoginForm>(defaultFormValue);
+  const { state }: { state: { url: string } } = useLocation();
+  const navigation = useNavigate();
 
   const submitHandler = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(loginForm);
+    dispatch(loginUserAction(loginForm)).then(() => navigation(state.url || "/"));
   };
 
   const inputOnChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {

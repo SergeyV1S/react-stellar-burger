@@ -2,6 +2,8 @@ import { IndexLayout } from "@pages/layouts/main-layout";
 import { ProfileLayout } from "@pages/layouts/profile-layout";
 import { Route, Routes } from "react-router-dom";
 
+import { ProtectedRoute } from "@components/protected-route";
+
 import {
   CurrentIngredientPage,
   ForgotPasswordPage,
@@ -17,9 +19,9 @@ export const AppRoutes = () => (
     <Route path='/' element={<IndexLayout />}>
       <Route index element={<HomePage />} />
       <Route path='ingredients/:id' element={<CurrentIngredientPage />} />
-      <Route path='profile' element={<ProfileLayout />}>
-        <Route index element={<ProfilePage />} />
-        <Route path='order-history' element={<ProfilePage />} />
+      <Route path='profile' element={<ProtectedRoute element={<ProfileLayout />} />}>
+        <Route index element={<ProtectedRoute element={<ProfilePage />} />} />
+        <Route path='order-history' element={<ProtectedRoute element={<ProfilePage />} />} />
       </Route>
       <Route path='reset-password' element={<ResetPasswordPage />} />
       <Route path='forgot-password' element={<ForgotPasswordPage />} />
