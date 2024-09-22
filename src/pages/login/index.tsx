@@ -34,7 +34,7 @@ export const LoginPage = () => {
     }
   };
 
-  if (user) return <Navigate to='/' replace />;
+  if (user.email) return <Navigate to='/' replace />;
 
   return (
     <form onSubmit={submitHandler} className={loginPageStyles.container}>

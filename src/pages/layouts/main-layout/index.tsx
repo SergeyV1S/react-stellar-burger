@@ -5,6 +5,7 @@ import { useEffect } from "react";
 import { Outlet } from "react-router-dom";
 
 import { AppHeader } from "@components/app-header";
+import { Spinner } from "@components/loader";
 
 import styles from "./index-layout.module.css";
 
@@ -20,8 +21,8 @@ export const IndexLayout = () => {
     <>
       <AppHeader />
       <main className={styles.container}>
-        {data && <Outlet />}
-        {isLoading && <div>Загрузка...</div>}
+        {data && !isLoading && <Outlet />}
+        {isLoading && <Spinner />}
         {error && <div>{error}</div>}
       </main>
     </>

@@ -1,24 +1,35 @@
-import { useAppDispatch } from "@services/store";
-import { getUserAction } from "@services/user";
-import { useEffect, useState } from "react";
+import { useAppSelector } from "@services/store";
+import { getUserStore } from "@services/user";
 import { Navigate, useLocation } from "react-router-dom";
 
-export const ProtectedRoute = ({ element }: { element: React.ReactNode }) => {
-  const [isUser, setIsUser] = useState(false);
-  const dispatch = useAppDispatch();
+import { Spinner } from "./loader";
+
+interface IProtectedRouteProps {
+  onlyUnAuth?: boolean;
+  element: React.ReactNode;
+}
+
+const ProtectedRoute = ({ onlyUnAuth = false, element }: IProtectedRouteProps) => {
+  const { user, isLoading } = useAppSelector(getUserStore);
   const location = useLocation();
 
-  const init = () => {
-    dispatch(getUserAction()).then(() => {
-      setIsUser(() => true);
-    });
-  };
+  if (isLoading) {
+    return <Spinner />;
+  }
 
-  useEffect(() => {
-    init();
-  }, []);
+  if (!onlyUnAuth && !user.email) {
+    return <Navigate to='/login' state={{ from: location }} />;
+  }
 
-  if (!isUser) return null;
+  if (onlyUnAuth && user.email) {
+    const { from } = location.state ?? { from: { pathname: "/" } };
+    return <Navigate to={from} />;
+  }
 
-  return isUser ? element : <Navigate to='/login' state={{ url: location.pathname }} replace />;
+  return element;
 };
+
+export const OnlyAuth = ProtectedRoute;
+export const OnlyUnAuth = ({ element }: Omit<IProtectedRouteProps, "onlyUnAuth">) => (
+  <ProtectedRoute onlyUnAuth={true} element={element} />
+);

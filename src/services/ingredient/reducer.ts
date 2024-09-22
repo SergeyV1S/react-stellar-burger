@@ -35,16 +35,16 @@ export const ingredietSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(getIngredientsAction.fulfilled, (state, action: PayloadAction<{ data: IIngredient[] }>) => {
-        state.data = action.payload.data;
         state.isLoading = false;
+        state.data = action.payload.data;
       })
       .addCase(getIngredientsAction.rejected, (state, action) => {
-        state.error = action.error.message;
         state.isLoading = false;
+        state.error = action.error.message;
       })
       .addCase(getIngredientsAction.pending, (state) => {
-        state.error = undefined;
         state.isLoading = true;
+        state.error = undefined;
         state.data = [];
       });
   }
