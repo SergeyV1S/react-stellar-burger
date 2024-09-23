@@ -4,7 +4,7 @@ import type { IPostLoginMutationResponse } from "@api/postLoginMutation";
 import type { PayloadAction } from "@reduxjs/toolkit";
 import { createSlice } from "@reduxjs/toolkit";
 
-import { getUserAction, loginUserAction, registerUserAction } from "./action";
+import { getUserAction, loginUserAction, logoutUserAction, registerUserAction } from "./action";
 import type { IUserInitialState } from "./types";
 
 const defaultUser = {
@@ -61,6 +61,19 @@ export const userSlice = createSlice({
         state.isLoading = false;
       })
       .addCase(loginUserAction.rejected, (state, action) => {
+        state.error = action.error.message;
+        state.isLoading = false;
+      })
+      // Выход из аккаунта
+      .addCase(logoutUserAction.pending, (state) => {
+        state.isLoading = true;
+        state.error = undefined;
+      })
+      .addCase(logoutUserAction.fulfilled, (state) => {
+        state.user = defaultUser;
+        state.isLoading = false;
+      })
+      .addCase(logoutUserAction.rejected, (state, action) => {
         state.error = action.error.message;
         state.isLoading = false;
       });

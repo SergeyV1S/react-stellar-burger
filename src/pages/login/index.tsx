@@ -12,13 +12,13 @@ export const LoginPage = () => {
   const dispatch = useAppDispatch();
   const { user } = useAppSelector(getUserStore);
   const [loginForm, setLoginForm] = useState<ILoginForm>(defaultFormValue);
-  const { state }: { state: { url: string } } = useLocation();
+  const { state } = useLocation();
   const navigate = useNavigate();
 
   const submitHandler = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     dispatch(loginUserAction(loginForm)).then(() =>
-      navigate(state.url || "/", {
+      navigate(state.from.pathname || "/", {
         replace: true
       })
     );

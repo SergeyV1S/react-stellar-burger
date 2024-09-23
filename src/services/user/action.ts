@@ -1,6 +1,7 @@
 import { getUserQuery } from "@api/getUserQuery";
 import { postCreateUserMutation } from "@api/postCreateUserMutation";
 import { postLoginMutation } from "@api/postLoginMutation";
+import { postLogoutMutation } from "@api/postLogoutMutation";
 import type { ILoginForm } from "@pages/login/types";
 import type { IRegisterForm } from "@pages/register/types/registerForm";
 import { createAsyncThunk } from "@reduxjs/toolkit";
@@ -14,3 +15,5 @@ export const getUserAction = createAsyncThunk("userSlice/getUser", async () => g
 export const loginUserAction = createAsyncThunk("userSlice/loginUser", async (userAuthData: ILoginForm) =>
   postLoginMutation(userAuthData)
 );
+
+export const logoutUserAction = createAsyncThunk("userSlice/logoutUser", async () => postLogoutMutation());
