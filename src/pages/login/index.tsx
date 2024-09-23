@@ -1,8 +1,8 @@
-import { useAppDispatch, useAppSelector } from "@services/store";
-import { getUserStore, loginUserAction } from "@services/user";
+import { useAppDispatch } from "@services/store";
+import { loginUserAction } from "@services/user";
 import { Button, EmailInput, PasswordInput } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useState } from "react";
-import { Link, Navigate, useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 import { defaultFormValue } from "./constants/defultFormValue";
 import loginPageStyles from "./login.module.css";
@@ -10,7 +10,6 @@ import type { ILoginForm } from "./types";
 
 export const LoginPage = () => {
   const dispatch = useAppDispatch();
-  const { user } = useAppSelector(getUserStore);
   const [loginForm, setLoginForm] = useState<ILoginForm>(defaultFormValue);
   const { state } = useLocation();
   const navigate = useNavigate();
@@ -34,7 +33,7 @@ export const LoginPage = () => {
     }
   };
 
-  if (user.email) return <Navigate to='/' replace />;
+  // if (user.email) return <Navigate to='/' replace />;
 
   return (
     <form onSubmit={submitHandler} className={loginPageStyles.container}>

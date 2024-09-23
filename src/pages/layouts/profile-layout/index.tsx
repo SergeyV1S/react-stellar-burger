@@ -25,7 +25,7 @@ export const ProfileLayout = () => {
             Профиль
           </NavLink>
           <NavLink
-            to='/profile/order-history'
+            to='/profile/orders'
             className={({ isActive }) =>
               (isActive ? profileLayout.active_link : profileLayout.link) + " text text_type_main-medium"
             }

@@ -35,12 +35,12 @@ export const AppRoutes = () => {
         <Route path='order-list' element={<OrderListPage />} />
         <Route path='profile' element={<OnlyAuth element={<ProfileLayout />} />}>
           <Route index element={<OnlyAuth element={<ProfilePage />} />} />
-          <Route path='order-history' element={<OnlyAuth element={<OrderHistoryPage />} />} />
+          <Route path='orders' element={<OnlyAuth element={<OrderHistoryPage />} />} />
         </Route>
-        <Route path='reset-password' element={<ResetPasswordPage />} />
-        <Route path='forgot-password' element={<ForgotPasswordPage />} />
+        <Route path='reset-password' element={<OnlyUnAuth element={<ResetPasswordPage />} />} />
+        <Route path='forgot-password' element={<OnlyUnAuth element={<ForgotPasswordPage />} />} />
         <Route path='login' element={<OnlyUnAuth element={<LoginPage />} />} />
-        <Route path='register' element={<RegisterPage />} />
+        <Route path='register' element={<OnlyUnAuth element={<RegisterPage />} />} />
         <Route path='*' element={<NotFoundPage />} />
       </Route>
     </Routes>

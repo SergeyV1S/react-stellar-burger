@@ -1,6 +1,8 @@
+import { postResetPasswordMutation } from "@api/postResetPasswordMutation";
+import type { IPostResetPasswordMutationResponse } from "@api/postResetPasswordMutation";
 import { Button, Input, PasswordInput } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 
 import { defaultFormValut } from "./constants/defaultFormValue";
 import resetPasswordPageStyles from "./reset-password.module.css";
@@ -8,16 +10,24 @@ import type { IResetForm } from "./types";
 
 export const ResetPasswordPage = () => {
   const [resetForm, setResetForm] = useState<IResetForm>(defaultFormValut);
+  const navigate = useNavigate();
 
-  const submitHandler = (e: React.FormEvent<HTMLFormElement>) => {
+  const submitHandler = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(resetForm);
+    await postResetPasswordMutation(resetForm).then((res: IPostResetPasswordMutationResponse) => {
+      if (res.success) {
+        localStorage.removeItem("forgor-password-visited");
+        navigate("/login", { replace: true });
+      }
+    });
   };
 
   const inputOnChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.name === "password") setResetForm((prev) => ({ ...prev, password: e.target.value }));
     if (e.target.name === "token") setResetForm((prev) => ({ ...prev, token: e.target.value }));
   };
+
+  if (!localStorage.getItem("forgor-password-visited")) return <Navigate to='/' />;
 
   return (
     <form onSubmit={submitHandler} className={resetPasswordPageStyles.container}>
