@@ -2,7 +2,7 @@ import { useAppDispatch, useAppSelector } from "@services/store";
 import { getUserStore, registerUserAction } from "@services/user";
 import { Button, EmailInput, Input, PasswordInput } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 
 import { defaultFormValue } from "./constants/defultFormValue";
 import registerPageStyles from "./register.module.css";
@@ -11,7 +11,7 @@ import type { IRegisterForm } from "./types/registerForm";
 export const RegisterPage = () => {
   const [registerForm, setRegisterForm] = useState<IRegisterForm>(defaultFormValue);
   const dispatch = useAppDispatch();
-  const { isLoading } = useAppSelector(getUserStore);
+  const { isLoading, user } = useAppSelector(getUserStore);
   const navigate = useNavigate();
 
   const submitHandler = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -22,6 +22,8 @@ export const RegisterPage = () => {
 
   const inputOnChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) =>
     setRegisterForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+
+  if (user.email) return <Navigate to='/' replace />;
 
   return (
     <form onSubmit={submitHandler} className={registerPageStyles.container}>

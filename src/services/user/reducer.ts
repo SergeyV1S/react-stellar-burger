@@ -1,10 +1,6 @@
-import type { IGetUserResponse } from "@api/getUserQuery";
-import type { IPostCreateMutationResponse } from "@api/postCreateUserMutation";
-import type { IPostLoginMutationResponse } from "@api/postLoginMutation";
-import type { PayloadAction } from "@reduxjs/toolkit";
 import { createSlice } from "@reduxjs/toolkit";
 
-import { getUserAction, loginUserAction, logoutUserAction, registerUserAction } from "./action";
+import { getUserAction, loginUserAction, logoutUserAction, registerUserAction, updateUserAction } from "./action";
 import type { IUserInitialState } from "./types";
 
 const defaultUser = {
@@ -29,7 +25,7 @@ export const userSlice = createSlice({
         state.error = undefined;
         state.isLoading = true;
       })
-      .addCase(registerUserAction.fulfilled, (state, action: PayloadAction<IPostCreateMutationResponse>) => {
+      .addCase(registerUserAction.fulfilled, (state, action) => {
         state.user = action.payload.user;
         state.isLoading = false;
       })
@@ -43,7 +39,7 @@ export const userSlice = createSlice({
         state.error = undefined;
         state.isLoading = true;
       })
-      .addCase(getUserAction.fulfilled, (state, action: PayloadAction<IGetUserResponse>) => {
+      .addCase(getUserAction.fulfilled, (state, action) => {
         state.user = action.payload.user;
         state.isLoading = false;
       })
@@ -56,7 +52,7 @@ export const userSlice = createSlice({
         state.isLoading = true;
         state.error = undefined;
       })
-      .addCase(loginUserAction.fulfilled, (state, action: PayloadAction<IPostLoginMutationResponse>) => {
+      .addCase(loginUserAction.fulfilled, (state, action) => {
         state.user = action.payload.user;
         state.isLoading = false;
       })
@@ -74,6 +70,19 @@ export const userSlice = createSlice({
         state.isLoading = false;
       })
       .addCase(logoutUserAction.rejected, (state, action) => {
+        state.error = action.error.message;
+        state.isLoading = false;
+      })
+      // Обновление данных
+      .addCase(updateUserAction.pending, (state) => {
+        state.isLoading = true;
+        state.error = undefined;
+      })
+      .addCase(updateUserAction.fulfilled, (state, action) => {
+        state.user = action.payload.user;
+        state.isLoading = false;
+      })
+      .addCase(updateUserAction.rejected, (state, action) => {
         state.error = action.error.message;
         state.isLoading = false;
       });

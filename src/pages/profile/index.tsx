@@ -1,5 +1,5 @@
-import { useAppSelector } from "@services/store";
-import { getUserStore } from "@services/user";
+import { useAppDispatch, useAppSelector } from "@services/store";
+import { getUserStore, updateUserAction } from "@services/user";
 import { Button, EmailInput, Input, PasswordInput } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useEffect, useState } from "react";
 
@@ -7,7 +7,8 @@ import profilePageStyles from "./profile.module.css";
 import type { IProfileForm } from "./types/profileForm";
 
 export const ProfilePage = () => {
-  const { user } = useAppSelector(getUserStore);
+  const { user, isLoading } = useAppSelector(getUserStore);
+  const dispatch = useAppDispatch();
 
   const [profileForm, setProfileForm] = useState<IProfileForm>({
     email: "",
@@ -20,7 +21,7 @@ export const ProfilePage = () => {
 
   const submitHandler = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(profileForm);
+    dispatch(updateUserAction(profileForm));
   };
 
   const inputOnChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -36,10 +37,10 @@ export const ProfilePage = () => {
   useEffect(() => {
     if (user) {
       setProfileForm({
-        email: user.email,
-        name: user.name,
-        defaultName: user.name,
-        defaultMail: user.email
+        email: user.email || "",
+        name: user.name || "",
+        defaultName: user.name || "",
+        defaultMail: user.email || ""
       });
     }
   }, [user]);
@@ -74,7 +75,9 @@ export const ProfilePage = () => {
       <div className={profilePageStyles.button_container}>
         <Button
           onClick={resetForm}
-          disabled={profileForm.email === profileForm.defaultMail && profileForm.name === profileForm.defaultName}
+          disabled={
+            (profileForm.email === profileForm.defaultMail && profileForm.name === profileForm.defaultName) || isLoading
+          }
           htmlType='reset'
           type='secondary'
           extraClass='mb-20'
@@ -83,7 +86,9 @@ export const ProfilePage = () => {
         </Button>
         <Button
           htmlType='submit'
-          disabled={profileForm.email === profileForm.defaultMail && profileForm.name === profileForm.defaultName}
+          disabled={
+            (profileForm.email === profileForm.defaultMail && profileForm.name === profileForm.defaultName) || isLoading
+          }
           extraClass='mb-20'
         >
           Сохранить

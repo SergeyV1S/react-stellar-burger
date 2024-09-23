@@ -13,7 +13,7 @@ const ProtectedRoute = ({ onlyUnAuth = false, element }: IProtectedRouteProps) =
   const { user, isLoading } = useAppSelector(getUserStore);
   const location = useLocation();
 
-  if (isLoading) {
+  if (isLoading && user.email.length === 0) {
     return <Spinner />;
   }
 

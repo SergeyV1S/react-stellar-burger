@@ -15,5 +15,5 @@ export const getUserQuery = async () =>
       Authorization: localStorage.getItem("access-token") || ""
     }
   })
-    .then((res) => res)
+    .then((res): Promise<IGetUserResponse> => res)
     .catch((err) => Promise.reject(err));
