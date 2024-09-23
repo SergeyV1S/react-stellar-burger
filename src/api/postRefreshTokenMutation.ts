@@ -13,7 +13,7 @@ export const postRefreshTokenMutation = () =>
       "Content-Type": "application/json;charset=utf-8"
     },
     body: JSON.stringify({
-      token: localStorage.getItem("refreshToken")
+      token: localStorage.getItem("refresh-token") || ""
     })
   })
     .then(checkReponse)

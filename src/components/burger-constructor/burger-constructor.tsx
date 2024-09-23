@@ -5,7 +5,7 @@ import {
   moveItem,
   removeIngredientFromConstructor
 } from "@services/constructor";
-import { createOrderAction, getIsModalOrder, toggleOrderModal } from "@services/order";
+import { createOrderAction, getIsModalOrder } from "@services/order";
 import { useAppDispatch, useAppSelector } from "@services/store";
 import { Button, ConstructorElement, CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useMemo } from "react";
@@ -34,8 +34,6 @@ export const BurgerConstructor = () => {
   });
 
   // Функции
-  const closeModal = () => dispatch(toggleOrderModal({ isOpen: false }));
-
   const moveIngredient = (dragIndex: number, hoverIndex: number) => dispatch(moveItem({ dragIndex, hoverIndex }));
 
   const createOrder = () => {
@@ -127,7 +125,7 @@ export const BurgerConstructor = () => {
         </Button>
       </div>
       {isOrderModalOpen && (
-        <Modal closeModal={closeModal}>
+        <Modal>
           <OrderDetails />
         </Modal>
       )}

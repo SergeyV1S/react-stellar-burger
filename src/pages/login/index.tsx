@@ -33,8 +33,6 @@ export const LoginPage = () => {
     }
   };
 
-  // if (user.email) return <Navigate to='/' replace />;
-
   return (
     <form onSubmit={submitHandler} className={loginPageStyles.container}>
       <h1 className='text text_type_main-medium'>Вход</h1>

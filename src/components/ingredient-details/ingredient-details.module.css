@@ -1,5 +1,13 @@
-.container {
+.modal_container {
   padding: 0 20px 0 20px;
+}
+
+.page_conatiner {
+  height: 70vh;
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .content {

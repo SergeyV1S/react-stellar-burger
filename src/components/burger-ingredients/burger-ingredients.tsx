@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
-import { getIngredientModal, getIngredientsState, toggleIngredientModal } from "@services/ingredient";
-import { type TAppDispatch, useAppDispatch, useAppSelector } from "@services/store";
+import { getIngredientModal, getIngredientsState } from "@services/ingredient";
+import { useAppSelector } from "@services/store";
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useRef, useState } from "react";
 
@@ -16,8 +16,7 @@ export const BurgerIngredients = () => {
   const [currentTab, setCurrentTab] = useState("bun");
 
   const { data } = useAppSelector(getIngredientsState);
-  const { isSelectedIngredientModalOpen, selectedIngredient } = useAppSelector(getIngredientModal);
-  const dispatch = useAppDispatch<TAppDispatch>();
+  const { isSelectedIngredientModalOpen } = useAppSelector(getIngredientModal);
 
   const bunsRef = useRef<HTMLDivElement>(null);
   const mainsRef = useRef<HTMLDivElement>(null);
@@ -37,8 +36,6 @@ export const BurgerIngredients = () => {
     document.getElementById(tab)?.scrollIntoView({ behavior: "smooth" });
     setCurrentTab(tab);
   };
-
-  const closeModal = () => dispatch(toggleIngredientModal({ isOpen: false }));
 
   const checkPosition = () => {
     const ingredientsTop = ingredientsRef.current!.getBoundingClientRect().top;
@@ -79,8 +76,8 @@ export const BurgerIngredients = () => {
         ))}
       </div>
       {isSelectedIngredientModalOpen && (
-        <Modal closeModal={closeModal} title='Детали ингредиента'>
-          <IngredientDetails ingredient={selectedIngredient} />
+        <Modal>
+          <IngredientDetails />
         </Modal>
       )}
     </section>

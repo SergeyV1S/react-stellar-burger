@@ -1,6 +1,11 @@
+import { clearConstructor } from "@services/constructor";
+import { closeIngredientModal } from "@services/ingredient";
+import { toggleOrderModal } from "@services/order";
+import { useAppDispatch } from "@services/store";
 import { CloseIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import { type ReactNode, useEffect } from "react";
 import { createPortal } from "react-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 import { ModalOverlay } from "./modal-overlay";
 import modal from "./modal.module.css";
@@ -9,11 +14,23 @@ const modalElement = document.getElementById("modal") as HTMLElement;
 
 interface IModalProps {
   children: ReactNode;
-  closeModal: () => void;
-  title?: string;
 }
 
-export const Modal = ({ children, closeModal, title }: IModalProps) => {
+export const Modal = ({ children }: IModalProps) => {
+  const dispatch = useAppDispatch();
+  const { state } = useLocation();
+  const navigate = useNavigate();
+
+  const closeModal = () => {
+    dispatch(toggleOrderModal({ isOpen: false }));
+    dispatch(closeIngredientModal());
+    if (state) {
+      navigate(-1);
+    } else {
+      dispatch(clearConstructor());
+    }
+  };
+
   useEffect(() => {
     const checkEscapeButton = (e: KeyboardEvent) => {
       if (e.key == "Escape") {
@@ -32,8 +49,8 @@ export const Modal = ({ children, closeModal, title }: IModalProps) => {
       <ModalOverlay closeModal={closeModal} />
       <div className={modal.container}>
         <div className={modal.content}>
-          <div className={title ? modal.header_with_title : modal.header_without_title}>
-            {title && <h2 className='text text_type_main-large'>{title}</h2>}
+          <div className={modal.header_with_title}>
+            <h2 className='text text_type_main-large'>Детали ингредиента</h2>
             <span className={modal.close} onClick={closeModal}>
               <CloseIcon type='primary' />
             </span>

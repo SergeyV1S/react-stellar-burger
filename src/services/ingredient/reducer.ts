@@ -23,8 +23,9 @@ export const ingredietSlice = createSlice({
       state.modal.selectedIngredient = action.payload;
       state.modal.isSelectedIngredientModalOpen = true;
     },
-    toggleIngredientModal: (state, action: PayloadAction<{ isOpen: boolean }>) => {
-      state.modal.isSelectedIngredientModalOpen = action.payload.isOpen;
+    closeIngredientModal: (state) => {
+      state.modal.selectedIngredient = null;
+      state.modal.isSelectedIngredientModalOpen = false;
     }
   },
   selectors: {
@@ -50,6 +51,6 @@ export const ingredietSlice = createSlice({
   }
 });
 
-export const { setSelectedIngredient, toggleIngredientModal } = ingredietSlice.actions;
+export const { setSelectedIngredient, closeIngredientModal } = ingredietSlice.actions;
 
 export const { getIngredientsState, getIngredientModal } = ingredietSlice.selectors;

@@ -1,6 +1,6 @@
 import { createRoot } from "react-dom/client";
 import { Provider } from "react-redux";
-import { BrowserRouter } from "react-router-dom";
+import { BrowserRouter as Router } from "react-router-dom";
 
 import "./index.css";
 import { AppRoutes } from "./router";
@@ -11,8 +11,8 @@ const root = createRoot(rootElement as HTMLElement);
 
 root.render(
   <Provider store={store}>
-    <BrowserRouter>
+    <Router>
       <AppRoutes />
-    </BrowserRouter>
+    </Router>
   </Provider>
 );
