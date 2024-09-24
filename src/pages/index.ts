@@ -1,4 +1,3 @@
-export * from "./current-ingredient";
 export * from "./forgot-password";
 export * from "./home";
 export * from "./login";

@@ -1,10 +1,10 @@
 import { getIngredientsState } from "@services/ingredient";
 import { useAppSelector } from "@services/store";
+import "@src/index.css";
 import { useLocation, useParams } from "react-router-dom";
 
 import { Spinner } from "@components/loader";
 
-import "../../index.css";
 import ingredientDetails from "./ingredient-details.module.css";
 
 export const IngredientDetails = () => {

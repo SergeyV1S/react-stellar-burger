@@ -9,7 +9,7 @@ export const ProfileLayout = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
-  const logout = () => dispatch(logoutUserAction()).then(() => navigate("/"));
+  const logout = () => dispatch(logoutUserAction()).then(() => navigate("/login"));
 
   return (
     <div className={profileLayout.wrapper}>

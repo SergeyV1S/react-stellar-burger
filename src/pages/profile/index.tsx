@@ -13,11 +13,11 @@ export const ProfilePage = () => {
   const [profileForm, setProfileForm] = useState<IProfileForm>({
     email: "",
     name: "",
+    password: "",
     defaultName: "",
-    defaultMail: ""
+    defaultMail: "",
+    defaultPassword: ""
   });
-
-  const [password, setPassword] = useState("");
 
   const submitHandler = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -25,10 +25,6 @@ export const ProfilePage = () => {
   };
 
   const inputOnChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.name === "password") {
-      setPassword(e.target.value);
-      return;
-    }
     setProfileForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
@@ -39,8 +35,10 @@ export const ProfilePage = () => {
       setProfileForm({
         email: user.email || "",
         name: user.name || "",
+        password: "",
         defaultName: user.name || "",
-        defaultMail: user.email || ""
+        defaultMail: user.email || "",
+        defaultPassword: ""
       });
     }
   }, [user]);
@@ -68,7 +66,7 @@ export const ProfilePage = () => {
       <PasswordInput
         placeholder='Пароль'
         onChange={inputOnChangeHandler}
-        value={password}
+        value={profileForm.password}
         extraClass='mb-6'
         name='password'
       />
@@ -76,7 +74,10 @@ export const ProfilePage = () => {
         <Button
           onClick={resetForm}
           disabled={
-            (profileForm.email === profileForm.defaultMail && profileForm.name === profileForm.defaultName) || isLoading
+            (profileForm.email === profileForm.defaultMail &&
+              profileForm.name === profileForm.defaultName &&
+              profileForm.password === profileForm.defaultPassword) ||
+            isLoading
           }
           htmlType='reset'
           type='secondary'
@@ -87,7 +88,10 @@ export const ProfilePage = () => {
         <Button
           htmlType='submit'
           disabled={
-            (profileForm.email === profileForm.defaultMail && profileForm.name === profileForm.defaultName) || isLoading
+            (profileForm.email === profileForm.defaultMail &&
+              profileForm.name === profileForm.defaultName &&
+              profileForm.password === profileForm.defaultPassword) ||
+            isLoading
           }
           extraClass='mb-20'
         >

@@ -12,7 +12,8 @@ export const patchUserDataMutation = (newUser: IProfileForm) =>
     },
     body: JSON.stringify({
       email: newUser.email,
-      name: newUser.name
+      name: newUser.name,
+      password: newUser.password
     })
   })
     .then(checkReponse)
