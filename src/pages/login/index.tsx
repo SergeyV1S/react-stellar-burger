@@ -17,7 +17,7 @@ export const LoginPage = () => {
   const submitHandler = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     dispatch(loginUserAction(loginForm)).then(() =>
-      navigate(state.from.pathname || "/", {
+      navigate(state && state.from ? state.from.pathname : "/", {
         replace: true
       })
     );

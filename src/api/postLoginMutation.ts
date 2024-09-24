@@ -1,5 +1,6 @@
 import type { IUser } from "@interfaces/user";
 import type { ILoginForm } from "@pages/login/types";
+import { checkReponse } from "@src/utils/checkResponse";
 
 export interface IPostLoginMutationResponse {
   success: boolean;
@@ -16,11 +17,8 @@ export const postLoginMutation = async (userAuthData: ILoginForm) =>
     },
     body: JSON.stringify(userAuthData)
   })
-    .then((res): Promise<IPostLoginMutationResponse> => {
-      if (res.ok) return res.json();
-      return Promise.reject(res.status);
-    })
-    .then((jsonRes) => {
+    .then(checkReponse)
+    .then((jsonRes: IPostLoginMutationResponse) => {
       localStorage.setItem("access-token", jsonRes.accessToken);
       localStorage.setItem("refresh-token", jsonRes.refreshToken);
       return jsonRes;
