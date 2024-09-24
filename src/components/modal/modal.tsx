@@ -48,15 +48,10 @@ export const Modal = ({ children }: IModalProps) => {
     <menu type='popup' className={modal.wrapper}>
       <ModalOverlay closeModal={closeModal} />
       <div className={modal.container}>
-        <div className={modal.content}>
-          <div className={modal.header_with_title}>
-            <h2 className='text text_type_main-large' />
-            <span className={modal.close} onClick={closeModal}>
-              <CloseIcon type='primary' />
-            </span>
-          </div>
-          {children}
-        </div>
+        <span className={modal.close} onClick={closeModal}>
+          <CloseIcon type='primary' />
+        </span>
+        {children}
       </div>
     </menu>,
     modalElement

@@ -8,19 +8,24 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  text-align: center;
 }
 
 .content {
+  margin: 40px;
+}
+
+.ingredients {
   display: flex;
   flex-direction: column;
+  text-align: center;
   justify-content: center;
-  align-items: center;
-  gap: 32px;
-  margin-top: 32px;
 }
 
 .compound_container {
   display: flex;
+  align-items: center;
+  justify-content: center;
   gap: 20px;
 }
 
