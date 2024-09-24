@@ -3,6 +3,8 @@ import { useAppSelector } from "@services/store";
 
 import checkmark from "@images/checkmark.webp";
 
+import { Spinner } from "@components/loader";
+
 import orderDetails from "./order-details.module.css";
 
 export const OrderDetails = () => {
@@ -21,7 +23,11 @@ export const OrderDetails = () => {
           </div>
         </div>
       )}
-      {isLoading && <div className='text'>Загрузка...</div>}
+      {isLoading && (
+        <div className={orderDetails.spinner_wrapper}>
+          <Spinner />
+        </div>
+      )}
       {error && <div>{error}</div>}
     </>
   );

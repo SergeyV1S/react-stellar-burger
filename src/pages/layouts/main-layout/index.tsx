@@ -7,6 +7,7 @@ import { Outlet } from "react-router-dom";
 import { AppHeader } from "@components/app-header";
 import { Spinner } from "@components/loader";
 
+import "../../../index.css";
 import styles from "./index-layout.module.css";
 
 export const IndexLayout = () => {
@@ -22,7 +23,11 @@ export const IndexLayout = () => {
       <AppHeader />
       <main className={styles.container}>
         {data && !isLoading && <Outlet />}
-        {isLoading && <Spinner />}
+        {isLoading && (
+          <div className='spinner_wrapper'>
+            <Spinner />
+          </div>
+        )}
         {error && <div>{error}</div>}
       </main>
     </>

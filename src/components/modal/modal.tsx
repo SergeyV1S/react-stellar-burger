@@ -50,7 +50,7 @@ export const Modal = ({ children }: IModalProps) => {
       <div className={modal.container}>
         <div className={modal.content}>
           <div className={modal.header_with_title}>
-            <h2 className='text text_type_main-large'>Детали ингредиента</h2>
+            <h2 className='text text_type_main-large' />
             <span className={modal.close} onClick={closeModal}>
               <CloseIcon type='primary' />
             </span>

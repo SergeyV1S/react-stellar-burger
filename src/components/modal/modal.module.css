@@ -27,12 +27,8 @@
   justify-content: space-between;
 }
 
-.header_without_title {
-  display: flex;
-  justify-content: end;
-}
-
 .close {
+  text-align: end;
   & :hover {
     cursor: pointer;
   }

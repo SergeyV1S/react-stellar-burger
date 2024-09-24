@@ -2,6 +2,7 @@ import { useAppSelector } from "@services/store";
 import { getUserStore } from "@services/user";
 import { Navigate, useLocation } from "react-router-dom";
 
+import "../index.css";
 import { Spinner } from "./loader";
 
 interface IProtectedRouteProps {
@@ -14,7 +15,11 @@ const ProtectedRoute = ({ onlyUnAuth = false, element }: IProtectedRouteProps) =
   const location = useLocation();
 
   if (isLoading && user.email.length === 0) {
-    return <Spinner />;
+    return (
+      <div className='spinner_wrapper'>
+        <Spinner />
+      </div>
+    );
   }
 
   if (!onlyUnAuth && !user.email) {
