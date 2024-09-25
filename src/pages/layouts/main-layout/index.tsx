@@ -1,17 +1,16 @@
 import { getIngredientsAction } from "@services/ingredient";
 import { getIngredientsState } from "@services/ingredient";
 import { type TAppDispatch, useAppDispatch, useAppSelector } from "@services/store";
+import "@src/index.css";
 import { useEffect } from "react";
-import { DndProvider } from "react-dnd";
-import { HTML5Backend } from "react-dnd-html5-backend";
+import { Outlet } from "react-router-dom";
 
 import { AppHeader } from "@components/app-header";
-import { BurgerConstructor } from "@components/burger-constructor";
-import { BurgerIngredients } from "@components/burger-ingredients";
+import { Spinner } from "@components/loader";
 
-import app from "./app.module.css";
+import styles from "./index-layout.module.css";
 
-export const App = () => {
+export const IndexLayout = () => {
   const dispatch = useAppDispatch<TAppDispatch>();
   const { data, isLoading, error } = useAppSelector(getIngredientsState);
 
@@ -22,14 +21,13 @@ export const App = () => {
   return (
     <>
       <AppHeader />
-      <main className={app.container}>
-        {data && (
-          <DndProvider backend={HTML5Backend}>
-            <BurgerIngredients />
-            <BurgerConstructor />
-          </DndProvider>
+      <main className={styles.container}>
+        {data && !isLoading && <Outlet />}
+        {isLoading && (
+          <div className='spinner_wrapper'>
+            <Spinner />
+          </div>
         )}
-        {isLoading && <div>Загрузка...</div>}
         {error && <div>{error}</div>}
       </main>
     </>

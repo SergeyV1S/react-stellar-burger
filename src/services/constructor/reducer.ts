@@ -31,6 +31,10 @@ export const consructorSlice = createSlice({
       const [draggedIngredient] = updatedIngredients.splice(action.payload.dragIndex, 1);
       updatedIngredients.splice(action.payload.hoverIndex, 0, draggedIngredient);
       state.ingredients = updatedIngredients;
+    },
+    clearConstructor: (state) => {
+      state.bun = null;
+      state.ingredients = [];
     }
   },
   selectors: {
@@ -38,6 +42,7 @@ export const consructorSlice = createSlice({
   }
 });
 
-export const { addIngredientToConstructor, moveItem, removeIngredientFromConstructor } = consructorSlice.actions;
+export const { addIngredientToConstructor, moveItem, removeIngredientFromConstructor, clearConstructor } =
+  consructorSlice.actions;
 
 export const { getConstructorState } = consructorSlice.selectors;

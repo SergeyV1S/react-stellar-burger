@@ -21,13 +21,15 @@
     "noFallthroughCasesInSwitch": true,
     "baseUrl": ".",
     "paths": {
+      "@src/*": ["src/*"],
       "@components/*": ["src/components/*"],
       "@fonts/*": ["src/fonts/*"],
       "@images/*": ["src/images/*"],
       "@utils/*": ["src/utils/*"],
       "@services/*": ["src/services/*"],
       "@interfaces/*": ["src/interfaces/*"],
-      "@api/*": ["src/api/*"]
+      "@api/*": ["src/api/*"],
+      "@pages/*": ["src/pages/*"]
     }
   },
   "include": ["**/*.ts", "**/*.tsx"]

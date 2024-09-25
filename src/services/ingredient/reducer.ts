@@ -23,8 +23,9 @@ export const ingredietSlice = createSlice({
       state.modal.selectedIngredient = action.payload;
       state.modal.isSelectedIngredientModalOpen = true;
     },
-    toggleIngredientModal: (state, action: PayloadAction<{ isOpen: boolean }>) => {
-      state.modal.isSelectedIngredientModalOpen = action.payload.isOpen;
+    closeIngredientModal: (state) => {
+      state.modal.selectedIngredient = null;
+      state.modal.isSelectedIngredientModalOpen = false;
     }
   },
   selectors: {
@@ -35,21 +36,21 @@ export const ingredietSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(getIngredientsAction.fulfilled, (state, action: PayloadAction<{ data: IIngredient[] }>) => {
-        state.data = action.payload.data;
         state.isLoading = false;
+        state.data = action.payload.data;
       })
       .addCase(getIngredientsAction.rejected, (state, action) => {
-        state.error = action.error.message;
         state.isLoading = false;
+        state.error = action.error.message;
       })
       .addCase(getIngredientsAction.pending, (state) => {
-        state.error = undefined;
         state.isLoading = true;
+        state.error = undefined;
         state.data = [];
       });
   }
 });
 
-export const { setSelectedIngredient, toggleIngredientModal } = ingredietSlice.actions;
+export const { setSelectedIngredient, closeIngredientModal } = ingredietSlice.actions;
 
 export const { getIngredientsState, getIngredientModal } = ingredietSlice.selectors;

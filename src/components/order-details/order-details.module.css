@@ -4,7 +4,11 @@
   align-items: center;
   justify-content: center;
   gap: 32px;
-  padding: 50px 30px 50px 30px;
+  padding: 80px;
+}
+
+.spinner_wrapper {
+  padding: 100px 80px;
 }
 
 .digits {

@@ -12,6 +12,10 @@
   padding-left: 32px;
 }
 
+.content {
+  position: relative;
+}
+
 .ingredients_wrapper {
   display: flex;
   flex-direction: column;

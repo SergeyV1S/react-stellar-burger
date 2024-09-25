@@ -16,23 +16,17 @@
   background-color: #1c1c21;
 }
 
-.content {
-  padding: 40px;
-  top: 0;
-}
-
 .header_with_title {
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
 
-.header_without_title {
-  display: flex;
-  justify-content: end;
-}
-
 .close {
+  position: absolute;
+  right: 40px;
+  top: 49px;
+
   & :hover {
     cursor: pointer;
   }

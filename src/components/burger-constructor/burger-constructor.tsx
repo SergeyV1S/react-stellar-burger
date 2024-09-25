@@ -5,11 +5,13 @@ import {
   moveItem,
   removeIngredientFromConstructor
 } from "@services/constructor";
-import { createOrderAction, getIsModalOrder, toggleOrderModal } from "@services/order";
+import { createOrderAction, getIsModalOrder } from "@services/order";
 import { useAppDispatch, useAppSelector } from "@services/store";
+import { getUserStore } from "@services/user";
 import { Button, ConstructorElement, CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useMemo } from "react";
 import { useDrop } from "react-dnd";
+import { useNavigate } from "react-router-dom";
 
 import { Modal } from "@components/modal";
 import { OrderDetails } from "@components/order-details";
@@ -23,6 +25,8 @@ export const BurgerConstructor = () => {
   const dispatch = useAppDispatch();
   const { bun, ingredients } = useAppSelector(getConstructorState);
   const isOrderModalOpen = useAppSelector(getIsModalOrder);
+  const { user } = useAppSelector(getUserStore);
+  const navigate = useNavigate();
 
   const [{ isOver, isBun }, dropTargetConstructorRef] = useDrop({
     accept: "burger-item",
@@ -34,11 +38,13 @@ export const BurgerConstructor = () => {
   });
 
   // Функции
-  const closeModal = () => dispatch(toggleOrderModal({ isOpen: false }));
-
   const moveIngredient = (dragIndex: number, hoverIndex: number) => dispatch(moveItem({ dragIndex, hoverIndex }));
 
   const createOrder = () => {
+    if (!user.email) {
+      navigate("/login");
+      return;
+    }
     if (bun) {
       dispatch(createOrderAction(formatIngredientsForRequest(bun._id, ingredients)));
     }
@@ -127,7 +133,7 @@ export const BurgerConstructor = () => {
         </Button>
       </div>
       {isOrderModalOpen && (
-        <Modal closeModal={closeModal}>
+        <Modal>
           <OrderDetails />
         </Modal>
       )}

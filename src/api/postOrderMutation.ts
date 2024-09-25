@@ -1,15 +1,15 @@
+import { checkReponse } from "@utils/checkResponse";
+
 export const postOrderMutation = async (idArr: string[]) =>
-  fetch(import.meta.env.VITE_API_URL + "/orders", {
+  await fetch(import.meta.env.VITE_API_URL + "/orders", {
     method: "POST",
     headers: {
-      "Content-Type": "application/json"
+      "Content-Type": "application/json",
+      Authorization: localStorage.getItem("access-token") || ""
     },
     body: JSON.stringify({
       ingredients: idArr
     })
-  }).then((res) => {
-    if (res.ok) {
-      return res.json();
-    }
-    return Promise.reject(`Ошибка ${res.status}`);
-  });
+  })
+    .then(checkReponse)
+    .then((res) => res);

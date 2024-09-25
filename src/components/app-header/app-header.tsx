@@ -1,4 +1,5 @@
 import { BurgerIcon, ListIcon, Logo, ProfileIcon } from "@ya.praktikum/react-developer-burger-ui-components";
+import { NavLink } from "react-router-dom";
 
 import appHeader from "./app-header.module.css";
 
@@ -6,22 +7,43 @@ export const AppHeader = () => (
   <header className={appHeader.wrapper + " pt-4 pb-4"}>
     <div className={appHeader.container}>
       <nav className={appHeader.nav}>
-        <a className={appHeader.link + " pl-5 pr-5 pb-4 pt-4"} href='/'>
-          <BurgerIcon type='primary' />
-          <p className={appHeader.active_link + " text text_type_main-default"}>Конструктор</p>
-        </a>
-        <a className={appHeader.link + " pl-5 pr-5 pb-4 pt-4"} href='/'>
-          <ListIcon type='secondary' />
-          <p className='text text_type_main-default'>Лента заказов</p>
-        </a>
+        <NavLink
+          to='/'
+          className={({ isActive }) => (isActive ? appHeader.active_link : appHeader.link) + " pl-5 pr-5 pb-4 pt-4"}
+        >
+          {({ isActive }) => (
+            <>
+              <BurgerIcon type={isActive ? "primary" : "secondary"} />
+              <p className='text text_type_main-default'>Конструктор</p>
+            </>
+          )}
+        </NavLink>
+        <NavLink
+          to='order-list'
+          className={({ isActive }) => (isActive ? appHeader.active_link : appHeader.link) + " pl-5 pr-5 pb-4 pt-4"}
+        >
+          {({ isActive }) => (
+            <>
+              <ListIcon type={isActive ? "primary" : "secondary"} />
+              <p className='text text_type_main-default'>Лента заказов</p>
+            </>
+          )}
+        </NavLink>
       </nav>
       <div className={appHeader.logo}>
         <Logo />
       </div>
-      <a className={appHeader.link + " pl-5 pr-5 pb-4 pt-4"} href='/'>
-        <ProfileIcon type='secondary' />
-        <p className='text text_type_main-default'>Личный кабинет</p>
-      </a>
+      <NavLink
+        to='/profile'
+        className={({ isActive }) => (isActive ? appHeader.active_link : appHeader.link) + " pl-5 pr-5 pb-4 pt-4"}
+      >
+        {({ isActive }) => (
+          <>
+            <ProfileIcon type={isActive ? "primary" : "secondary"} />
+            <p className='text text_type_main-default'>Личный кабинет</p>
+          </>
+        )}
+      </NavLink>
     </div>
   </header>
 );
