@@ -1,7 +1,7 @@
-import type { IProfileForm } from "@pages/profile/types/profileForm";
-import { checkReponse } from "@utils/checkResponse";
+import type { IProfileForm } from "@pages/profile/types/profileForm"
+import { checkReponse } from "@utils/checkResponse"
 
-import type { IGetUserResponse } from "./getUserQuery";
+import type { IGetUserResponse } from "./getUserQuery"
 
 export const patchUserDataMutation = (newUser: IProfileForm) =>
   fetch(`${import.meta.env.VITE_API_URL}/auth/user`, {
@@ -18,4 +18,4 @@ export const patchUserDataMutation = (newUser: IProfileForm) =>
   })
     .then(checkReponse)
     .then((jsonRes: IGetUserResponse) => jsonRes)
-    .catch((err) => Promise.reject(err));
+    .catch((err) => Promise.reject(err))

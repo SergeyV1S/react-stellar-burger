@@ -1,8 +1,8 @@
-import { checkReponse } from "@utils/checkResponse";
+import { checkReponse } from "@utils/checkResponse"
 
 export interface IPostForgutPasswordMutationResponse {
-  success: boolean;
-  message: string;
+  success: boolean
+  message: string
 }
 
 export const postForgotPasswordMutation = (data: { email: string }) =>
@@ -15,4 +15,4 @@ export const postForgotPasswordMutation = (data: { email: string }) =>
   })
     .then(checkReponse)
     .then((res: IPostForgutPasswordMutationResponse) => res)
-    .catch((err) => err);
+    .catch((err) => err)

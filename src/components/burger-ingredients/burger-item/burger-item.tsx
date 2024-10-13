@@ -1,20 +1,20 @@
-import type { IIngredient } from "@interfaces/ingredient";
-import { getConstructorState } from "@services/constructor";
-import { useAppSelector } from "@services/store";
-import { Counter, CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
-import { useDrag } from "react-dnd";
-import { Link, useLocation } from "react-router-dom";
+import type { IIngredient } from "@interfaces/ingredient"
+import { getConstructorState } from "@services/constructor"
+import { useAppSelector } from "@services/store"
+import { Counter, CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components"
+import { useDrag } from "react-dnd"
+import { Link, useLocation } from "react-router-dom"
 
-import burgerItem from "./burger-item.module.css";
+import burgerItem from "./burger-item.module.css"
 
 interface IBurgerItemProps {
-  item: IIngredient;
+  item: IIngredient
 }
 
 export const BurgerItem = ({ item }: IBurgerItemProps) => {
   // Хуки
-  const location = useLocation();
-  const { bun, ingredients } = useAppSelector(getConstructorState);
+  const location = useLocation()
+  const { bun, ingredients } = useAppSelector(getConstructorState)
 
   const [{ isDragging }, dragRef, dragPreviewRef] = useDrag({
     type: "burger-item",
@@ -23,10 +23,10 @@ export const BurgerItem = ({ item }: IBurgerItemProps) => {
     collect: (monitor) => ({
       isDragging: monitor.isDragging()
     })
-  });
+  })
 
   // Подсчет кол-ва выбранных элементов
-  const count = ingredients.filter((element) => item._id === element._id);
+  const count = ingredients.filter((element) => item._id === element._id)
 
   return (
     <Link
@@ -48,5 +48,5 @@ export const BurgerItem = ({ item }: IBurgerItemProps) => {
         <p className='text text_type_main-default'>{item.name}</p>
       </div>
     </Link>
-  );
-};
+  )
+}

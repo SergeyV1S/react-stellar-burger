@@ -1,1 +1,1 @@
-export * from "./checkTabPosition";
+export * from "./checkTabPosition"

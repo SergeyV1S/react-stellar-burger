@@ -1,22 +1,22 @@
-import { getOrderStore, toggleOrderModal } from "@services/order";
-import { useAppDispatch, useAppSelector } from "@services/store";
-import { getUserStore } from "@services/user";
-import { Navigate } from "react-router-dom";
+import { getOrderStore, toggleOrderModal } from "@services/order"
+import { useAppDispatch, useAppSelector } from "@services/store"
+import { getUserStore } from "@services/user"
+import { Navigate } from "react-router-dom"
 
-import checkmark from "@images/checkmark.webp";
+import checkmark from "@images/checkmark.webp"
 
-import { Spinner } from "@components/loader";
+import { Spinner } from "@components/loader"
 
-import orderDetails from "./order-details.module.css";
+import orderDetails from "./order-details.module.css"
 
 export const OrderDetails = () => {
-  const { error, order, isLoading } = useAppSelector(getOrderStore);
-  const { user } = useAppSelector(getUserStore);
-  const dispatch = useAppDispatch();
+  const { error, order, isLoading } = useAppSelector(getOrderStore)
+  const { user } = useAppSelector(getUserStore)
+  const dispatch = useAppDispatch()
 
   if (error === "jwt expired" || !user.email) {
-    dispatch(toggleOrderModal({ isOpen: false }));
-    return <Navigate to='/login' />;
+    dispatch(toggleOrderModal({ isOpen: false }))
+    return <Navigate to='/login' />
   }
 
   return (
@@ -38,5 +38,5 @@ export const OrderDetails = () => {
         </div>
       )}
     </>
-  );
-};
+  )
+}

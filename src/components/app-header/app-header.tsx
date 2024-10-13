@@ -1,7 +1,7 @@
-import { BurgerIcon, ListIcon, Logo, ProfileIcon } from "@ya.praktikum/react-developer-burger-ui-components";
-import { NavLink } from "react-router-dom";
+import { BurgerIcon, ListIcon, Logo, ProfileIcon } from "@ya.praktikum/react-developer-burger-ui-components"
+import { NavLink } from "react-router-dom"
 
-import appHeader from "./app-header.module.css";
+import appHeader from "./app-header.module.css"
 
 export const AppHeader = () => (
   <header className={appHeader.wrapper + " pt-4 pb-4"}>
@@ -46,4 +46,4 @@ export const AppHeader = () => (
       </NavLink>
     </div>
   </header>
-);
+)

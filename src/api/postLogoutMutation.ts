@@ -1,8 +1,8 @@
-import { checkReponse } from "@utils/checkResponse";
+import { checkReponse } from "@utils/checkResponse"
 
 export interface IPostLogoutMutation {
-  success: boolean;
-  message: string;
+  success: boolean
+  message: string
 }
 
 export const postLogoutMutation = () =>
@@ -17,8 +17,8 @@ export const postLogoutMutation = () =>
   })
     .then(checkReponse)
     .then((jsonRes: IPostLogoutMutation) => {
-      if (!jsonRes.success) return Promise.reject("error");
-      localStorage.removeItem("access-token");
-      localStorage.removeItem("refresh-token");
-      return jsonRes.success;
-    });
+      if (!jsonRes.success) return Promise.reject("error")
+      localStorage.removeItem("access-token")
+      localStorage.removeItem("refresh-token")
+      return jsonRes.success
+    })

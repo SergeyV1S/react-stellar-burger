@@ -1,22 +1,22 @@
-import { getIngredientsState } from "@services/ingredient";
-import { useAppSelector } from "@services/store";
-import "@src/index.css";
-import { useLocation, useParams } from "react-router-dom";
+import { getIngredientsState } from "@services/ingredient"
+import { useAppSelector } from "@services/store"
+import "@src/index.css"
+import { useLocation, useParams } from "react-router-dom"
 
-import { Spinner } from "@components/loader";
+import { Spinner } from "@components/loader"
 
-import ingredientDetails from "./ingredient-details.module.css";
+import ingredientDetails from "./ingredient-details.module.css"
 
 export const IngredientDetails = () => {
   const {
     data,
     modal: { selectedIngredient }
-  } = useAppSelector(getIngredientsState);
-  const { state } = useLocation();
+  } = useAppSelector(getIngredientsState)
+  const { state } = useLocation()
 
-  const { id } = useParams();
+  const { id } = useParams()
 
-  const currentItem = data ? data.filter((item) => item._id === id)[0] : selectedIngredient;
+  const currentItem = data ? data.filter((item) => item._id === id)[0] : selectedIngredient
 
   return (
     <div className={state ? ingredientDetails.modal_container : ingredientDetails.page_conatiner}>
@@ -52,5 +52,5 @@ export const IngredientDetails = () => {
         </div>
       )}
     </div>
-  );
-};
+  )
+}

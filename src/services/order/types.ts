@@ -1,13 +1,13 @@
 export interface IOrderInitialState {
-  order: IOrder | null;
-  error: string | undefined;
-  isOrderModalOpen: boolean;
-  isLoading: boolean;
+  order: IOrder | null
+  error: string | undefined
+  isOrderModalOpen: boolean
+  isLoading: boolean
 }
 
 export interface IOrder {
-  name: string;
+  name: string
   order: {
-    number: number;
-  };
+    number: number
+  }
 }

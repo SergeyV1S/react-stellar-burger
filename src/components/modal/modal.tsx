@@ -1,48 +1,48 @@
-import { clearConstructor } from "@services/constructor";
-import { closeIngredientModal } from "@services/ingredient";
-import { toggleOrderModal } from "@services/order";
-import { useAppDispatch } from "@services/store";
-import { CloseIcon } from "@ya.praktikum/react-developer-burger-ui-components";
-import { type ReactNode, useEffect } from "react";
-import { createPortal } from "react-dom";
-import { useLocation, useNavigate } from "react-router-dom";
+import { clearConstructor } from "@services/constructor"
+import { closeIngredientModal } from "@services/ingredient"
+import { toggleOrderModal } from "@services/order"
+import { useAppDispatch } from "@services/store"
+import { CloseIcon } from "@ya.praktikum/react-developer-burger-ui-components"
+import { type ReactNode, useEffect } from "react"
+import { createPortal } from "react-dom"
+import { useLocation, useNavigate } from "react-router-dom"
 
-import { ModalOverlay } from "./modal-overlay";
-import modal from "./modal.module.css";
+import { ModalOverlay } from "./modal-overlay"
+import modal from "./modal.module.css"
 
-const modalElement = document.getElementById("modal") as HTMLElement;
+const modalElement = document.getElementById("modal") as HTMLElement
 
 interface IModalProps {
-  children: ReactNode;
+  children: ReactNode
 }
 
 export const Modal = ({ children }: IModalProps) => {
-  const dispatch = useAppDispatch();
-  const { state } = useLocation();
-  const navigate = useNavigate();
+  const dispatch = useAppDispatch()
+  const { state } = useLocation()
+  const navigate = useNavigate()
 
   const closeModal = () => {
-    dispatch(toggleOrderModal({ isOpen: false }));
-    dispatch(closeIngredientModal());
+    dispatch(toggleOrderModal({ isOpen: false }))
+    dispatch(closeIngredientModal())
     if (state) {
-      navigate(-1);
+      navigate(-1)
     } else {
-      dispatch(clearConstructor());
+      dispatch(clearConstructor())
     }
-  };
+  }
 
   useEffect(() => {
     const checkEscapeButton = (e: KeyboardEvent) => {
       if (e.key == "Escape") {
-        closeModal();
+        closeModal()
       }
-    };
-    document.addEventListener("keydown", checkEscapeButton);
+    }
+    document.addEventListener("keydown", checkEscapeButton)
 
     return () => {
-      document.removeEventListener("keydown", checkEscapeButton);
-    };
-  }, []);
+      document.removeEventListener("keydown", checkEscapeButton)
+    }
+  }, [])
 
   return createPortal(
     <menu type='popup' className={modal.wrapper}>
@@ -55,5 +55,5 @@ export const Modal = ({ children }: IModalProps) => {
       </div>
     </menu>,
     modalElement
-  );
-};
+  )
+}

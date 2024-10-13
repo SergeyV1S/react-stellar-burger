@@ -1,14 +1,14 @@
-import { useAppDispatch, useAppSelector } from "@services/store";
-import { getUserStore, updateUserAction } from "@services/user";
-import { Button, EmailInput, Input, PasswordInput } from "@ya.praktikum/react-developer-burger-ui-components";
-import { useEffect, useState } from "react";
+import { useAppDispatch, useAppSelector } from "@services/store"
+import { getUserStore, updateUserAction } from "@services/user"
+import { Button, EmailInput, Input, PasswordInput } from "@ya.praktikum/react-developer-burger-ui-components"
+import { useEffect, useState } from "react"
 
-import profilePageStyles from "./profile.module.css";
-import type { IProfileForm } from "./types/profileForm";
+import profilePageStyles from "./profile.module.css"
+import type { IProfileForm } from "./types/profileForm"
 
 export const ProfilePage = () => {
-  const { user, isLoading } = useAppSelector(getUserStore);
-  const dispatch = useAppDispatch();
+  const { user, isLoading } = useAppSelector(getUserStore)
+  const dispatch = useAppDispatch()
 
   const [profileForm, setProfileForm] = useState<IProfileForm>({
     email: "",
@@ -17,18 +17,18 @@ export const ProfilePage = () => {
     defaultName: "",
     defaultMail: "",
     defaultPassword: ""
-  });
+  })
 
   const submitHandler = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    dispatch(updateUserAction(profileForm));
-  };
+    e.preventDefault()
+    dispatch(updateUserAction(profileForm))
+  }
 
   const inputOnChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setProfileForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
-  };
+    setProfileForm((prev) => ({ ...prev, [e.target.name]: e.target.value }))
+  }
 
-  const resetForm = () => setProfileForm((prev) => ({ ...prev, email: prev.defaultMail, name: prev.defaultName }));
+  const resetForm = () => setProfileForm((prev) => ({ ...prev, email: prev.defaultMail, name: prev.defaultName }))
 
   useEffect(() => {
     if (user) {
@@ -39,9 +39,9 @@ export const ProfilePage = () => {
         defaultName: user.name || "",
         defaultMail: user.email || "",
         defaultPassword: ""
-      });
+      })
     }
-  }, [user]);
+  }, [user])
 
   return (
     <form onSubmit={submitHandler} className={profilePageStyles.container}>
@@ -99,5 +99,5 @@ export const ProfilePage = () => {
         </Button>
       </div>
     </form>
-  );
-};
+  )
+}

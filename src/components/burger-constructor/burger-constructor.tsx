@@ -1,32 +1,32 @@
-import type { IIngredient } from "@interfaces/ingredient";
+import type { IIngredient } from "@interfaces/ingredient"
 import {
   addIngredientToConstructor,
   getConstructorState,
   moveItem,
   removeIngredientFromConstructor
-} from "@services/constructor";
-import { createOrderAction, getIsModalOrder } from "@services/order";
-import { useAppDispatch, useAppSelector } from "@services/store";
-import { getUserStore } from "@services/user";
-import { Button, ConstructorElement, CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
-import { useMemo } from "react";
-import { useDrop } from "react-dnd";
-import { useNavigate } from "react-router-dom";
+} from "@services/constructor"
+import { createOrderAction, getIsModalOrder } from "@services/order"
+import { useAppDispatch, useAppSelector } from "@services/store"
+import { getUserStore } from "@services/user"
+import { Button, ConstructorElement, CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components"
+import { useMemo } from "react"
+import { useDrop } from "react-dnd"
+import { useNavigate } from "react-router-dom"
 
-import { Modal } from "@components/modal";
-import { OrderDetails } from "@components/order-details";
+import { Modal } from "@components/modal"
+import { OrderDetails } from "@components/order-details"
 
-import burgerConstructor from "./burger-constructor.module.css";
-import { IngredientElement } from "./ingredient-element/ingedient-element";
-import { countTotalCost, formatIngredientsForRequest } from "./utils";
+import burgerConstructor from "./burger-constructor.module.css"
+import { IngredientElement } from "./ingredient-element/ingedient-element"
+import { countTotalCost, formatIngredientsForRequest } from "./utils"
 
 export const BurgerConstructor = () => {
   // Хуки
-  const dispatch = useAppDispatch();
-  const { bun, ingredients } = useAppSelector(getConstructorState);
-  const isOrderModalOpen = useAppSelector(getIsModalOrder);
-  const { user } = useAppSelector(getUserStore);
-  const navigate = useNavigate();
+  const dispatch = useAppDispatch()
+  const { bun, ingredients } = useAppSelector(getConstructorState)
+  const isOrderModalOpen = useAppSelector(getIsModalOrder)
+  const { user } = useAppSelector(getUserStore)
+  const navigate = useNavigate()
 
   const [{ isOver, isBun }, dropTargetConstructorRef] = useDrop({
     accept: "burger-item",
@@ -35,33 +35,33 @@ export const BurgerConstructor = () => {
       isOver: monitor.isOver(),
       isBun: monitor.getItem() && monitor.getItem().type === "bun"
     })
-  });
+  })
 
   // Функции
-  const moveIngredient = (dragIndex: number, hoverIndex: number) => dispatch(moveItem({ dragIndex, hoverIndex }));
+  const moveIngredient = (dragIndex: number, hoverIndex: number) => dispatch(moveItem({ dragIndex, hoverIndex }))
 
   const createOrder = () => {
     if (!user.email) {
-      navigate("/login");
-      return;
+      navigate("/login")
+      return
     }
     if (bun) {
-      dispatch(createOrderAction(formatIngredientsForRequest(bun._id, ingredients)));
+      dispatch(createOrderAction(formatIngredientsForRequest(bun._id, ingredients)))
     }
-  };
+  }
 
-  const removeIngredient = (ingredient: IIngredient) => dispatch(removeIngredientFromConstructor(ingredient));
+  const removeIngredient = (ingredient: IIngredient) => dispatch(removeIngredientFromConstructor(ingredient))
 
   // Стили при перетаскивании
   const ingredientDndStyles = useMemo(
     () => (!isBun && isOver ? burgerConstructor.no_ingredients_dnd_hover : burgerConstructor.no_ingredients),
     [isBun, isOver]
-  );
+  )
 
-  const bunDndtyles = isBun && isOver && burgerConstructor.no_bun_dnd_hover;
+  const bunDndtyles = isBun && isOver && burgerConstructor.no_bun_dnd_hover
 
   // Рассчет итоговой стоимости
-  const totalCoast = useMemo(() => countTotalCost(bun, ingredients), [bun, ingredients]);
+  const totalCoast = useMemo(() => countTotalCost(bun, ingredients), [bun, ingredients])
 
   return (
     <section className={burgerConstructor.wrapper}>
@@ -138,5 +138,5 @@ export const BurgerConstructor = () => {
         </Modal>
       )}
     </section>
-  );
-};
+  )
+}

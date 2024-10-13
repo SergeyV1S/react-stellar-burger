@@ -1,10 +1,10 @@
-import type { IUser } from "@interfaces/user";
+import type { IUser } from "@interfaces/user"
 
-import { fetchWithRefresh } from "../utils/fetchWithRefresh";
+import { fetchWithRefresh } from "../utils/fetchWithRefresh"
 
 export interface IGetUserResponse {
-  success: boolean;
-  user: IUser;
+  success: boolean
+  user: IUser
 }
 
 export const getUserQuery = async () =>
@@ -16,4 +16,4 @@ export const getUserQuery = async () =>
     }
   })
     .then((res): Promise<IGetUserResponse> => res)
-    .catch((err) => Promise.reject(err));
+    .catch((err) => Promise.reject(err))

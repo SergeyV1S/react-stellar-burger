@@ -1,28 +1,28 @@
-import { postForgotPasswordMutation } from "@api/postForgotPasswordMutation";
-import type { IPostForgutPasswordMutationResponse } from "@api/postForgotPasswordMutation";
-import { Button, EmailInput } from "@ya.praktikum/react-developer-burger-ui-components";
-import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { postForgotPasswordMutation } from "@api/postForgotPasswordMutation"
+import type { IPostForgutPasswordMutationResponse } from "@api/postForgotPasswordMutation"
+import { Button, EmailInput } from "@ya.praktikum/react-developer-burger-ui-components"
+import { useState } from "react"
+import { Link, useNavigate } from "react-router-dom"
 
-import forgotPasswordPageStyles from "./forgot-password.module.css";
+import forgotPasswordPageStyles from "./forgot-password.module.css"
 
 export const ForgotPasswordPage = () => {
   const [formData, setMail] = useState({
     email: ""
-  });
-  const navigate = useNavigate();
+  })
+  const navigate = useNavigate()
 
   const submitHandler = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+    e.preventDefault()
     await postForgotPasswordMutation(formData).then((res: IPostForgutPasswordMutationResponse) => {
       if (res.success) {
-        localStorage.setItem("forgor-password-visited", "true");
-        navigate("/reset-password");
+        localStorage.setItem("forgor-password-visited", "true")
+        navigate("/reset-password")
       }
-    });
-  };
+    })
+  }
 
-  const inputOnChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => setMail({ email: e.target.value });
+  const inputOnChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => setMail({ email: e.target.value })
 
   return (
     <form onSubmit={submitHandler} className={forgotPasswordPageStyles.container}>
@@ -44,5 +44,5 @@ export const ForgotPasswordPage = () => {
         </Link>
       </div>
     </form>
-  );
-};
+  )
+}

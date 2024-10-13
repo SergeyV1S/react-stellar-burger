@@ -1,2 +1,2 @@
-export * from "./countTotalCost";
-export * from "./formatIngredientsForRequest";
+export * from "./countTotalCost"
+export * from "./formatIngredientsForRequest"

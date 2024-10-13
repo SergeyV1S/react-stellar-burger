@@ -1,6 +1,6 @@
-import type { IIngredient } from "@interfaces/ingredient";
+import type { IIngredient } from "@interfaces/ingredient"
 
 export interface IConstructorInitialState {
-  bun: null | IIngredient;
-  ingredients: IIngredient[];
+  bun: null | IIngredient
+  ingredients: IIngredient[]
 }

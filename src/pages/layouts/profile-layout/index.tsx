@@ -1,15 +1,15 @@
-import { useAppDispatch } from "@services/store";
-import { logoutUserAction } from "@services/user";
-import { Button } from "@ya.praktikum/react-developer-burger-ui-components";
-import { NavLink, Outlet, useNavigate } from "react-router-dom";
+import { useAppDispatch } from "@services/store"
+import { logoutUserAction } from "@services/user"
+import { Button } from "@ya.praktikum/react-developer-burger-ui-components"
+import { NavLink, Outlet, useNavigate } from "react-router-dom"
 
-import profileLayout from "./profile-layout.module.css";
+import profileLayout from "./profile-layout.module.css"
 
 export const ProfileLayout = () => {
-  const navigate = useNavigate();
-  const dispatch = useAppDispatch();
+  const navigate = useNavigate()
+  const dispatch = useAppDispatch()
 
-  const logout = () => dispatch(logoutUserAction()).then(() => navigate("/login"));
+  const logout = () => dispatch(logoutUserAction()).then(() => navigate("/login"))
 
   return (
     <div className={profileLayout.wrapper}>
@@ -48,5 +48,5 @@ export const ProfileLayout = () => {
         </main>
       </div>
     </div>
-  );
-};
+  )
+}

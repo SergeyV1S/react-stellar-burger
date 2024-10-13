@@ -3,17 +3,17 @@ export const checkTabPosition = (ingredientsTop: number, bunsTop: number, mainsT
     Math.abs(bunsTop - ingredientsTop) < Math.abs(mainsTop - ingredientsTop) &&
     Math.abs(bunsTop - ingredientsTop) < Math.abs(saucesTop - ingredientsTop)
   ) {
-    return "bun";
+    return "bun"
   } else if (
     Math.abs(mainsTop - ingredientsTop) < Math.abs(bunsTop - ingredientsTop) &&
     Math.abs(mainsTop - ingredientsTop) < Math.abs(saucesTop - ingredientsTop)
   ) {
-    return "main";
+    return "main"
   } else if (
     Math.abs(saucesTop - ingredientsTop) < Math.abs(bunsTop - ingredientsTop) &&
     Math.abs(saucesTop - ingredientsTop) < Math.abs(mainsTop - ingredientsTop)
   ) {
-    return "sauce";
+    return "sauce"
   }
-  return "bun";
-};
+  return "bun"
+}

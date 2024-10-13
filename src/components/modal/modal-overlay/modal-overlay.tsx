@@ -1,9 +1,9 @@
-import modalOverlay from "./modal-overlay.module.css";
+import modalOverlay from "./modal-overlay.module.css"
 
 interface IModalOverlayProps {
-  closeModal: () => void;
+  closeModal: () => void
 }
 
 export const ModalOverlay = ({ closeModal }: IModalOverlayProps) => (
   <div className={modalOverlay.wrapper} onClick={closeModal} />
-);
+)

@@ -1,9 +1,9 @@
-import { checkReponse } from "@utils/checkResponse";
+import { checkReponse } from "@utils/checkResponse"
 
 interface IPostRefreshTokenResponse {
-  success: boolean;
-  accessToken: string;
-  refreshToken: string;
+  success: boolean
+  accessToken: string
+  refreshToken: string
 }
 
 export const postRefreshTokenMutation = () =>
@@ -20,9 +20,9 @@ export const postRefreshTokenMutation = () =>
 
     .then((refreshData: IPostRefreshTokenResponse) => {
       if (!refreshData.success) {
-        return Promise.reject(refreshData);
+        return Promise.reject(refreshData)
       }
-      localStorage.setItem("refresh-token", refreshData.refreshToken);
-      localStorage.setItem("access-token", refreshData.accessToken);
-      return refreshData;
-    });
+      localStorage.setItem("refresh-token", refreshData.refreshToken)
+      localStorage.setItem("access-token", refreshData.accessToken)
+      return refreshData
+    })

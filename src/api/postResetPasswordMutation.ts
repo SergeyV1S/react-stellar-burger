@@ -1,9 +1,9 @@
-import type { IResetForm } from "@pages/reset-password/types";
-import { checkReponse } from "@utils/checkResponse";
+import type { IResetForm } from "@pages/reset-password/types"
+import { checkReponse } from "@utils/checkResponse"
 
 export interface IPostResetPasswordMutationResponse {
-  success: boolean;
-  message: string;
+  success: boolean
+  message: string
 }
 
 export const postResetPasswordMutation = async (data: IResetForm) =>
@@ -16,4 +16,4 @@ export const postResetPasswordMutation = async (data: IResetForm) =>
   })
     .then(checkReponse)
     .then((res: IPostResetPasswordMutationResponse) => res)
-    .catch((err) => err);
+    .catch((err) => err)

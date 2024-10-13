@@ -1,37 +1,37 @@
-import { useAppDispatch } from "@services/store";
-import { loginUserAction } from "@services/user";
-import { Button, EmailInput, PasswordInput } from "@ya.praktikum/react-developer-burger-ui-components";
-import { useState } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useAppDispatch } from "@services/store"
+import { loginUserAction } from "@services/user"
+import { Button, EmailInput, PasswordInput } from "@ya.praktikum/react-developer-burger-ui-components"
+import { useState } from "react"
+import { Link, useLocation, useNavigate } from "react-router-dom"
 
-import { defaultFormValue } from "./constants/defultFormValue";
-import loginPageStyles from "./login.module.css";
-import type { ILoginForm } from "./types";
+import { defaultFormValue } from "./constants/defultFormValue"
+import loginPageStyles from "./login.module.css"
+import type { ILoginForm } from "./types"
 
 export const LoginPage = () => {
-  const dispatch = useAppDispatch();
-  const [loginForm, setLoginForm] = useState<ILoginForm>(defaultFormValue);
-  const { state } = useLocation();
-  const navigate = useNavigate();
+  const dispatch = useAppDispatch()
+  const [loginForm, setLoginForm] = useState<ILoginForm>(defaultFormValue)
+  const { state } = useLocation()
+  const navigate = useNavigate()
 
   const submitHandler = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+    e.preventDefault()
     dispatch(loginUserAction(loginForm)).then(() =>
       navigate(state && state.from ? state.from.pathname : "/", {
         replace: true
       })
-    );
-  };
+    )
+  }
 
   const inputOnChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const inputValue = e.target.value;
+    const inputValue = e.target.value
     if (e.target.name === "email") {
-      setLoginForm((prev) => ({ ...prev, email: inputValue }));
+      setLoginForm((prev) => ({ ...prev, email: inputValue }))
     }
     if (e.target.name === "password") {
-      setLoginForm((prev) => ({ ...prev, password: inputValue }));
+      setLoginForm((prev) => ({ ...prev, password: inputValue }))
     }
-  };
+  }
 
   return (
     <form onSubmit={submitHandler} className={loginPageStyles.container}>
@@ -66,5 +66,5 @@ export const LoginPage = () => {
         </Link>
       </div>
     </form>
-  );
-};
+  )
+}

@@ -1,4 +1,4 @@
-import notFoundStyles from "./not-found.module.css";
+import notFoundStyles from "./not-found.module.css"
 
 export const NotFoundPage = () => (
   <div className={notFoundStyles.container}>
@@ -6,4 +6,4 @@ export const NotFoundPage = () => (
     <h1 className='text text_type_main-large'>Oops...</h1>
     <p className='text text_type_main-medium'>Мы не смогли найти такую страницу &#128064;</p>
   </div>
-);
+)

@@ -1,12 +1,12 @@
-import type { IUser } from "@interfaces/user";
-import type { ILoginForm } from "@pages/login/types";
-import { checkReponse } from "@src/utils/checkResponse";
+import type { IUser } from "@interfaces/user"
+import type { ILoginForm } from "@pages/login/types"
+import { checkReponse } from "@src/utils/checkResponse"
 
 export interface IPostLoginMutationResponse {
-  success: boolean;
-  accessToken: string;
-  refreshToken: string;
-  user: IUser;
+  success: boolean
+  accessToken: string
+  refreshToken: string
+  user: IUser
 }
 
 export const postLoginMutation = async (userAuthData: ILoginForm) =>
@@ -19,7 +19,7 @@ export const postLoginMutation = async (userAuthData: ILoginForm) =>
   })
     .then(checkReponse)
     .then((jsonRes: IPostLoginMutationResponse) => {
-      localStorage.setItem("access-token", jsonRes.accessToken);
-      localStorage.setItem("refresh-token", jsonRes.refreshToken);
-      return jsonRes;
-    });
+      localStorage.setItem("access-token", jsonRes.accessToken)
+      localStorage.setItem("refresh-token", jsonRes.refreshToken)
+      return jsonRes
+    })

@@ -1,12 +1,12 @@
-import type { IUser } from "@interfaces/user";
-import type { IRegisterForm } from "@pages/register/types/registerForm";
-import { checkReponse } from "@src/utils/checkResponse";
+import type { IUser } from "@interfaces/user"
+import type { IRegisterForm } from "@pages/register/types/registerForm"
+import { checkReponse } from "@src/utils/checkResponse"
 
 export interface IPostCreateMutationResponse {
-  success: boolean;
-  user: IUser;
-  accessToken: string;
-  refreshToken: string;
+  success: boolean
+  user: IUser
+  accessToken: string
+  refreshToken: string
 }
 
 export const postCreateUserMutation = async (data: IRegisterForm) =>
@@ -19,7 +19,7 @@ export const postCreateUserMutation = async (data: IRegisterForm) =>
   })
     .then(checkReponse)
     .then((jsonRes: IPostCreateMutationResponse) => {
-      localStorage.setItem("access-token", jsonRes.accessToken);
-      localStorage.setItem("refresh-token", jsonRes.refreshToken);
-      return jsonRes;
-    });
+      localStorage.setItem("access-token", jsonRes.accessToken)
+      localStorage.setItem("refresh-token", jsonRes.refreshToken)
+      return jsonRes
+    })

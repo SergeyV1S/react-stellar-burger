@@ -1,4 +1,4 @@
-import { checkReponse } from "@utils/checkResponse";
+import { checkReponse } from "@utils/checkResponse"
 
 export const postOrderMutation = async (idArr: string[]) =>
   await fetch(import.meta.env.VITE_API_URL + "/orders", {
@@ -12,4 +12,4 @@ export const postOrderMutation = async (idArr: string[]) =>
     })
   })
     .then(checkReponse)
-    .then((res) => res);
+    .then((res) => res)

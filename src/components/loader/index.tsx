@@ -1,4 +1,4 @@
-import spinnerStyles from "./loader.module.css";
+import spinnerStyles from "./loader.module.css"
 
 export const Spinner = () => (
   <svg
@@ -197,4 +197,4 @@ export const Spinner = () => (
       <g />
     </g>
   </svg>
-);
+)

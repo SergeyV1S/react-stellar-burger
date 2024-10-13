@@ -1,13 +1,13 @@
-import { IndexLayout } from "@pages/layouts/main-layout";
-import { ProfileLayout } from "@pages/layouts/profile-layout";
-import { useAppDispatch } from "@services/store";
-import { getUserAction } from "@services/user";
-import { useEffect } from "react";
-import { Route, Routes, useLocation } from "react-router-dom";
+import { IndexLayout } from "@pages/layouts/main-layout"
+import { ProfileLayout } from "@pages/layouts/profile-layout"
+import { useAppDispatch } from "@services/store"
+import { getUserAction } from "@services/user"
+import { useEffect } from "react"
+import { Route, Routes, useLocation } from "react-router-dom"
 
-import { IngredientDetails } from "@components/ingredient-details";
-import { Modal } from "@components/modal";
-import { OnlyAuth, OnlyUnAuth } from "@components/protected-route";
+import { IngredientDetails } from "@components/ingredient-details"
+import { Modal } from "@components/modal"
+import { OnlyAuth, OnlyUnAuth } from "@components/protected-route"
 
 import {
   ForgotPasswordPage,
@@ -19,17 +19,17 @@ import {
   ProfilePage,
   RegisterPage,
   ResetPasswordPage
-} from "./pages";
+} from "./pages"
 
 export const AppRoutes = () => {
-  const dispatch = useAppDispatch();
-  const location = useLocation();
+  const dispatch = useAppDispatch()
+  const location = useLocation()
 
-  const state = location.state?.backgroundLocation;
+  const state = location.state?.backgroundLocation
 
   useEffect(() => {
-    dispatch(getUserAction());
-  }, [dispatch]);
+    dispatch(getUserAction())
+  }, [dispatch])
 
   return (
     <>
@@ -63,5 +63,5 @@ export const AppRoutes = () => {
         </Routes>
       )}
     </>
-  );
-};
+  )
+}

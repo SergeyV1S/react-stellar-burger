@@ -1,9 +1,9 @@
-import type { IIngredient } from "@interfaces/ingredient";
-import type { PayloadAction } from "@reduxjs/toolkit";
-import { createSlice } from "@reduxjs/toolkit";
+import type { IIngredient } from "@interfaces/ingredient"
+import type { PayloadAction } from "@reduxjs/toolkit"
+import { createSlice } from "@reduxjs/toolkit"
 
-import { getIngredientsAction } from "./action";
-import type { IIngredientInitialState } from "./types";
+import { getIngredientsAction } from "./action"
+import type { IIngredientInitialState } from "./types"
 
 const initialState: IIngredientInitialState = {
   data: [],
@@ -13,19 +13,19 @@ const initialState: IIngredientInitialState = {
     selectedIngredient: null,
     isSelectedIngredientModalOpen: false
   }
-};
+}
 
 export const ingredietSlice = createSlice({
   name: "ingredientSlice", // === reducerPath
   initialState,
   reducers: {
     setSelectedIngredient: (state, action: PayloadAction<IIngredient>) => {
-      state.modal.selectedIngredient = action.payload;
-      state.modal.isSelectedIngredientModalOpen = true;
+      state.modal.selectedIngredient = action.payload
+      state.modal.isSelectedIngredientModalOpen = true
     },
     closeIngredientModal: (state) => {
-      state.modal.selectedIngredient = null;
-      state.modal.isSelectedIngredientModalOpen = false;
+      state.modal.selectedIngredient = null
+      state.modal.isSelectedIngredientModalOpen = false
     }
   },
   selectors: {
@@ -36,21 +36,21 @@ export const ingredietSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(getIngredientsAction.fulfilled, (state, action: PayloadAction<{ data: IIngredient[] }>) => {
-        state.isLoading = false;
-        state.data = action.payload.data;
+        state.isLoading = false
+        state.data = action.payload.data
       })
       .addCase(getIngredientsAction.rejected, (state, action) => {
-        state.isLoading = false;
-        state.error = action.error.message;
+        state.isLoading = false
+        state.error = action.error.message
       })
       .addCase(getIngredientsAction.pending, (state) => {
-        state.isLoading = true;
-        state.error = undefined;
-        state.data = [];
-      });
+        state.isLoading = true
+        state.error = undefined
+        state.data = []
+      })
   }
-});
+})
 
-export const { setSelectedIngredient, closeIngredientModal } = ingredietSlice.actions;
+export const { setSelectedIngredient, closeIngredientModal } = ingredietSlice.actions
 
-export const { getIngredientsState, getIngredientModal } = ingredietSlice.selectors;
+export const { getIngredientsState, getIngredientModal } = ingredietSlice.selectors

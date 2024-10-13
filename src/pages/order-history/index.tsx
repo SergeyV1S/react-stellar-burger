@@ -1,4 +1,4 @@
-import orderHistoryStyles from "./order-history.module.css";
+import orderHistoryStyles from "./order-history.module.css"
 
 export const OrderHistoryPage = () => (
   <div className={orderHistoryStyles.container}>
@@ -7,4 +7,4 @@ export const OrderHistoryPage = () => (
     </p>
     <p className='text text_type_main-medium mt-6'>Всего вам хорошего!</p>
   </div>
-);
+)
