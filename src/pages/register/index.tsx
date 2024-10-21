@@ -1,27 +1,27 @@
-import { useAppDispatch, useAppSelector } from "@services/store"
-import { getUserStore, registerUserAction } from "@services/user"
-import { Button, EmailInput, Input, PasswordInput } from "@ya.praktikum/react-developer-burger-ui-components"
-import { useState } from "react"
-import { Link, useNavigate } from "react-router-dom"
+import { useForm } from "@hooks/useForm";
+import { useAppDispatch, useAppSelector } from "@services/store";
+import { getUserStore, registerUserAction } from "@services/user";
+import { Button, EmailInput, Input, PasswordInput } from "@ya.praktikum/react-developer-burger-ui-components";
+import { Link, useNavigate } from "react-router-dom";
 
-import { defaultFormValue } from "./constants/defultFormValue"
-import registerPageStyles from "./register.module.css"
-import type { IRegisterForm } from "./types/registerForm"
+import { defaultFormValue } from "./constants/defultFormValue";
+import registerPageStyles from "./register.module.css";
+import type { IRegisterForm } from "./types/registerForm";
 
 export const RegisterPage = () => {
-  const [registerForm, setRegisterForm] = useState<IRegisterForm>(defaultFormValue)
-  const dispatch = useAppDispatch()
-  const { isLoading } = useAppSelector(getUserStore)
-  const navigate = useNavigate()
+  const dispatch = useAppDispatch();
+  const { isLoading, error, user } = useAppSelector(getUserStore);
+  const navigate = useNavigate();
+  const { formState, handleChange } = useForm<IRegisterForm>(defaultFormValue);
 
   const submitHandler = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
-    await dispatch(registerUserAction(registerForm))
-    navigate("/profile")
-  }
-
-  const inputOnChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) =>
-    setRegisterForm((prev) => ({ ...prev, [e.target.name]: e.target.value }))
+    e.preventDefault();
+    await dispatch(registerUserAction(formState)).then(() => {
+      if (user.name && !error) {
+        navigate("/profile");
+      }
+    });
+  };
 
   return (
     <form onSubmit={submitHandler} className={registerPageStyles.container}>
@@ -29,29 +29,23 @@ export const RegisterPage = () => {
       <Input
         name='name'
         placeholder='Имя'
-        value={registerForm.name}
-        onChange={inputOnChangeHandler}
+        value={formState.name}
+        onChange={handleChange}
         extraClass='mt-6 mb-6'
         errorText='Пользователь с таким именем уже существует'
         size='default'
       />
-      <EmailInput
-        placeholder='E-mail'
-        onChange={inputOnChangeHandler}
-        value={registerForm.email}
-        name='email'
-        extraClass='mb-6'
-      />
+      <EmailInput placeholder='E-mail' onChange={handleChange} value={formState.email} name='email' extraClass='mb-6' />
       <PasswordInput
         placeholder='Пароль'
-        onChange={inputOnChangeHandler}
-        value={registerForm.password}
+        onChange={handleChange}
+        value={formState.password}
         extraClass='mb-6'
         name='password'
       />
       <Button
         htmlType='submit'
-        disabled={!registerForm.email || !registerForm.password || !registerForm.name || isLoading}
+        disabled={!formState.email || !formState.password || !formState.name || isLoading}
         extraClass='mb-20'
       >
         Зарегистрироваться
@@ -63,5 +57,5 @@ export const RegisterPage = () => {
         </Link>
       </div>
     </form>
-  )
-}
+  );
+};

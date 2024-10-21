@@ -1,4 +1,4 @@
-export const defaultFormValut = {
+export const defaultFormValue = {
   password: "",
   token: ""
-}
+};

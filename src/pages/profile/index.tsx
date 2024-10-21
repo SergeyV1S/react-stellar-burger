@@ -1,55 +1,46 @@
-import { useAppDispatch, useAppSelector } from "@services/store"
-import { getUserStore, updateUserAction } from "@services/user"
-import { Button, EmailInput, Input, PasswordInput } from "@ya.praktikum/react-developer-burger-ui-components"
-import { useEffect, useState } from "react"
+import { useForm } from "@hooks/useForm";
+import { useAppDispatch, useAppSelector } from "@services/store";
+import { getUserStore, updateUserAction } from "@services/user";
+import { Button, EmailInput, Input, PasswordInput } from "@ya.praktikum/react-developer-burger-ui-components";
+import { useEffect } from "react";
 
-import profilePageStyles from "./profile.module.css"
-import type { IProfileForm } from "./types/profileForm"
+import { defaultProfileFormState } from "./constants/defaultProfileFormState.constant";
+import profilePageStyles from "./profile.module.css";
+import type { IProfileForm } from "./types/profileForm";
 
 export const ProfilePage = () => {
-  const { user, isLoading } = useAppSelector(getUserStore)
-  const dispatch = useAppDispatch()
+  const { user, isLoading } = useAppSelector(getUserStore);
+  const dispatch = useAppDispatch();
 
-  const [profileForm, setProfileForm] = useState<IProfileForm>({
-    email: "",
-    name: "",
-    password: "",
-    defaultName: "",
-    defaultMail: "",
-    defaultPassword: ""
-  })
+  const { handleChange, formState, setFormState } = useForm<IProfileForm>(defaultProfileFormState);
 
   const submitHandler = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
-    dispatch(updateUserAction(profileForm))
-  }
+    e.preventDefault();
+    dispatch(updateUserAction(formState));
+  };
 
-  const inputOnChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setProfileForm((prev) => ({ ...prev, [e.target.name]: e.target.value }))
-  }
-
-  const resetForm = () => setProfileForm((prev) => ({ ...prev, email: prev.defaultMail, name: prev.defaultName }))
+  const resetForm = () => setFormState((prev) => ({ ...prev, email: prev.defaultMail, name: prev.defaultName }));
 
   useEffect(() => {
     if (user) {
-      setProfileForm({
+      setFormState({
         email: user.email || "",
         name: user.name || "",
         password: "",
         defaultName: user.name || "",
         defaultMail: user.email || "",
         defaultPassword: ""
-      })
+      });
     }
-  }, [user])
+  }, [user]);
 
   return (
     <form onSubmit={submitHandler} className={profilePageStyles.container}>
       <Input
         name='name'
         placeholder='Имя'
-        value={profileForm.name}
-        onChange={inputOnChangeHandler}
+        value={formState.name}
+        onChange={handleChange}
         icon='EditIcon'
         extraClass='mt-6 mb-6'
         errorText='Пользователь с таким именем уже существует'
@@ -57,16 +48,16 @@ export const ProfilePage = () => {
       />
       <EmailInput
         placeholder='Логин'
-        onChange={inputOnChangeHandler}
-        value={profileForm.email}
+        onChange={handleChange}
+        value={formState.email}
         isIcon
         name='email'
         extraClass='mb-6'
       />
       <PasswordInput
         placeholder='Пароль'
-        onChange={inputOnChangeHandler}
-        value={profileForm.password}
+        onChange={handleChange}
+        value={formState.password}
         extraClass='mb-6'
         name='password'
       />
@@ -74,9 +65,9 @@ export const ProfilePage = () => {
         <Button
           onClick={resetForm}
           disabled={
-            (profileForm.email === profileForm.defaultMail &&
-              profileForm.name === profileForm.defaultName &&
-              profileForm.password === profileForm.defaultPassword) ||
+            (formState.email === formState.defaultMail &&
+              formState.name === formState.defaultName &&
+              formState.password === formState.defaultPassword) ||
             isLoading
           }
           htmlType='reset'
@@ -88,9 +79,9 @@ export const ProfilePage = () => {
         <Button
           htmlType='submit'
           disabled={
-            (profileForm.email === profileForm.defaultMail &&
-              profileForm.name === profileForm.defaultName &&
-              profileForm.password === profileForm.defaultPassword) ||
+            (formState.email === formState.defaultMail &&
+              formState.name === formState.defaultName &&
+              formState.password === formState.defaultPassword) ||
             isLoading
           }
           extraClass='mb-20'
@@ -99,5 +90,5 @@ export const ProfilePage = () => {
         </Button>
       </div>
     </form>
-  )
-}
+  );
+};
