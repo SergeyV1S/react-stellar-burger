@@ -13,3 +13,7 @@ export interface IIngredient {
   image_large: string;
   __v: number;
 }
+
+export interface IIngredientWithIndex extends IIngredient {
+  index: number;
+}

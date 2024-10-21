@@ -1,2 +1,2 @@
-export * from "./reserPasswordResponse";
+export * from "./resetPasswordResponse";
 export * from "./resetForm";

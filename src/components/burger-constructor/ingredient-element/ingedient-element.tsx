@@ -1,4 +1,4 @@
-import type { IIngredient } from "@interfaces/ingredient";
+import type { IIngredient, IIngredientWithIndex } from "@interfaces/ingredient";
 import { ConstructorElement, DragIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useRef } from "react";
 import { useDrag, useDrop } from "react-dnd";
@@ -21,7 +21,7 @@ export const IngredientElement = ({ removeIngredient, ingredient, index, moveIng
 
   const [, dropTargetIngredientsRef] = useDrop({
     accept: "switch-ingredient-position",
-    hover: (draggedItem: any, monitor) => {
+    hover: (draggedItem: IIngredientWithIndex, monitor) => {
       if (!ingredientElementRef.current) return;
 
       const dragIndex = draggedItem.index;

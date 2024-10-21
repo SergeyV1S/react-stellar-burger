@@ -1,4 +1,4 @@
-export interface IForgotPassword {
+export interface IForgotPasswordResponse {
   success: boolean;
   message: string;
 }

@@ -22,4 +22,7 @@ export const postCreateUserMutation = async (data: IRegisterForm) =>
       localStorage.setItem("access-token", jsonRes.accessToken);
       localStorage.setItem("refresh-token", jsonRes.refreshToken);
       return jsonRes;
+    })
+    .catch((error) => {
+      throw error;
     });

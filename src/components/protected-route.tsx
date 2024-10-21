@@ -3,7 +3,6 @@ import { getUserStore } from "@services/user";
 import { Navigate, useLocation } from "react-router-dom";
 
 import "../index.css";
-import { Spinner } from "./loader";
 
 interface IProtectedRouteProps {
   onlyUnAuth?: boolean;
@@ -11,16 +10,8 @@ interface IProtectedRouteProps {
 }
 
 const ProtectedRoute = ({ onlyUnAuth = false, element }: IProtectedRouteProps) => {
-  const { user, isLoading } = useAppSelector(getUserStore);
+  const { user } = useAppSelector(getUserStore);
   const location = useLocation();
-
-  if (isLoading && user.email.length === 0) {
-    return (
-      <div className='spinner_wrapper'>
-        <Spinner />
-      </div>
-    );
-  }
 
   if (!onlyUnAuth && !user.email) {
     return <Navigate to='/login' state={{ from: location }} />;
