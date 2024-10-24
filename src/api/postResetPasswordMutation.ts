@@ -7,7 +7,7 @@ export interface IPostResetPasswordMutationResponse {
 }
 
 export const postResetPasswordMutation = async (data: IResetForm) =>
-  await fetch(`${import.meta.env.VITE_API_URL}/password-reset/reset`, {
+  await fetch(`${import.meta.env.BASE_API_URL}/password-reset/reset`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json"

@@ -14,8 +14,8 @@ import {
   HomePage,
   LoginPage,
   NotFoundPage,
+  OrderFeedPage,
   OrderHistoryPage,
-  OrderListPage,
   ProfilePage,
   RegisterPage,
   ResetPasswordPage
@@ -36,7 +36,7 @@ export const AppRoutes = () => {
       <Routes location={state || location}>
         <Route path='/' element={<IndexLayout />}>
           <Route index element={<HomePage />} />
-          <Route path='order-list' element={<OrderListPage />} />
+          <Route path='order-feed' element={<OrderFeedPage />} />
           <Route path='ingredients/:id' element={<IngredientDetails />} />
           <Route path='profile' element={<OnlyAuth element={<ProfileLayout />} />}>
             <Route index element={<OnlyAuth element={<ProfilePage />} />} />

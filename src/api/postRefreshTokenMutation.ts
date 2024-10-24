@@ -7,7 +7,7 @@ interface IPostRefreshTokenResponse {
 }
 
 export const postRefreshTokenMutation = () =>
-  fetch(`${import.meta.env.VITE_API_URL}/auth/token`, {
+  fetch(`${import.meta.env.BASE_API_URL}/auth/token`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json;charset=utf-8"

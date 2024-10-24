@@ -1,7 +1,7 @@
-import orderListStyles from "./order-list.module.css";
+import orderFeedStyles from "./order-feed.module.css";
 
-export const OrderListPage = () => (
-  <div className={orderListStyles.container}>
+export const OrderFeedPage = () => (
+  <div className={orderFeedStyles.container}>
     <p className='text text_type_main-medium'>
       Дяденька, не заходите сюда пожалуйста, страница будет позже, обещаю &#128517;
     </p>

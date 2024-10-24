@@ -1,5 +1,5 @@
 export const getInrgedientsQuery = async () =>
-  await fetch(import.meta.env.VITE_API_URL + "/ingredients").then((res) => {
+  await fetch(import.meta.env.BASE_API_URL + "/ingredients").then((res) => {
     if (res.ok) {
       return res.json();
     }
