@@ -36,11 +36,15 @@ export const AppRoutes = () => {
       <Routes location={state || location}>
         <Route path='/' element={<IndexLayout />}>
           <Route index element={<HomePage />} />
-          <Route path='order-feed' element={<OrderFeedPage />} />
+          <Route path='order-feed' element={<OrderFeedPage />}>
+            <Route path=':id' element={<OrderFeedPage />} />
+          </Route>
           <Route path='ingredients/:id' element={<IngredientDetails />} />
           <Route path='profile' element={<OnlyAuth element={<ProfileLayout />} />}>
             <Route index element={<OnlyAuth element={<ProfilePage />} />} />
-            <Route path='orders' element={<OnlyAuth element={<OrderHistoryPage />} />} />
+            <Route path='orders' element={<OnlyAuth element={<OrderHistoryPage />} />}>
+              <Route path=':orderId' element={<OnlyAuth element={<ProfilePage />} />} />
+            </Route>
           </Route>
           <Route path='reset-password' element={<OnlyUnAuth element={<ResetPasswordPage />} />} />
           <Route path='forgot-password' element={<OnlyUnAuth element={<ForgotPasswordPage />} />} />
