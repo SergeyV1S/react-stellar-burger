@@ -13,10 +13,9 @@
     "prepare": "husky"
   },
   "lint-staged": {
-    "*.{js,ts,tsx}": [
-      "eslint --max-warnings=3",
-      "eslint --fix",
-      "yarn format"
+    "*.{ts,tsx}": [
+      "prettier --write",
+      "eslint --fix"
     ]
   },
   "dependencies": {
