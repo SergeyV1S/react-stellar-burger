@@ -1,8 +1,8 @@
 .wrapper {
   border-radius: 40px;
   background-color: #1c1c21;
-  width: 584px;
-  margin-right: 8px;
+  width: 100%;
+  min-width: 844px;
 }
 
 .container {
@@ -16,9 +16,6 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-}
-
-.title {
 }
 
 .ingredients_cost {
