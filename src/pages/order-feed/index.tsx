@@ -1,10 +1,15 @@
+import { OrderList } from "@components/order-list";
+
 import orderFeedStyles from "./order-feed.module.css";
 
 export const OrderFeedPage = () => (
-  <div className={orderFeedStyles.container}>
-    <p className='text text_type_main-medium'>
-      Дяденька, не заходите сюда пожалуйста, страница будет позже, обещаю &#128517;
-    </p>
-    <p className='text text_type_main-medium mt-6'>Всего вам хорошего!</p>
-  </div>
+  <section className={orderFeedStyles.container}>
+    <h1 className='text text_type_main-large'>Соберите бургер</h1>
+    <OrderList />
+    {/* {isSelectedIngredientModalOpen && (
+      <Modal>
+        <IngredientDetails />
+      </Modal>
+    )} */}
+  </section>
 );

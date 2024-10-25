@@ -5,6 +5,7 @@ export interface IIngredientInitialState {
     isSelectedIngredientModalOpen: boolean;
     selectedIngredient: null | IIngredient;
   };
+  ingredientsMap: Map<string, IIngredient>;
   data: IIngredient[];
   error: string | undefined;
   isLoading: boolean;

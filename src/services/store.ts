@@ -5,7 +5,13 @@ import { rootReducer } from "./rootReducer";
 
 const store = createStore({
   devTools: true,
-  reducer: rootReducer
+  reducer: rootReducer,
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: {
+        ignoredPaths: ["ingredientSlice.ingredientsMap"]
+      }
+    })
 });
 
 export type TRootState = ReturnType<typeof store.getState>;
