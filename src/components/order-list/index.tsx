@@ -14,9 +14,22 @@ export const OrderList = () => {
           "643d69a5c3f7b9001cfa093e",
           "643d69a5c3f7b9001cfa0942"
         ],
-        _id: "",
+        _id: "1",
         status: "done",
         number: 0,
+        createdAt: "2021-06-23T14:43:22.587Z",
+        updatedAt: "2021-06-23T14:43:22.603Z"
+      },
+      {
+        ingredients: [
+          "643d69a5c3f7b9001cfa093c",
+          "643d69a5c3f7b9001cfa0941",
+          "643d69a5c3f7b9001cfa093e",
+          "643d69a5c3f7b9001cfa0942"
+        ],
+        _id: "d",
+        status: "done",
+        number: 2,
         createdAt: "2021-06-23T14:43:22.587Z",
         updatedAt: "2021-06-23T14:43:22.603Z"
       }
@@ -28,19 +41,17 @@ export const OrderList = () => {
   const { getIngredientFromMap } = useSelectIngredientsByUid();
 
   return (
-    <div className={orderListStyles.wrapper}>
-      <div className={orderListStyles.container}>
-        {data.orders.map((order) => (
-          <OrderCard
-            key={order.number}
-            orderNumber={order.number}
-            createdDate={order.createdAt}
-            orderName={"бургер"}
-            totalCost={0}
-            ingredients={getIngredientFromMap(order.ingredients)}
-          />
-        ))}
-      </div>
+    <div className={orderListStyles.container}>
+      {data.orders.map((order) => (
+        <OrderCard
+          key={order.number}
+          orderNumber={order.number}
+          createdDate={order.createdAt}
+          orderName={"бургер"}
+          totalCost={0}
+          ingredients={getIngredientFromMap(order.ingredients)}
+        />
+      ))}
     </div>
   );
 };
