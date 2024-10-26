@@ -4,7 +4,11 @@ import { useMatch } from "react-router-dom";
 import { OrderCard } from "../order-card";
 import orderListStyles from "./order-list.module.css";
 
-export const OrderList = () => {
+interface IOrderListProps {
+  path: string;
+}
+
+export const OrderList = ({ path }: IOrderListProps) => {
   const data = {
     success: true,
     orders: [
@@ -46,6 +50,7 @@ export const OrderList = () => {
     <div className={orderListStyles.container}>
       {data.orders.map((order) => (
         <OrderCard
+          path={path}
           key={order.number}
           orderNumber={order.number}
           orderStatus={order.status}

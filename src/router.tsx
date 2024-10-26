@@ -9,6 +9,7 @@ import { IngredientDetails } from "@components/ingredient-details";
 import { Modal } from "@components/modal";
 import { OnlyAuth, OnlyUnAuth } from "@components/protected-route";
 
+import { OrderInfo } from "./components/order-info";
 import {
   ForgotPasswordPage,
   HomePage,
@@ -36,15 +37,13 @@ export const AppRoutes = () => {
       <Routes location={state || location}>
         <Route path='/' element={<IndexLayout />}>
           <Route index element={<HomePage />} />
-          <Route path='order-feed' element={<OrderFeedPage />}>
-            <Route path=':id' element={<OrderFeedPage />} />
-          </Route>
+          <Route path='order-feed' element={<OrderFeedPage />} />
+          <Route path='order-feed/:orderId' element={<OrderInfo />} />
           <Route path='ingredients/:id' element={<IngredientDetails />} />
+          <Route path='profile/orders/:orderId' element={<OrderInfo />} />
           <Route path='profile' element={<OnlyAuth element={<ProfileLayout />} />}>
             <Route index element={<OnlyAuth element={<ProfilePage />} />} />
-            <Route path='orders' element={<OnlyAuth element={<OrderHistoryPage />} />}>
-              <Route path=':orderId' element={<OnlyAuth element={<ProfilePage />} />} />
-            </Route>
+            <Route path='orders' element={<OnlyAuth element={<OrderHistoryPage />} />} />
           </Route>
           <Route path='reset-password' element={<OnlyUnAuth element={<ResetPasswordPage />} />} />
           <Route path='forgot-password' element={<OnlyUnAuth element={<ForgotPasswordPage />} />} />
@@ -61,6 +60,22 @@ export const AppRoutes = () => {
             element={
               <Modal>
                 <IngredientDetails />
+              </Modal>
+            }
+          />
+          <Route
+            path='profile/orders/:orderId'
+            element={
+              <Modal>
+                <OrderInfo />
+              </Modal>
+            }
+          />
+          <Route
+            path='order-feed/:orderId'
+            element={
+              <Modal>
+                <OrderInfo />
               </Modal>
             }
           />

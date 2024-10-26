@@ -1,0 +1,31 @@
+.compound_item {
+  text-align: center;
+  display: grid;
+  grid-template-columns: 64px 1fr 200px;
+  align-items: center;
+  column-gap: 16px;
+}
+
+.image_wrapper {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: linear-gradient(64deg, #801ab2, #4c4cff);
+  color: #ffffff;
+  font-weight: normal;
+  font-size: 24px;
+}
+
+.image_wrapper::before {
+  content: "";
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  position: absolute;
+  background: #131316;
+  z-index: -1;
+}

@@ -9,7 +9,7 @@ export const OrderFeedPage = () => (
     <h1 className='text text_type_main-large mb-5 mt-10'>Лента заказов</h1>
     <div className={orderFeedStyles.container}>
       <section className={orderFeedStyles.orderlist_wrapper}>
-        <OrderList />
+        <OrderList path='/order-feed' />
       </section>
       <section className={orderFeedStyles.order_ribbon}>
         <div className={orderFeedStyles.order_statuses}>

@@ -34,7 +34,6 @@ export const ingredietSlice = createSlice({
     getIngredientsState: (state) => state,
     getIngredientModal: (state) => state.modal
   },
-  // если есть готовый экшенк реатор
   extraReducers: (builder) => {
     builder
       .addCase(getIngredientsAction.fulfilled, (state, action: PayloadAction<{ data: IIngredient[] }>) => {
