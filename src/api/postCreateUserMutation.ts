@@ -1,6 +1,6 @@
 import type { IUser } from "@interfaces/user";
 import type { IRegisterForm } from "@pages/register/types/registerForm";
-import { checkReponse } from "@src/utils/checkResponse";
+import { checkReponse } from "@utils/checkResponse";
 
 export interface IPostCreateMutationResponse {
   success: boolean;
