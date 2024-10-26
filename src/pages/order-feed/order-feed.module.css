@@ -3,12 +3,11 @@
 }
 
 .orderlist_wrapper {
-  width: 63%;
+  width: 55%;
 }
 
 .container {
   display: flex;
-  justify-content: center;
   gap: 60px;
 }
 
