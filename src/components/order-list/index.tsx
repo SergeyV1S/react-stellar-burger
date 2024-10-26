@@ -1,4 +1,5 @@
 import { useSelectIngredientsByUid } from "@hooks/useSelectIngredientsByUid";
+import { useMatch } from "react-router-dom";
 
 import { OrderCard } from "../order-card";
 import orderListStyles from "./order-list.module.css";
@@ -39,6 +40,7 @@ export const OrderList = () => {
   };
 
   const { getIngredientFromMap } = useSelectIngredientsByUid();
+  const match = useMatch("/profile/orders");
 
   return (
     <div className={orderListStyles.container}>
@@ -46,8 +48,10 @@ export const OrderList = () => {
         <OrderCard
           key={order.number}
           orderNumber={order.number}
+          orderStatus={order.status}
           createdDate={order.createdAt}
           orderName={"бургер"}
+          isProfile={!!match}
           totalCost={0}
           ingredients={getIngredientFromMap(order.ingredients)}
         />

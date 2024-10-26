@@ -1,3 +1,8 @@
+.container {
+  width: 100%;
+  max-width: 480px;
+}
+
 .button_container {
   text-align: end;
 }

@@ -46,9 +46,7 @@ export const ProfileLayout = () => {
               : "В этом разделе вы можете просмотреть свою историю заказов"}
           </p>
         </nav>
-        <main>
-          <Outlet />
-        </main>
+        <Outlet />
       </div>
     </div>
   );
