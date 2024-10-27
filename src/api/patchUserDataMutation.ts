@@ -8,7 +8,7 @@ export const patchUserDataMutation = (newUser: IProfileForm) =>
     method: "PATCH",
     headers: {
       "Content-Type": "application/json",
-      Authorization: localStorage.getItem("access-token") || ""
+      Authorization: "Bearer " + localStorage.getItem("access-token") || ""
     },
     body: JSON.stringify({
       email: newUser.email,

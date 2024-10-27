@@ -1,5 +1,10 @@
-import { EWsStatuses, getOrderWsStatus, wsConnectAction } from "@services/order-feed";
-import { getRibbonOrders } from "@services/order-feed";
+import {
+  EWsFeedStatuses,
+  getFeedOrderWsStatus,
+  wsOrderFeedConnectAction,
+  wsOrderFeedDisconnectAction
+} from "@services/order-feed";
+import { getFeedRibbonOrders } from "@services/order-feed";
 import { useAppDispatch, useAppSelector } from "@services/store";
 import { useEffect } from "react";
 
@@ -10,17 +15,21 @@ import orderFeedStyles from "./order-feed.module.css";
 
 export const OrderFeedPage = () => {
   const dispatch = useAppDispatch();
-  const orderRibbon = useAppSelector(getRibbonOrders);
-  const wsStatus = useAppSelector(getOrderWsStatus);
+  const orderRibbon = useAppSelector(getFeedRibbonOrders);
+  const wsStatus = useAppSelector(getFeedOrderWsStatus);
 
   useEffect(() => {
-    dispatch(wsConnectAction(`${import.meta.env.BASE_WS_URL}/orders/all`));
+    dispatch(wsOrderFeedConnectAction(`${import.meta.env.BASE_WS_URL}/orders/all`));
+
+    return () => {
+      dispatch(wsOrderFeedDisconnectAction());
+    };
   }, []);
 
   return (
     <div className={orderFeedStyles.wrapper}>
       <h1 className='text text_type_main-large mb-5 mt-10'>Лента заказов</h1>
-      {wsStatus === EWsStatuses.OPEN && orderRibbon ? (
+      {wsStatus === EWsFeedStatuses.OPEN && orderRibbon ? (
         <div className={orderFeedStyles.container}>
           <section className={orderFeedStyles.orderlist_wrapper}>
             <OrderList orderRibbon={orderRibbon} path='/order-feed' />

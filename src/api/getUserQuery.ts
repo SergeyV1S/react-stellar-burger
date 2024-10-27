@@ -12,7 +12,7 @@ export const getUserQuery = async () =>
     method: "GET",
     headers: {
       "Content-Type": "application/json",
-      Authorization: localStorage.getItem("access-token") || ""
+      Authorization: "Bearer " + localStorage.getItem("access-token") || ""
     }
   })
     .then((res): Promise<IGetUserResponse> => res)

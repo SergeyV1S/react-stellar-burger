@@ -1,5 +1,7 @@
 import { createAction } from "@reduxjs/toolkit";
 
-export const wsConnectAction = createAction<string, "WS_CONNEСT_ACTION">("WS_CONNEСT_ACTION");
+export const wsOrderFeedConnectAction = createAction<string, "WS_ORDER_FEED_CONNEСT_ACTION">(
+  "WS_ORDER_FEED_CONNEСT_ACTION"
+);
 
-export const wsDisconnectAction = createAction("WS_DISCONNECT_ACTION");
+export const wsOrderFeedDisconnectAction = createAction("WS_ORDER_FEED_DISCONNECT_ACTION");

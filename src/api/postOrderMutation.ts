@@ -5,7 +5,7 @@ export const postOrderMutation = async (idArr: string[]) =>
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      Authorization: localStorage.getItem("access-token") || ""
+      Authorization: "Bearer " + localStorage.getItem("access-token") || ""
     },
     body: JSON.stringify({
       ingredients: idArr

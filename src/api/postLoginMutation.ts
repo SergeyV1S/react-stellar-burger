@@ -19,7 +19,7 @@ export const postLoginMutation = async (userAuthData: ILoginForm) =>
   })
     .then(checkReponse)
     .then((jsonRes: IPostLoginMutationResponse) => {
-      localStorage.setItem("access-token", jsonRes.accessToken);
+      localStorage.setItem("access-token", jsonRes.accessToken.replace("Bearer ", ""));
       localStorage.setItem("refresh-token", jsonRes.refreshToken);
       return jsonRes;
     })

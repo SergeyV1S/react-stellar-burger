@@ -22,7 +22,7 @@ export const postRefreshTokenMutation = () =>
       if (!refreshData.success) {
         return Promise.reject(refreshData);
       }
-      localStorage.setItem("refresh-token", refreshData.refreshToken);
+      localStorage.setItem("refresh-token", refreshData.refreshToken.replace("Bearer ", ""));
       localStorage.setItem("access-token", refreshData.accessToken);
       return refreshData;
     });

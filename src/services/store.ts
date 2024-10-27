@@ -1,7 +1,7 @@
 import { configureStore as createStore } from "@reduxjs/toolkit";
 import { useDispatch, useSelector } from "react-redux";
 
-import { feedRibbonWs } from "./middleware/wsMiddleware";
+import { feedRibbonWs, profileRibbonWs } from "./middleware";
 import { rootReducer } from "./rootReducer";
 
 const store = createStore({
@@ -12,7 +12,7 @@ const store = createStore({
       serializableCheck: {
         ignoredPaths: ["ingredientSlice.ingredientsMap"]
       }
-    }).concat(feedRibbonWs)
+    }).concat(feedRibbonWs, profileRibbonWs)
 });
 
 export type TRootState = ReturnType<typeof rootReducer>;

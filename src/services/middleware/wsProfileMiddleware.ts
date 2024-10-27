@@ -1,23 +1,20 @@
 import { postRefreshTokenMutation } from "@api/postRefreshTokenMutation";
-import type { ActionCreatorWithPayload, ActionCreatorWithoutPayload, Middleware } from "@reduxjs/toolkit";
+import type { Middleware } from "@reduxjs/toolkit";
 
-import { wsConnectAction, wsDisconnectAction } from "../order-feed/action";
-import { wsClose, wsConnecting, wsError, wsMessage, wsOpen } from "../order-feed/reducer";
-import type { IRibbonDataResponse } from "../order-feed/types";
+import type { IRibbonProfileOrderDataResponse } from "../profile-order";
+import {
+  wsProfileOrderClose,
+  wsProfileOrderConnectAction,
+  wsProfileOrderConnecting,
+  wsProfileOrderDisconnectAction,
+  wsProfileOrderError,
+  wsProfileOrderMessage,
+  wsProfileOrderOpen
+} from "../profile-order";
 import type { TRootState } from "../store";
+import type { IWsActionTypes } from "./types";
 
-export interface IWsActionTypes<S, M> {
-  connect: ActionCreatorWithPayload<string>;
-  disconnect: ActionCreatorWithoutPayload;
-  sendMessage?: ActionCreatorWithPayload<S>;
-  onOpen: ActionCreatorWithoutPayload;
-  onClose: ActionCreatorWithoutPayload;
-  onError: ActionCreatorWithPayload<string>;
-  onMessage: ActionCreatorWithPayload<M>;
-  onConnecting: ActionCreatorWithoutPayload;
-}
-
-const wsMiddleware =
+const wsProfileMiddleware =
   <S, M>(wsActions: IWsActionTypes<S, M>): Middleware<unknown, TRootState> =>
   (store) => {
     let socket: WebSocket | null = null;
@@ -56,7 +53,7 @@ const wsMiddleware =
                 .then((res) => {
                   dispatch(
                     wsActions.connect(
-                      `${localStorage.getItem("accessToken")}?token=${res.accessToken.replace("Bearer ", "")}`
+                      `${localStorage.getItem("access-token")}?token=${res.accessToken.replace("Bearer ", "")}`
                     )
                   );
                 })
@@ -100,13 +97,13 @@ const wsMiddleware =
     };
   };
 
-export const feedRibbonWs = wsMiddleware<unknown, IRibbonDataResponse>({
-  connect: wsConnectAction,
-  disconnect: wsDisconnectAction,
+export const profileRibbonWs = wsProfileMiddleware<unknown, IRibbonProfileOrderDataResponse>({
+  connect: wsProfileOrderConnectAction,
+  disconnect: wsProfileOrderDisconnectAction,
   // sendMessage: wsSendMessage,
-  onOpen: wsOpen,
-  onClose: wsClose,
-  onError: wsError,
-  onMessage: wsMessage,
-  onConnecting: wsConnecting
+  onOpen: wsProfileOrderOpen,
+  onClose: wsProfileOrderClose,
+  onError: wsProfileOrderError,
+  onMessage: wsProfileOrderMessage,
+  onConnecting: wsProfileOrderConnecting
 });

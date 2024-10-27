@@ -1,11 +1,11 @@
-export interface IRibbonDataResponse {
+export interface IFeedRibbonDataResponse {
   success: true;
-  orders: IRibbonOrderData[];
+  orders: IFeedRibbonOrderData[];
   total: number;
   totalToday: number;
 }
 
-export interface IRibbonOrderData {
+export interface IFeedRibbonOrderData {
   ingredients: string[];
   _id: string;
   status: string;
@@ -15,14 +15,14 @@ export interface IRibbonOrderData {
   updatedAt: string;
 }
 
-export enum EWsStatuses {
+export enum EWsFeedStatuses {
   OPEN = "OPEN",
   CONNECTING = "CONNECTING",
   CLOSED = "CLOSED"
 }
 
 export interface IInitialState {
-  ribbonData: IRibbonDataResponse | null;
+  ribbonData: IFeedRibbonDataResponse | null;
   error: string | null;
-  wsStatus: EWsStatuses;
+  wsStatus: EWsFeedStatuses;
 }
