@@ -19,8 +19,7 @@
 
 .order_statuses {
   display: flex;
-  align-items: center;
-  gap: 36px;
+  justify-content: space-between;
 }
 
 .status_column {

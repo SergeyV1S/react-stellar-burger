@@ -1,6 +1,7 @@
 import { configureStore as createStore } from "@reduxjs/toolkit";
 import { useDispatch, useSelector } from "react-redux";
 
+import { feedRibbonWs } from "./middleware/wsMiddleware";
 import { rootReducer } from "./rootReducer";
 
 const store = createStore({
@@ -11,10 +12,10 @@ const store = createStore({
       serializableCheck: {
         ignoredPaths: ["ingredientSlice.ingredientsMap"]
       }
-    })
+    }).concat(feedRibbonWs)
 });
 
-export type TRootState = ReturnType<typeof store.getState>;
+export type TRootState = ReturnType<typeof rootReducer>;
 export type TAppDispatch = typeof store.dispatch;
 
 export const useAppDispatch = useDispatch.withTypes<TAppDispatch>();

@@ -47,9 +47,9 @@ export const OrderCard = ({
         <div className={orderCardStyles.ingredients_cost}>
           <div className={orderCardStyles.ingredients}>
             {ingredients.map(
-              (ingredient) =>
+              (ingredient, index) =>
                 ingredient && (
-                  <div key={ingredient._id} className={orderCardStyles.image_wrapper}>
+                  <div key={ingredient.uuid + index.toString()} className={orderCardStyles.image_wrapper}>
                     <img className={orderCardStyles.image} src={ingredient.image_mobile} alt={ingredient.name} />
                   </div>
                 )

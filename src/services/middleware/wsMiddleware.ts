@@ -1,7 +1,10 @@
 import { postRefreshTokenMutation } from "@api/postRefreshTokenMutation";
 import type { ActionCreatorWithPayload, ActionCreatorWithoutPayload, Middleware } from "@reduxjs/toolkit";
 
-import type { TAppDispatch, TRootState } from "../store";
+import { wsConnectAction, wsDisconnectAction } from "../order-feed/action";
+import { wsClose, wsConnecting, wsError, wsMessage, wsOpen } from "../order-feed/reducer";
+import type { IRibbonDataResponse } from "../order-feed/types";
+import type { TRootState } from "../store";
 
 export interface IWsActionTypes<S, M> {
   connect: ActionCreatorWithPayload<string>;
@@ -11,10 +14,11 @@ export interface IWsActionTypes<S, M> {
   onClose: ActionCreatorWithoutPayload;
   onError: ActionCreatorWithPayload<string>;
   onMessage: ActionCreatorWithPayload<M>;
+  onConnecting: ActionCreatorWithoutPayload;
 }
 
-export const wsMiddleware =
-  <S, M>(wsActions: IWsActionTypes<S, M>): Middleware<unknown, TRootState, TAppDispatch> =>
+const wsMiddleware =
+  <S, M>(wsActions: IWsActionTypes<S, M>): Middleware<unknown, TRootState> =>
   (store) => {
     let socket: WebSocket | null = null;
     let isConnected = false;
@@ -26,6 +30,7 @@ export const wsMiddleware =
 
       if (wsActions.connect.match(action)) {
         socket = new WebSocket(action.payload);
+        dispatch(wsActions.onConnecting());
         isConnected = true;
         url = action.payload;
 
@@ -49,7 +54,11 @@ export const wsMiddleware =
             if (parsedData.message === "Invalid or missing token") {
               postRefreshTokenMutation()
                 .then((res) => {
-                  dispatch(wsActions.connect(`${url}?token=${res.accessToken.replace("Bearer ", "")}`));
+                  dispatch(
+                    wsActions.connect(
+                      `${localStorage.getItem("accessToken")}?token=${res.accessToken.replace("Bearer ", "")}`
+                    )
+                  );
                 })
                 .catch((error) => {
                   dispatch(wsActions.onError((error as Error).message));
@@ -90,3 +99,14 @@ export const wsMiddleware =
       next(action);
     };
   };
+
+export const feedRibbonWs = wsMiddleware<unknown, IRibbonDataResponse>({
+  connect: wsConnectAction,
+  disconnect: wsDisconnectAction,
+  // sendMessage: wsSendMessage,
+  onOpen: wsOpen,
+  onClose: wsClose,
+  onError: wsError,
+  onMessage: wsMessage,
+  onConnecting: wsConnecting
+});
