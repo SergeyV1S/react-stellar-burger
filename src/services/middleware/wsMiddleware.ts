@@ -1,6 +1,9 @@
 import { postRefreshTokenMutation } from "@api/postRefreshTokenMutation";
 import type { Middleware } from "@reduxjs/toolkit";
 
+import type { IFeedRibbonDataResponse } from "../order-feed";
+import { wsOrderFeedConnectAction, wsOrderFeedDisconnectAction } from "../order-feed/action";
+import { wsFeedClose, wsFeedConnecting, wsFeedError, wsFeedMessage, wsFeedOpen } from "../order-feed/reducer";
 import type { IRibbonProfileOrderDataResponse } from "../profile-order";
 import {
   wsProfileOrderClose,
@@ -14,7 +17,7 @@ import {
 import type { TRootState } from "../store";
 import type { IWsActionTypes } from "./types";
 
-const wsProfileMiddleware =
+const wsMiddleware =
   <S, M>(wsActions: IWsActionTypes<S, M>): Middleware<unknown, TRootState> =>
   (store) => {
     let socket: WebSocket | null = null;
@@ -97,7 +100,7 @@ const wsProfileMiddleware =
     };
   };
 
-export const profileRibbonWs = wsProfileMiddleware<unknown, IRibbonProfileOrderDataResponse>({
+export const profileRibbonWs = wsMiddleware<unknown, IRibbonProfileOrderDataResponse>({
   connect: wsProfileOrderConnectAction,
   disconnect: wsProfileOrderDisconnectAction,
   // sendMessage: wsSendMessage,
@@ -106,4 +109,15 @@ export const profileRibbonWs = wsProfileMiddleware<unknown, IRibbonProfileOrderD
   onError: wsProfileOrderError,
   onMessage: wsProfileOrderMessage,
   onConnecting: wsProfileOrderConnecting
+});
+
+export const feedRibbonWs = wsMiddleware<unknown, IFeedRibbonDataResponse>({
+  connect: wsOrderFeedConnectAction,
+  disconnect: wsOrderFeedDisconnectAction,
+  // sendMessage: wsSendMessage,
+  onOpen: wsFeedOpen,
+  onClose: wsFeedClose,
+  onError: wsFeedError,
+  onMessage: wsFeedMessage,
+  onConnecting: wsFeedConnecting
 });
