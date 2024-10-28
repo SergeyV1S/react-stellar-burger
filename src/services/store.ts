@@ -1,7 +1,7 @@
 import { configureStore as createStore } from "@reduxjs/toolkit";
 import { useDispatch, useSelector } from "react-redux";
 
-import { feedRibbonWs, profileRibbonWs } from "./middleware/wsProfileMiddleware";
+import { feedRibbonWs, profileRibbonWs } from "./middleware/wsMiddleware";
 import { rootReducer } from "./rootReducer";
 
 const store = createStore({
