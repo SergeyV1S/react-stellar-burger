@@ -76,22 +76,23 @@
   z-index: 2;
 }
 
-.image_wrapper:nth-of-type(6):after {
-  position: absolute;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  overflow: hidden;
-  border-radius: 50%;
-  background: rgba(19, 19, 22, 0.7);
-  width: 60px;
-  height: 60px;
+.image_wrapper:nth-of-type(6) {
   z-index: 1;
+}
+
+.last_image_counter {
+  position: absolute;
+  z-index: 1;
+  color: #f2f2f3;
 }
 
 .image {
   height: 50px;
   z-index: 1;
+}
+
+.image_last {
+  opacity: 0.4;
 }
 
 .cost {

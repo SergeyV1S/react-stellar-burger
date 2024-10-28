@@ -48,9 +48,18 @@ export const OrderCard = ({
         </div>
         <div className={orderCardStyles.ingredients_cost}>
           <div className={orderCardStyles.ingredients}>
-            {ingredientsData.map((ingredient, index) => (
+            {ingredientsData.slice(0, 6).map((ingredient, index) => (
               <div key={ingredient.uuid + index.toString()} className={orderCardStyles.image_wrapper}>
-                <img className={orderCardStyles.image} src={ingredient.image_mobile} alt={ingredient.name} />
+                <img
+                  className={`${orderCardStyles.image} ${index === 5 && orderCardStyles.image_last}`}
+                  src={ingredient.image_mobile}
+                  alt={ingredient.name}
+                />
+                {index === 5 && (
+                  <p className={`text text_type_digits-default ${orderCardStyles.last_image_counter}`}>
+                    +{ingredientsData.length - 5}
+                  </p>
+                )}
               </div>
             ))}
           </div>
