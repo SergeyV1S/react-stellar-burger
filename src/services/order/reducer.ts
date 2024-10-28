@@ -1,11 +1,14 @@
+import type { IGetCurrentOrderResponse } from "@api/getCurrentOrderQuery";
+import type { IOrder } from "@interfaces/order";
 import type { PayloadAction } from "@reduxjs/toolkit";
 import { createSlice } from "@reduxjs/toolkit";
 
-import { createOrderAction } from "./action";
-import type { IOrder, IOrderInitialState } from "./types";
+import { createOrderAction, getCurrentOrderAction } from "./action";
+import type { IOrderInitialState } from "./types";
 
 const initialState: IOrderInitialState = {
   order: null,
+  currentOrder: null,
   error: undefined,
   isOrderModalOpen: false,
   isLoading: false
@@ -21,6 +24,7 @@ export const orderSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
+      // Создание заказа
       .addCase(createOrderAction.fulfilled, (state, action: PayloadAction<IOrder>) => {
         state.order = action.payload;
         state.isLoading = false;
@@ -34,14 +38,29 @@ export const orderSlice = createSlice({
         state.order = null;
         state.error = undefined;
         state.isLoading = true;
+      })
+      // Получение заказа по номеру
+      .addCase(getCurrentOrderAction.fulfilled, (state, action: PayloadAction<IGetCurrentOrderResponse>) => {
+        state.currentOrder = action.payload.orders[0];
+        state.isLoading = false;
+      })
+      .addCase(getCurrentOrderAction.rejected, (state, action) => {
+        state.error = action.error?.message;
+        state.isLoading = false;
+      })
+      .addCase(getCurrentOrderAction.pending, (state) => {
+        state.order = null;
+        state.error = undefined;
+        state.isLoading = true;
       });
   },
   selectors: {
     getIsModalOrder: (state) => state.isOrderModalOpen,
-    getOrderStore: (state) => state
+    getOrderStore: (state) => state,
+    getCurrentOrder: (state) => state.order
   }
 });
 
 export const { toggleOrderModal } = orderSlice.actions;
 
-export const { getIsModalOrder, getOrderStore } = orderSlice.selectors;
+export const { getIsModalOrder, getOrderStore, getCurrentOrder } = orderSlice.selectors;

@@ -1,10 +1,11 @@
 import type { IIngredient } from "@interfaces/ingredient";
-import type { EOrderStatus } from "@services/order-feed";
+import type { EOrderStatus } from "@interfaces/order";
+import { translateOrderStatus } from "@utils/translateOrderStatus";
 import { CurrencyIcon, FormattedDate } from "@ya.praktikum/react-developer-burger-ui-components";
 import { Link, useLocation } from "react-router-dom";
 
+import { OrderImageList } from "../order-image-list";
 import orderCardStyles from "./order-card.module.css";
-import { translateOrderStatus } from "./utils/translateOrderStatus";
 
 interface IOrderCardProps {
   number: number;
@@ -49,18 +50,12 @@ export const OrderCard = ({
         <div className={orderCardStyles.ingredients_cost}>
           <div className={orderCardStyles.ingredients}>
             {ingredientsData.slice(0, 6).map((ingredient, index) => (
-              <div key={ingredient.uuid + index.toString()} className={orderCardStyles.image_wrapper}>
-                <img
-                  className={`${orderCardStyles.image} ${index === 5 && orderCardStyles.image_last}`}
-                  src={ingredient.image_mobile}
-                  alt={ingredient.name}
-                />
-                {index === 5 && (
-                  <p className={`text text_type_digits-default ${orderCardStyles.last_image_counter}`}>
-                    +{ingredientsData.length - 5}
-                  </p>
-                )}
-              </div>
+              <OrderImageList
+                key={ingredient.uuid + index.toString()}
+                imageCount={ingredientsData.length - 5}
+                index={index}
+                ingredient={ingredient}
+              />
             ))}
           </div>
           <p className={`text text_type_digits-default ${orderCardStyles.cost}`}>

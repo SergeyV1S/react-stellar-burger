@@ -1,20 +1,10 @@
-import type { EOrderStatus } from "../order-feed";
+import type { IFeedOrderData } from "@interfaces/order";
 
 export interface IRibbonProfileOrderDataResponse {
   success: true;
-  orders: IRibbonProfileOrderData[];
+  orders: IFeedOrderData[];
   total: number;
   totalToday: number;
-}
-
-export interface IRibbonProfileOrderData {
-  ingredients: string[];
-  _id: string;
-  status: EOrderStatus;
-  name: string;
-  number: number;
-  createdAt: string;
-  updatedAt: string;
 }
 
 export enum EProfileOrderWsStatuses {

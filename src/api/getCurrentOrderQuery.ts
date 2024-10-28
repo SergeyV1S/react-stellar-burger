@@ -1,15 +1,18 @@
-import { fetchWithRefresh } from "../utils/fetchWithRefresh";
+import type { IFeedOrderData } from "@interfaces/order";
+import { checkReponse } from "@utils/checkResponse";
 
 export interface IGetCurrentOrderResponse {
   success: boolean;
+  orders: IFeedOrderData[];
 }
 
-export const getCurrentOrderQuery = async (orderID: string) =>
-  await fetchWithRefresh(`${import.meta.env.BASE_API_URL}/orders/${orderID}`, {
+export const getCurrentOrderQuery = async (orderNumber: number) =>
+  await fetch(`${import.meta.env.BASE_API_URL}/orders/${orderNumber}`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json"
     }
   })
-    .then((res): Promise<IGetCurrentOrderResponse> => res)
+    .then(checkReponse)
+    .then((res: IGetCurrentOrderResponse) => res)
     .catch((err) => Promise.reject(err));

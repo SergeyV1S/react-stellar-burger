@@ -1,4 +1,4 @@
-import { EOrderStatus } from "@services/order-feed";
+import { EOrderStatus } from "@interfaces/order";
 
 export const translateOrderStatus = (status: EOrderStatus) => {
   switch (status) {
