@@ -1,3 +1,5 @@
+import type { EOrderStatus } from "../order-feed";
+
 export interface IRibbonProfileOrderDataResponse {
   success: true;
   orders: IRibbonProfileOrderData[];
@@ -8,7 +10,7 @@ export interface IRibbonProfileOrderDataResponse {
 export interface IRibbonProfileOrderData {
   ingredients: string[];
   _id: string;
-  status: string;
+  status: EOrderStatus;
   name: string;
   number: number;
   createdAt: string;

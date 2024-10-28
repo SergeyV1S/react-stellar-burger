@@ -1,59 +1,58 @@
 import type { IIngredient } from "@interfaces/ingredient";
+import type { EOrderStatus } from "@services/order-feed";
 import { CurrencyIcon, FormattedDate } from "@ya.praktikum/react-developer-burger-ui-components";
 import { Link, useLocation } from "react-router-dom";
 
 import orderCardStyles from "./order-card.module.css";
+import { translateOrderStatus } from "./utils/translateOrderStatus";
 
 interface IOrderCardProps {
-  orderNumber: number;
-  createdDate: string;
-  orderName: string;
+  number: number;
+  createdAt: string;
+  name: string;
   totalCost: number;
   isProfile: boolean;
-  ingredients: (IIngredient | undefined)[];
-  orderStatus: string;
+  ingredientsData: IIngredient[];
+  status: EOrderStatus;
   path: string;
 }
 
 export const OrderCard = ({
-  orderNumber,
-  createdDate,
-  orderName,
+  number,
+  createdAt,
+  name,
   isProfile,
   totalCost,
-  ingredients,
-  orderStatus,
+  ingredientsData,
+  status,
   path
 }: IOrderCardProps) => {
   const location = useLocation();
 
   return (
-    <Link to={`${path}/${orderNumber}`} state={{ backgroundLocation: location }} className={orderCardStyles.wrapper}>
+    <Link to={`${path}/${number}`} state={{ backgroundLocation: location }} className={orderCardStyles.wrapper}>
       <div className={`p-6 ${orderCardStyles.container}`}>
         <div className={orderCardStyles.number_date}>
-          <p className='text text_type_digits-default'>{orderNumber}</p>
-          <FormattedDate className='text text_type_main-default text_color_inactive' date={new Date(createdDate)} />
+          <p className='text text_type_digits-default'>{number}</p>
+          <FormattedDate className='text text_type_main-default text_color_inactive' date={new Date(createdAt)} />
         </div>
         <div>
-          <p className={`text text_type_main-medium text_color_primary ${orderCardStyles.title}`}>{orderName}</p>
+          <p className={`text text_type_main-medium text_color_primary ${orderCardStyles.title}`}>{name}</p>
           {isProfile && (
             <p
-              className={`text text_type_main-default text_color_primary mt-2 ${orderStatus === "done" && orderCardStyles.done_order}`}
+              className={`text text_type_main-default text_color_primary mt-2 ${status === "done" && orderCardStyles.done_order}`}
             >
-              {orderStatus === "done" ? "Создан" : "Готовится"}
+              {translateOrderStatus(status)}
             </p>
           )}
         </div>
         <div className={orderCardStyles.ingredients_cost}>
           <div className={orderCardStyles.ingredients}>
-            {ingredients.map(
-              (ingredient, index) =>
-                ingredient && (
-                  <div key={ingredient.uuid + index.toString()} className={orderCardStyles.image_wrapper}>
-                    <img className={orderCardStyles.image} src={ingredient.image_mobile} alt={ingredient.name} />
-                  </div>
-                )
-            )}
+            {ingredientsData.map((ingredient, index) => (
+              <div key={ingredient.uuid + index.toString()} className={orderCardStyles.image_wrapper}>
+                <img className={orderCardStyles.image} src={ingredient.image_mobile} alt={ingredient.name} />
+              </div>
+            ))}
           </div>
           <p className={`text text_type_digits-default ${orderCardStyles.cost}`}>
             {totalCost}

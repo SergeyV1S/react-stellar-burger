@@ -5,10 +5,16 @@ export interface IFeedRibbonDataResponse {
   totalToday: number;
 }
 
+export enum EOrderStatus {
+  created = "created",
+  pending = "pending",
+  done = "done"
+}
+
 export interface IFeedRibbonOrderData {
   ingredients: string[];
   _id: string;
-  status: string;
+  status: EOrderStatus;
   name: string;
   number: number;
   createdAt: string;

@@ -22,13 +22,10 @@ export const OrderList = ({ path, orderRibbon }: IOrderListProps) => {
           <OrderCard
             path={path}
             key={order.number}
-            orderNumber={order.number}
-            orderStatus={order.status}
-            createdDate={order.createdAt}
-            orderName={order.name}
             isProfile={!!match}
             totalCost={countTotalOrderCost(order.ingredients)}
-            ingredients={getIngredientFromMap(order.ingredients)}
+            ingredientsData={getIngredientFromMap(order.ingredients)}
+            {...order}
           />
         ))}
     </div>
