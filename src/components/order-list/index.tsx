@@ -1,4 +1,4 @@
-import { useSelectIngredientsByUid } from "@hooks/useSelectIngredientsByUid";
+import { useOrderList } from "@hooks/useOrderList";
 import type { IFeedRibbonDataResponse } from "@services/order-feed";
 import type { IRibbonProfileOrderDataResponse } from "@services/profile-order";
 import { useMatch } from "react-router-dom";
@@ -12,7 +12,7 @@ interface IOrderListProps {
 }
 
 export const OrderList = ({ path, orderRibbon }: IOrderListProps) => {
-  const { getIngredientFromMap } = useSelectIngredientsByUid();
+  const { getIngredientFromMap, countTotalOrderCost } = useOrderList();
   const match = useMatch("/profile/orders");
 
   return (
@@ -27,7 +27,7 @@ export const OrderList = ({ path, orderRibbon }: IOrderListProps) => {
             createdDate={order.createdAt}
             orderName={order.name}
             isProfile={!!match}
-            totalCost={0}
+            totalCost={countTotalOrderCost(order.ingredients)}
             ingredients={getIngredientFromMap(order.ingredients)}
           />
         ))}
