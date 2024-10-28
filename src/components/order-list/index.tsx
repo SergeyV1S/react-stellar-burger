@@ -1,6 +1,5 @@
 import { useOrderList } from "@hooks/useOrderList";
 import type { IFeedRibbonDataResponse } from "@services/order-feed";
-import type { IRibbonProfileOrderDataResponse } from "@services/profile-order";
 import { useMatch } from "react-router-dom";
 
 import { OrderCard } from "../order-card";
@@ -8,7 +7,7 @@ import orderListStyles from "./order-list.module.css";
 
 interface IOrderListProps {
   path: string;
-  orderRibbon: IFeedRibbonDataResponse | IRibbonProfileOrderDataResponse | null;
+  orderRibbon: IFeedRibbonDataResponse | null;
 }
 
 export const OrderList = ({ path, orderRibbon }: IOrderListProps) => {

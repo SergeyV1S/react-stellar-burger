@@ -2,12 +2,12 @@ import type { PayloadAction } from "@reduxjs/toolkit";
 import { createSlice } from "@reduxjs/toolkit";
 
 import type { IFeedRibbonDataResponse, IInitialState } from "./types";
-import { EWsFeedStatuses } from "./types";
+import { EWsStatuses } from "./types";
 
 const initialState: IInitialState = {
   ribbonData: null,
   error: null,
-  wsStatus: EWsFeedStatuses.CLOSED
+  wsStatus: EWsStatuses.CLOSED
 };
 
 export const orderFeedSlice = createSlice({
@@ -15,13 +15,13 @@ export const orderFeedSlice = createSlice({
   initialState,
   reducers: {
     wsFeedOpen: (state) => {
-      state.wsStatus = EWsFeedStatuses.OPEN;
+      state.wsStatus = EWsStatuses.OPEN;
     },
     wsFeedClose: (state) => {
-      state.wsStatus = EWsFeedStatuses.CLOSED;
+      state.wsStatus = EWsStatuses.CLOSED;
     },
     wsFeedConnecting: (state) => {
-      state.wsStatus = EWsFeedStatuses.CONNECTING;
+      state.wsStatus = EWsStatuses.CONNECTING;
     },
     wsFeedError: (state, action: PayloadAction<string>) => {
       state.error = action.payload;

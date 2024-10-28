@@ -4,7 +4,6 @@ import type { Middleware } from "@reduxjs/toolkit";
 import type { IFeedRibbonDataResponse } from "../order-feed";
 import { wsOrderFeedConnectAction, wsOrderFeedDisconnectAction } from "../order-feed/action";
 import { wsFeedClose, wsFeedConnecting, wsFeedError, wsFeedMessage, wsFeedOpen } from "../order-feed/reducer";
-import type { IRibbonProfileOrderDataResponse } from "../profile-order";
 import {
   wsProfileOrderClose,
   wsProfileOrderConnectAction,
@@ -100,7 +99,7 @@ const wsMiddleware =
     };
   };
 
-export const profileRibbonWs = wsMiddleware<unknown, IRibbonProfileOrderDataResponse>({
+export const profileRibbonWs = wsMiddleware<unknown, IFeedRibbonDataResponse>({
   connect: wsProfileOrderConnectAction,
   disconnect: wsProfileOrderDisconnectAction,
   // sendMessage: wsSendMessage,

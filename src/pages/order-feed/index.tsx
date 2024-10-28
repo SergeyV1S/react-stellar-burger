@@ -1,5 +1,5 @@
 import {
-  EWsFeedStatuses,
+  EWsStatuses,
   getFeedOrderWsStatus,
   wsOrderFeedConnectAction,
   wsOrderFeedDisconnectAction
@@ -29,7 +29,7 @@ export const OrderFeedPage = () => {
   return (
     <div className={orderFeedStyles.wrapper}>
       <h1 className='text text_type_main-large mb-5 mt-10'>Лента заказов</h1>
-      {wsStatus === EWsFeedStatuses.OPEN && orderRibbon ? (
+      {wsStatus === EWsStatuses.OPEN && orderRibbon ? (
         <div className={orderFeedStyles.container}>
           <section className={orderFeedStyles.orderlist_wrapper}>
             <OrderList orderRibbon={orderRibbon} path='/order-feed' />

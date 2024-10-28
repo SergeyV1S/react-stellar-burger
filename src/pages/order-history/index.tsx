@@ -1,5 +1,5 @@
+import { EWsStatuses } from "@services/order-feed";
 import {
-  EProfileOrderWsStatuses,
   getProfileOrderWsStatus,
   getProfileRibbonOrders,
   wsProfileOrderConnectAction,
@@ -31,7 +31,7 @@ export const OrderHistoryPage = () => {
   return (
     <section className={orderHistoryStyles.wrapper}>
       <div className={orderHistoryStyles.container}>
-        {wsStatus === EProfileOrderWsStatuses.OPEN && orderRibbon ? (
+        {wsStatus === EWsStatuses.OPEN && orderRibbon ? (
           <OrderList path='/profile/orders' orderRibbon={orderRibbon} />
         ) : (
           <div className='spinner_wrapper'>
