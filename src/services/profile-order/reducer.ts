@@ -1,13 +1,14 @@
 import type { PayloadAction } from "@reduxjs/toolkit";
 import { createSlice } from "@reduxjs/toolkit";
 
-import type { IProfileRibbonInitialState, IRibbonProfileOrderDataResponse } from "./types";
-import { EProfileOrderWsStatuses } from "./types";
+import type { IFeedRibbonDataResponse } from "../order-feed";
+import { EWsStatuses } from "../order-feed";
+import type { IProfileRibbonInitialState } from "./types";
 
 const initialState: IProfileRibbonInitialState = {
   profileRibbonData: null,
   error: null,
-  profileRibbonWsStatus: EProfileOrderWsStatuses.CLOSED
+  profileRibbonWsStatus: EWsStatuses.CLOSED
 };
 
 export const profileOrderSlice = createSlice({
@@ -15,18 +16,18 @@ export const profileOrderSlice = createSlice({
   initialState,
   reducers: {
     wsProfileOrderOpen: (state) => {
-      state.profileRibbonWsStatus = EProfileOrderWsStatuses.OPEN;
+      state.profileRibbonWsStatus = EWsStatuses.OPEN;
     },
     wsProfileOrderClose: (state) => {
-      state.profileRibbonWsStatus = EProfileOrderWsStatuses.CLOSED;
+      state.profileRibbonWsStatus = EWsStatuses.CLOSED;
     },
     wsProfileOrderConnecting: (state) => {
-      state.profileRibbonWsStatus = EProfileOrderWsStatuses.CONNECTING;
+      state.profileRibbonWsStatus = EWsStatuses.CONNECTING;
     },
     wsProfileOrderError: (state, action: PayloadAction<string>) => {
       state.error = action.payload;
     },
-    wsProfileOrderMessage: (state, action: PayloadAction<IRibbonProfileOrderDataResponse>) => {
+    wsProfileOrderMessage: (state, action: PayloadAction<IFeedRibbonDataResponse>) => {
       state.profileRibbonData = action.payload;
       state.error = null;
     }

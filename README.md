@@ -8,6 +8,7 @@ Befor run project you should:
 
 To run project in dev mode use:
 
+- yarn
 - yarn dev
 
 To lint project use:

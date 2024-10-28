@@ -1,20 +1,7 @@
-import type { IFeedOrderData } from "@interfaces/order";
-
-export interface IRibbonProfileOrderDataResponse {
-  success: true;
-  orders: IFeedOrderData[];
-  total: number;
-  totalToday: number;
-}
-
-export enum EProfileOrderWsStatuses {
-  OPEN = "OPEN",
-  CONNECTING = "CONNECTING",
-  CLOSED = "CLOSED"
-}
+import type { EWsStatuses, IFeedRibbonDataResponse } from "../order-feed";
 
 export interface IProfileRibbonInitialState {
-  profileRibbonData: IRibbonProfileOrderDataResponse | null;
+  profileRibbonData: IFeedRibbonDataResponse | null;
   error: string | null;
-  profileRibbonWsStatus: EProfileOrderWsStatuses;
+  profileRibbonWsStatus: EWsStatuses;
 }

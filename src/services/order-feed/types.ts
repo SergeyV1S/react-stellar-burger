@@ -7,7 +7,7 @@ export interface IFeedRibbonDataResponse {
   totalToday: number;
 }
 
-export enum EWsFeedStatuses {
+export enum EWsStatuses {
   OPEN = "OPEN",
   CONNECTING = "CONNECTING",
   CLOSED = "CLOSED"
@@ -16,5 +16,5 @@ export enum EWsFeedStatuses {
 export interface IInitialState {
   ribbonData: IFeedRibbonDataResponse | null;
   error: string | null;
-  wsStatus: EWsFeedStatuses;
+  wsStatus: EWsStatuses;
 }
