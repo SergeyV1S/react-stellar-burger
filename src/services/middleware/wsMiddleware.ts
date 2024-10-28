@@ -55,7 +55,7 @@ const wsMiddleware =
                 .then((res) => {
                   dispatch(
                     wsActions.connect(
-                      `${localStorage.getItem("access-token")}?token=${res.accessToken.replace("Bearer ", "")}`
+                      `${import.meta.env.BASE_WS_URL}/orders?token=${res.accessToken.replace("Bearer ", "")}`
                     )
                   );
                 })

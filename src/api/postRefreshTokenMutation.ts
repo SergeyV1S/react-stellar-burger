@@ -17,12 +17,11 @@ export const postRefreshTokenMutation = () =>
     })
   })
     .then(checkReponse)
-
     .then((refreshData: IPostRefreshTokenResponse) => {
       if (!refreshData.success) {
         return Promise.reject(refreshData);
       }
-      localStorage.setItem("refresh-token", refreshData.refreshToken.replace("Bearer ", ""));
-      localStorage.setItem("access-token", refreshData.accessToken);
+      localStorage.setItem("refresh-token", refreshData.refreshToken);
+      localStorage.setItem("access-token", refreshData.accessToken.replace("Bearer ", ""));
       return refreshData;
     });
