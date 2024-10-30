@@ -8,11 +8,11 @@ export interface IGetUserResponse {
 }
 
 export const getUserQuery = async () =>
-  await fetchWithRefresh(`${import.meta.env.VITE_API_URL}/auth/user`, {
+  await fetchWithRefresh(`${import.meta.env.BASE_API_URL}/auth/user`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
-      Authorization: localStorage.getItem("access-token") || ""
+      Authorization: "Bearer " + localStorage.getItem("access-token") || ""
     }
   })
     .then((res): Promise<IGetUserResponse> => res)

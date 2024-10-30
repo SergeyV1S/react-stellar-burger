@@ -1,0 +1,39 @@
+.wrapper {
+  width: 100%;
+}
+
+.orderlist_wrapper {
+  width: 55%;
+}
+
+.container {
+  display: flex;
+  gap: 60px;
+}
+
+.order_ribbon {
+  display: flex;
+  flex-direction: column;
+  gap: 60px;
+}
+
+.order_statuses {
+  display: flex;
+  justify-content: space-between;
+}
+
+.status_column {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(5, 1fr);
+  row-gap: 8px;
+  column-gap: 8px;
+}
+
+.done_orders {
+  color: #00cccc;
+}
+
+.digits {
+  text-shadow: 4px 4px 32px #3333ff;
+}

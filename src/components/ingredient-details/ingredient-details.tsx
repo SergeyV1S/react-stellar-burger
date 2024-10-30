@@ -19,7 +19,7 @@ export const IngredientDetails = () => {
   const currentItem = data ? data.filter((item) => item._id === id)[0] : selectedIngredient;
 
   return (
-    <div className={state ? ingredientDetails.modal_container : ingredientDetails.page_conatiner}>
+    <div className={state ? ingredientDetails.modal_container : ingredientDetails.page_container}>
       {currentItem ? (
         <div className={ingredientDetails.content}>
           <h1 className='text text_type_main-large'>Детали ингредиента</h1>

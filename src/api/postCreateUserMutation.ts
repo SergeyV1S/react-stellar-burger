@@ -1,6 +1,6 @@
 import type { IUser } from "@interfaces/user";
 import type { IRegisterForm } from "@pages/register/types/registerForm";
-import { checkReponse } from "@src/utils/checkResponse";
+import { checkReponse } from "@utils/checkResponse";
 
 export interface IPostCreateMutationResponse {
   success: boolean;
@@ -10,7 +10,7 @@ export interface IPostCreateMutationResponse {
 }
 
 export const postCreateUserMutation = async (data: IRegisterForm) =>
-  await fetch(`${import.meta.env.VITE_API_URL}/auth/register`, {
+  await fetch(`${import.meta.env.BASE_API_URL}/auth/register`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json"
@@ -19,7 +19,7 @@ export const postCreateUserMutation = async (data: IRegisterForm) =>
   })
     .then(checkReponse)
     .then((jsonRes: IPostCreateMutationResponse) => {
-      localStorage.setItem("access-token", jsonRes.accessToken);
+      localStorage.setItem("access-token", jsonRes.accessToken.replace("Bearer ", ""));
       localStorage.setItem("refresh-token", jsonRes.refreshToken);
       return jsonRes;
     })

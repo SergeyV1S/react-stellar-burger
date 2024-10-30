@@ -1,5 +1,9 @@
+.wrapper {
+  width: 100%;
+}
+
 .container {
-  max-width: 480px;
+  position: relative;
   height: 424px;
-  text-align: center;
+  width: 100%;
 }

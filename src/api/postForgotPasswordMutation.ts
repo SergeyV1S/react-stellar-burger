@@ -6,7 +6,7 @@ export interface IPostForgutPasswordMutationResponse {
 }
 
 export const postForgotPasswordMutation = (data: { email: string }) =>
-  fetch(`${import.meta.env.VITE_API_URL}/password-reset`, {
+  fetch(`${import.meta.env.BASE_API_URL}/password-reset`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json"

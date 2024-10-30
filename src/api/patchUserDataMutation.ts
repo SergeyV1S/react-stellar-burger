@@ -4,11 +4,11 @@ import { checkReponse } from "@utils/checkResponse";
 import type { IGetUserResponse } from "./getUserQuery";
 
 export const patchUserDataMutation = (newUser: IProfileForm) =>
-  fetch(`${import.meta.env.VITE_API_URL}/auth/user`, {
+  fetch(`${import.meta.env.BASE_API_URL}/auth/user`, {
     method: "PATCH",
     headers: {
       "Content-Type": "application/json",
-      Authorization: localStorage.getItem("access-token") || ""
+      Authorization: "Bearer " + localStorage.getItem("access-token") || ""
     },
     body: JSON.stringify({
       email: newUser.email,

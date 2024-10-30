@@ -1,13 +1,14 @@
 import { useAppDispatch } from "@services/store";
 import { logoutUserAction } from "@services/user";
 import { Button } from "@ya.praktikum/react-developer-burger-ui-components";
-import { NavLink, Outlet, useNavigate } from "react-router-dom";
+import { NavLink, Outlet, useMatch, useNavigate } from "react-router-dom";
 
 import profileLayout from "./profile-layout.module.css";
 
 export const ProfileLayout = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
+  const match = useMatch("/profile/orders");
 
   const logout = () => dispatch(logoutUserAction()).then(() => navigate("/login"));
 
@@ -40,12 +41,12 @@ export const ProfileLayout = () => {
             Выйти
           </Button>
           <p className='text text_type_main-default text_color_inactive mt-20'>
-            В этом разделе вы можете изменить свои персональные данные
+            {!match
+              ? "В этом разделе вы можете изменить свои персональные данные"
+              : "В этом разделе вы можете просмотреть свою историю заказов"}
           </p>
         </nav>
-        <main className={profileLayout.main}>
-          <Outlet />
-        </main>
+        <Outlet />
       </div>
     </div>
   );
