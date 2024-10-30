@@ -29,7 +29,7 @@ export const OrderInfo = () => {
   const orderIngredients = currentOrder && getIngredientFromMap(currentOrder.ingredients);
 
   return (
-    <div className={state ? orderInfoStyles.modal_container : orderInfoStyles.page_conatiner}>
+    <div className={state ? orderInfoStyles.modal_container : orderInfoStyles.page_container}>
       {currentOrder ? (
         <div className={orderInfoStyles.content}>
           <p className={`text text_type_digits-default ${orderInfoStyles.order_number}`}>#{currentOrder.number}</p>

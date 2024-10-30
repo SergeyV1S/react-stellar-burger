@@ -32,7 +32,7 @@ export const OrderHistoryPage = () => {
     <section className={orderHistoryStyles.wrapper}>
       <div className={orderHistoryStyles.container}>
         {wsStatus === EWsStatuses.OPEN && orderRibbon ? (
-          <OrderList path='/profile/orders' orderRibbon={orderRibbon} />
+          <OrderList path='/profile/orders' orders={[...orderRibbon.orders].reverse()} />
         ) : (
           <div className='spinner_wrapper'>
             <Spinner />

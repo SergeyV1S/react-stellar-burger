@@ -32,7 +32,7 @@ export const OrderFeedPage = () => {
       {wsStatus === EWsStatuses.OPEN && orderRibbon ? (
         <div className={orderFeedStyles.container}>
           <section className={orderFeedStyles.orderlist_wrapper}>
-            <OrderList orderRibbon={orderRibbon} path='/order-feed' />
+            <OrderList orders={orderRibbon.orders} path='/order-feed' />
           </section>
           <section className={orderFeedStyles.order_ribbon}>
             <div className={orderFeedStyles.order_statuses}>
