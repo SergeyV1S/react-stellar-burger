@@ -6,7 +6,7 @@ export interface IPostLogoutMutation {
 }
 
 export const postLogoutMutation = () =>
-  fetch(`${import.meta.env.BASE_API_URL}/auth/logout`, {
+  fetch(`${process.env.BASE_API_URL}/auth/logout`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json"

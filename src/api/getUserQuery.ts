@@ -8,7 +8,7 @@ export interface IGetUserResponse {
 }
 
 export const getUserQuery = async () =>
-  await fetchWithRefresh(`${import.meta.env.BASE_API_URL}/auth/user`, {
+  await fetchWithRefresh(`${process.env.BASE_API_URL}/auth/user`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",

@@ -10,7 +10,7 @@ export interface IPostCreateMutationResponse {
 }
 
 export const postCreateUserMutation = async (data: IRegisterForm) =>
-  await fetch(`${import.meta.env.BASE_API_URL}/auth/register`, {
+  await fetch(`${process.env.BASE_API_URL}/auth/register`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json"

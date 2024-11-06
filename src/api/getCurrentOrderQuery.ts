@@ -7,7 +7,7 @@ export interface IGetCurrentOrderResponse {
 }
 
 export const getCurrentOrderQuery = async (orderNumber: number) =>
-  await fetch(`${import.meta.env.BASE_API_URL}/orders/${orderNumber}`, {
+  await fetch(`${process.env.BASE_API_URL}/orders/${orderNumber}`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json"
