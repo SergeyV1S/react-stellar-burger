@@ -4,12 +4,12 @@ import { createSlice, nanoid } from "@reduxjs/toolkit";
 
 import type { IConstructorInitialState } from "./types";
 
-const initialState: IConstructorInitialState = {
+export const initialState: IConstructorInitialState = {
   bun: null,
   ingredients: []
 };
 
-export const consructorSlice = createSlice({
+export const constructorSlice = createSlice({
   name: "constructorSlice",
   initialState,
   reducers: {
@@ -43,6 +43,6 @@ export const consructorSlice = createSlice({
 });
 
 export const { addIngredientToConstructor, moveItem, removeIngredientFromConstructor, clearConstructor } =
-  consructorSlice.actions;
+  constructorSlice.actions;
 
-export const { getConstructorState } = consructorSlice.selectors;
+export const { getConstructorState } = constructorSlice.selectors;
