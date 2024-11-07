@@ -17,5 +17,5 @@ export const patchUserDataMutation = (newUser: IProfileForm) =>
     })
   })
     .then(checkReponse)
-    .then((jsonRes: IGetUserResponse) => jsonRes)
+    .then((jsonRes: IGetUserResponse) => jsonRes.user)
     .catch((err) => Promise.reject(err));

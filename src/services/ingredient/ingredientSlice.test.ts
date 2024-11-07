@@ -65,9 +65,7 @@ describe("ingredient slice", () => {
   });
 
   it("get ingredient pending", () => {
-    const action = { type: getIngredientsAction.pending.type };
-
-    const result = ingredientSlice.reducer(initialState, action);
+    const result = ingredientSlice.reducer(initialState, { type: getIngredientsAction.pending.type });
 
     expect(result).toEqual({ ...initialState, isLoading: true });
   });

@@ -59,9 +59,7 @@ describe("order slice", () => {
   });
 
   it("create order pending", () => {
-    const action = { type: createOrderAction.pending.type };
-
-    const result = orderSlice.reducer(initialState, action);
+    const result = orderSlice.reducer(initialState, { type: createOrderAction.pending.type });
 
     expect(result).toEqual({ ...initialState, isLoading: true, isOrderModalOpen: true });
   });
@@ -83,9 +81,7 @@ describe("order slice", () => {
   });
 
   it("get order by number pending", () => {
-    const action = { type: getCurrentOrderAction.pending.type };
-
-    const result = orderSlice.reducer(initialState, action);
+    const result = orderSlice.reducer(initialState, { type: getCurrentOrderAction.pending.type });
 
     expect(result).toEqual({ ...initialState, isLoading: true });
   });
