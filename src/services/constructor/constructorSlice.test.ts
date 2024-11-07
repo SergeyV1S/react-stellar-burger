@@ -9,7 +9,7 @@ import {
   removeIngredientFromConstructor
 } from "./reducer";
 
-const ingredient: IIngredient = {
+const testIngredient: IIngredient = {
   __v: 1,
   _id: "fwgqwgqgq",
   calories: 111,
@@ -32,15 +32,15 @@ describe("constructor slice", () => {
   });
 
   it("add ingredient to constructor", () => {
-    const action = { type: addIngredientToConstructor.type, payload: ingredient };
+    const action = { type: addIngredientToConstructor.type, payload: testIngredient };
 
     const result = constructorSlice.reducer(initialState, action);
 
-    expect(result).toEqual({ ...initialState, ingredients: [ingredient] });
+    expect(result).toEqual({ ...initialState, ingredients: [testIngredient] });
   });
 
   it("add bun to constructor", () => {
-    const ingredientForBunTest: IIngredient = { ...ingredient, type: "bun" };
+    const ingredientForBunTest: IIngredient = { ...testIngredient, type: "bun" };
     const action = { type: addIngredientToConstructor.type, payload: ingredientForBunTest };
 
     const result = constructorSlice.reducer(initialState, action);
@@ -49,8 +49,8 @@ describe("constructor slice", () => {
   });
 
   it("remove ingredient from constructor", () => {
-    const prevState = { ...initialState, ingredients: [ingredient] };
-    const action = { type: removeIngredientFromConstructor.type, payload: ingredient };
+    const prevState = { ...initialState, ingredients: [testIngredient] };
+    const action = { type: removeIngredientFromConstructor.type, payload: testIngredient };
 
     const result = constructorSlice.reducer(prevState, action);
 
@@ -60,11 +60,11 @@ describe("constructor slice", () => {
   it("dnd move ingredient in constructor", () => {
     const prevState = {
       ...initialState,
-      bun: ingredient,
+      bun: testIngredient,
       ingredients: [
-        ingredient,
-        { ...ingredient, _v: 2, _id: "ufdsoia", uuid: "ar-he" },
-        { ...ingredient, _v: 3, _id: "uoia", uuid: "oa-shf" }
+        testIngredient,
+        { ...testIngredient, _v: 2, _id: "ufdsoia", uuid: "ar-he" },
+        { ...testIngredient, _v: 3, _id: "uoia", uuid: "oa-shf" }
       ]
     };
     const action = { type: moveItem.type, payload: { dragIndex: 0, hoverIndex: 2 } };
@@ -72,14 +72,14 @@ describe("constructor slice", () => {
     const result = constructorSlice.reducer(prevState, action);
 
     expect(result.ingredients).toEqual([
-      { ...ingredient, _v: 2, _id: "ufdsoia", uuid: "ar-he" },
-      { ...ingredient, _v: 3, _id: "uoia", uuid: "oa-shf" },
-      ingredient
+      { ...testIngredient, _v: 2, _id: "ufdsoia", uuid: "ar-he" },
+      { ...testIngredient, _v: 3, _id: "uoia", uuid: "oa-shf" },
+      testIngredient
     ]);
   });
 
   it("clear constructor", () => {
-    const prevState = { ...initialState, bun: ingredient, ingredients: [{ ...ingredient, type: "sauce" }] };
+    const prevState = { ...initialState, bun: testIngredient, ingredients: [{ ...testIngredient, type: "sauce" }] };
     const action = { type: clearConstructor.type };
 
     const result = constructorSlice.reducer(prevState, action);

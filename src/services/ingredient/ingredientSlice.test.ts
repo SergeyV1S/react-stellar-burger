@@ -3,7 +3,7 @@ import type { IIngredient } from "@interfaces/ingredient";
 import { getIngredientsAction } from "./action";
 import { closeIngredientModal, ingredientSlice, initialState, setSelectedIngredient } from "./reducer";
 
-const ingredient: IIngredient = {
+const testIngredient: IIngredient = {
   __v: 1,
   _id: "fwgqwgqgq",
   calories: 111,
@@ -34,25 +34,25 @@ describe("ingredient slice", () => {
   });
 
   it("set selected ingredient to state", () => {
-    const action = { type: setSelectedIngredient.type, payload: ingredient };
+    const action = { type: setSelectedIngredient.type, payload: testIngredient };
 
     const result = ingredientSlice.reducer(initialState, action);
 
     expect(result.modal).toEqual({
-      selectedIngredient: ingredient,
+      selectedIngredient: testIngredient,
       isSelectedIngredientModalOpen: true
     });
   });
 
   it("get ingredient fulfilled", () => {
-    const action = { type: getIngredientsAction.fulfilled.type, payload: { data: [ingredient] } };
+    const action = { type: getIngredientsAction.fulfilled.type, payload: { data: [testIngredient] } };
 
     const result = ingredientSlice.reducer(initialState, action);
 
     expect(result).toEqual({
       ...initialState,
-      data: [ingredient],
-      ingredientsMap: new Map<string, IIngredient>().set(ingredient._id, ingredient)
+      data: [testIngredient],
+      ingredientsMap: new Map<string, IIngredient>().set(testIngredient._id, testIngredient)
     });
   });
 
@@ -61,7 +61,7 @@ describe("ingredient slice", () => {
 
     const result = ingredientSlice.reducer(initialState, action);
 
-    expect(result).toEqual({ ...initialState, error: "Error" });
+    expect(result).toEqual({ ...initialState, error: action.error.message });
   });
 
   it("get ingredient pending", () => {

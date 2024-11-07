@@ -14,5 +14,5 @@ export const getCurrentOrderQuery = async (orderNumber: number) =>
     }
   })
     .then(checkReponse)
-    .then((res: IGetCurrentOrderResponse) => res)
+    .then((res: IGetCurrentOrderResponse) => res.orders)
     .catch((err) => Promise.reject(err));
