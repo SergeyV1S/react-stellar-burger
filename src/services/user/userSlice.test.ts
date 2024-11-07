@@ -9,6 +9,12 @@ const testUser: IUser = {
 };
 
 describe("user slice", () => {
+  it("inital state correctly", () => {
+    const result = userSlice.reducer(undefined, { type: "" });
+
+    expect(result).toEqual(initialState);
+  });
+
   it("create user fulfilled", () => {
     const action = { type: registerUserAction.fulfilled.type, payload: testUser };
 
