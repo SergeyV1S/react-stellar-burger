@@ -5,7 +5,7 @@ import type { IFeedRibbonDataResponse } from "../order-feed";
 import { EWsStatuses } from "../order-feed";
 import type { IProfileRibbonInitialState } from "./types";
 
-const initialState: IProfileRibbonInitialState = {
+export const initialState: IProfileRibbonInitialState = {
   profileRibbonData: null,
   error: null,
   profileRibbonWsStatus: EWsStatuses.CLOSED
