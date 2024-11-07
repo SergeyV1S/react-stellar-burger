@@ -1,5 +1,6 @@
 import type { IIngredient } from "@interfaces/ingredient";
 
+import { getIngredientsAction } from "./action";
 import { closeIngredientModal, ingredientSlice, initialState, setSelectedIngredient } from "./reducer";
 
 const ingredient: IIngredient = {
@@ -41,5 +42,33 @@ describe("ingredient slice", () => {
       selectedIngredient: ingredient,
       isSelectedIngredientModalOpen: true
     });
+  });
+
+  it("get ingredient fulfilled", () => {
+    const action = { type: getIngredientsAction.fulfilled.type, payload: { data: [ingredient] } };
+
+    const result = ingredientSlice.reducer(initialState, action);
+
+    expect(result).toEqual({
+      ...initialState,
+      data: [ingredient],
+      ingredientsMap: new Map<string, IIngredient>().set(ingredient._id, ingredient)
+    });
+  });
+
+  it("get ingredient rejected", () => {
+    const action = { type: getIngredientsAction.rejected.type, error: { message: "Error" } };
+
+    const result = ingredientSlice.reducer(initialState, action);
+
+    expect(result).toEqual({ ...initialState, error: "Error" });
+  });
+
+  it("get ingredient pending", () => {
+    const action = { type: getIngredientsAction.pending.type };
+
+    const result = ingredientSlice.reducer(initialState, action);
+
+    expect(result).toEqual({ ...initialState, isLoading: true });
   });
 });
