@@ -9,11 +9,12 @@ module.exports = {
     "plugin:react/recommended",
     "plugin:jest/recommended",
     "plugin:react/jsx-runtime",
+    "plugin:cypress/recommended",
     "prettier"
   ],
   ignorePatterns: ["dist", ".eslintrc.cjs"],
   parser: "@typescript-eslint/parser",
-  plugins: ["react-refresh", "react", "@typescript-eslint", "jest"],
+  plugins: ["react-refresh", "react", "@typescript-eslint", "jest", "cypress"],
   root: true,
   rules: {
     "no-undef": "off",
