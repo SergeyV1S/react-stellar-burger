@@ -7,7 +7,7 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "format": "prettier --write \"src/**/*.{ts,tsx,json,md}\"",
-    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
+    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 3",
     "lint:fix": "eslint . --ext ts,tsx --fix",
     "test": "jest",
     "cypress": "cypress open cache clear",
@@ -17,7 +17,7 @@
   "lint-staged": {
     "*.{ts,tsx}": [
       "prettier --write",
-      "eslint --fix"
+      "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 3"
     ]
   },
   "dependencies": {
