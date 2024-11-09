@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { getIngredienstMapData } from "@services/ingredient";
 import { useAppSelector } from "@services/store";
 import { useCallback } from "react";
