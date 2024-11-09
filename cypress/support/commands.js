@@ -42,4 +42,5 @@ Cypress.Commands.add("prepareWithGetUser", () => {
   window.localStorage.setItem("access-token", "test-access-token");
   cy.intercept("GET", "ingredients", { fixture: "ingedients" });
   cy.intercept("GET", "api/auth/user", { fixture: "user" });
+  cy.intercept("POST", "orders", { fixture: "order" });
 });

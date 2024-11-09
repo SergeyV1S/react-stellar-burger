@@ -125,6 +125,7 @@ export const BurgerConstructor = () => {
         <Button
           disabled={!bun || ingredients.length === 0}
           onClick={createOrder}
+          data-testid='create_order_button'
           htmlType='button'
           type='primary'
           size='large'
