@@ -1,11 +1,11 @@
 /* eslint-disable jest/expect-expect */
 describe("close modal test", () => {
   beforeEach(() => {
-    cy.initIngredients();
+    cy.prepareWithGetUser();
   });
 
   it("close modal when click cross", () => {
-    cy.get("[data-testid=burger_item_link]").click();
+    cy.get("[data-testid=burger_item_link]:first").click();
 
     cy.get("[data-testid=modal_container]").should("exist");
     cy.get("[data-testid=modal_container] button").should("exist").click();
@@ -14,7 +14,7 @@ describe("close modal test", () => {
   });
 
   it("close modal when click modal overlay", () => {
-    cy.get("[data-testid=burger_item_link]").click();
+    cy.get("[data-testid=burger_item_link]:first").click();
 
     cy.get("[data-testid=modal_overlay]").should("exist").click({ force: true });
 
@@ -22,7 +22,7 @@ describe("close modal test", () => {
   });
 
   it("close modal when press esc", () => {
-    cy.get("[data-testid=burger_item_link]").click();
+    cy.get("[data-testid=burger_item_link]:first").click();
 
     cy.get("[data-testid=modal_container]").should("exist");
     cy.get("body").type("{esc}");

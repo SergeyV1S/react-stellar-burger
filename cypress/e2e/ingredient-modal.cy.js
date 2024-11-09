@@ -1,17 +1,17 @@
 /* eslint-disable jest/expect-expect */
 describe("modal tests", () => {
   beforeEach(() => {
-    cy.initIngredients();
+    cy.prepareWithGetUser();
   });
 
   it("open ingrdient modal", () => {
-    cy.get("[data-testid=burger_item_link]").should("be.visible").click();
+    cy.get("[data-testid=burger_item_link]:first").should("be.visible").click();
 
     cy.get("[data-testid=ingredient_details] h1").should("exist").should("have.text", "Детали ингредиента");
   });
 
   it("check ingrdient data in the modal", () => {
-    cy.get("[data-testid=burger_item_link]").click();
+    cy.get("[data-testid=burger_item_link]:first").click();
 
     cy.get("[data-testid=ingredient_details_name]").should("exist").should("have.text", "Краторная булка N-200i");
     cy.get("[data-testid=ingredient_details_calories]").should("exist").should("have.text", "420");

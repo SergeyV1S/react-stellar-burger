@@ -37,7 +37,9 @@
 //   }
 // }
 
-Cypress.Commands.add("initIngredients", () => {
+Cypress.Commands.add("prepareWithGetUser", () => {
   cy.visit("http://localhost:5173/");
+  window.localStorage.setItem("access-token", "test-access-token");
   cy.intercept("GET", "ingredients", { fixture: "ingedients" });
+  cy.intercept("GET", "api/auth/user", { fixture: "user" });
 });
