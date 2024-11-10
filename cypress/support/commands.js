@@ -38,9 +38,14 @@
 // }
 
 Cypress.Commands.add("prepareWithGetUser", () => {
-  cy.visit("http://localhost:5173/");
+  cy.visit("/");
   window.localStorage.setItem("access-token", "test-access-token");
-  cy.intercept("GET", "ingredients", { fixture: "ingedients" });
-  cy.intercept("GET", "api/auth/user", { fixture: "user" });
+  cy.intercept("GET", "ingredients", { fixture: "ingedients" }).as("getIngredients");
+  cy.intercept("GET", "api/auth/user", { fixture: "user" }).as("getUser");
   cy.intercept("POST", "orders", { fixture: "order" });
+
+  cy.url().should("include", "/");
+
+  cy.wait("@getIngredients");
+  cy.wait("@getUser");
 });

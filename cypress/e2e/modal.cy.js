@@ -1,32 +1,34 @@
 /* eslint-disable jest/expect-expect */
+import { BURGER_ITEM_LINK, INGREDIENT_DETAILS, MODAL_CONTAINER, MODAL_OVERLAY } from "../selectors.constant";
+
 describe("close modal test", () => {
   beforeEach(() => {
     cy.prepareWithGetUser();
   });
 
   it("close modal when click cross", () => {
-    cy.get("[data-testid=burger_item_link]:first").click();
+    cy.get(`${BURGER_ITEM_LINK}:first`).click();
 
-    cy.get("[data-testid=modal_container]").should("exist");
-    cy.get("[data-testid=modal_container] button").should("exist").click();
+    cy.get(MODAL_CONTAINER).should("exist");
+    cy.get(`${MODAL_CONTAINER} button`).should("exist").click();
 
-    cy.get("[data-testid=ingredient_details]").should("not.exist");
+    cy.get(INGREDIENT_DETAILS).should("not.exist");
   });
 
   it("close modal when click modal overlay", () => {
-    cy.get("[data-testid=burger_item_link]:first").click();
+    cy.get(`${BURGER_ITEM_LINK}:first`).click();
 
-    cy.get("[data-testid=modal_overlay]").should("exist").click({ force: true });
+    cy.get(MODAL_OVERLAY).should("exist").click({ force: true });
 
-    cy.get("[data-testid=ingredient_details]").should("not.exist");
+    cy.get(INGREDIENT_DETAILS).should("not.exist");
   });
 
   it("close modal when press esc", () => {
-    cy.get("[data-testid=burger_item_link]:first").click();
+    cy.get(`${BURGER_ITEM_LINK}:first`).click();
 
-    cy.get("[data-testid=modal_container]").should("exist");
+    cy.get(MODAL_CONTAINER).should("exist");
     cy.get("body").type("{esc}");
 
-    cy.get("[data-testid=ingredient_details]").should("not.exist");
+    cy.get(INGREDIENT_DETAILS).should("not.exist");
   });
 });
