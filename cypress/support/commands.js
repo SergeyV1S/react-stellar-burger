@@ -43,6 +43,7 @@ Cypress.Commands.add("prepareWithGetUser", () => {
   cy.intercept("GET", "ingredients", { fixture: "ingedients" }).as("getIngredients");
   cy.intercept("GET", "api/auth/user", { fixture: "user" }).as("getUser");
   cy.intercept("POST", "orders", { fixture: "order" });
+  cy.intercept("POST", "auth/token", { fixture: "order" });
 
   cy.url().should("include", "/");
 
