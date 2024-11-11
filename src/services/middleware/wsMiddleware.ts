@@ -55,7 +55,7 @@ const wsMiddleware =
                 .then((res) => {
                   dispatch(
                     wsActions.connect(
-                      `${import.meta.env.BASE_WS_URL}/orders?token=${res.accessToken.replace("Bearer ", "")}`
+                      `${process.env.BASE_WS_URL}/orders?token=${res.accessToken.replace("Bearer ", "")}`
                     )
                   );
                 })

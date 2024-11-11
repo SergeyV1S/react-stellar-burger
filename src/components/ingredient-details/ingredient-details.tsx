@@ -21,27 +21,46 @@ export const IngredientDetails = () => {
   return (
     <div className={state ? ingredientDetails.modal_container : ingredientDetails.page_container}>
       {currentItem ? (
-        <div className={ingredientDetails.content}>
+        <div className={ingredientDetails.content} data-testid='ingredient_details'>
           <h1 className='text text_type_main-large'>Детали ингредиента</h1>
           <div className={ingredientDetails.ingredients}>
             <img src={currentItem.image_large} alt={currentItem.name} />
-            <p className='text text_type_main-medium mb-8'>{currentItem.name}</p>
+            <p className='text text_type_main-medium mb-8' data-testid='ingredient_details_name'>
+              {currentItem.name}
+            </p>
             <div className={ingredientDetails.compound_container}>
               <div className={ingredientDetails.compound_item}>
                 <p className='text text_type_main-small text_color_inactive'>Калории,ккал</p>
-                <p className='text text_type_digits-default text_color_inactive'>{currentItem.calories}</p>
+                <p
+                  className='text text_type_digits-default text_color_inactive'
+                  data-testid='ingredient_details_calories'
+                >
+                  {currentItem.calories}
+                </p>
               </div>
               <div className={ingredientDetails.compound_item}>
                 <p className='text text_type_main-small text_color_inactive'>Белки, г</p>
-                <p className='text text_type_digits-default text_color_inactive'>{currentItem.proteins}</p>
+                <p
+                  className='text text_type_digits-default text_color_inactive'
+                  data-testid='ingredient_details_proteins'
+                >
+                  {currentItem.proteins}
+                </p>
               </div>
               <div className={ingredientDetails.compound_item}>
                 <p className='text text_type_main-small text_color_inactive'>Жиры, г</p>
-                <p className='text text_type_digits-default text_color_inactive'>{currentItem.fat}</p>
+                <p className='text text_type_digits-default text_color_inactive' data-testid='ingredient_details_fat'>
+                  {currentItem.fat}
+                </p>
               </div>
               <div className={ingredientDetails.compound_item}>
                 <p className='text text_type_main-small text_color_inactive'>Углеводы, г</p>
-                <p className='text text_type_digits-default text_color_inactive'>{currentItem.carbohydrates}</p>
+                <p
+                  className='text text_type_digits-default text_color_inactive'
+                  data-testid='ingredient_details_carbohydrates'
+                >
+                  {currentItem.carbohydrates}
+                </p>
               </div>
             </div>
           </div>

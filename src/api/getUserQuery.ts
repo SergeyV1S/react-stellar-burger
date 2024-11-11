@@ -8,12 +8,12 @@ export interface IGetUserResponse {
 }
 
 export const getUserQuery = async () =>
-  await fetchWithRefresh(`${import.meta.env.BASE_API_URL}/auth/user`, {
+  await fetchWithRefresh(`${process.env.BASE_API_URL}/auth/user`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
       Authorization: "Bearer " + localStorage.getItem("access-token") || ""
     }
   })
-    .then((res): Promise<IGetUserResponse> => res)
+    .then((res: IGetUserResponse) => res.user)
     .catch((err) => Promise.reject(err));

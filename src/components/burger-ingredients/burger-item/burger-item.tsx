@@ -30,6 +30,7 @@ export const BurgerItem = ({ item }: IBurgerItemProps) => {
 
   return (
     <Link
+      data-testid='burger_item_link'
       to={`/ingredients/${item._id}`}
       state={{ backgroundLocation: location }}
       className={`${burgerItem.wrapper} ${isDragging && burgerItem.dragCard}`}

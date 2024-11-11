@@ -26,7 +26,7 @@ export const ForgotPasswordPage = () => {
     <form onSubmit={submitHandler} className={forgotPasswordPageStyles.container}>
       <h1 className='text text_type_main-medium'>Восстановление пароля</h1>
       <EmailInput
-        name='mail'
+        name='email'
         placeholder='Введите e-mail'
         value={formState.email}
         onChange={handleChange}

@@ -1,12 +1,11 @@
-import type { IGetCurrentOrderResponse } from "@api/getCurrentOrderQuery";
-import type { IOrder } from "@interfaces/order";
+import type { IFeedOrderData, IOrder } from "@interfaces/order";
 import type { PayloadAction } from "@reduxjs/toolkit";
 import { createSlice } from "@reduxjs/toolkit";
 
 import { createOrderAction, getCurrentOrderAction } from "./action";
 import type { IOrderInitialState } from "./types";
 
-const initialState: IOrderInitialState = {
+export const initialState: IOrderInitialState = {
   order: null,
   currentOrder: null,
   error: undefined,
@@ -40,8 +39,8 @@ export const orderSlice = createSlice({
         state.isLoading = true;
       })
       // Получение заказа по номеру
-      .addCase(getCurrentOrderAction.fulfilled, (state, action: PayloadAction<IGetCurrentOrderResponse>) => {
-        state.currentOrder = action.payload.orders[0];
+      .addCase(getCurrentOrderAction.fulfilled, (state, action: PayloadAction<IFeedOrderData[]>) => {
+        state.currentOrder = action.payload[0];
         state.isLoading = false;
       })
       .addCase(getCurrentOrderAction.rejected, (state, action) => {

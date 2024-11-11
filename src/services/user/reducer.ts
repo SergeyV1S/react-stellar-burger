@@ -3,12 +3,12 @@ import { createSlice } from "@reduxjs/toolkit";
 import { getUserAction, loginUserAction, logoutUserAction, registerUserAction, updateUserAction } from "./action";
 import type { IUserInitialState } from "./types";
 
-const defaultUser = {
+export const defaultUser = {
   email: "",
   name: ""
 };
 
-const initialState: IUserInitialState = {
+export const initialState: IUserInitialState = {
   user: defaultUser,
   error: undefined,
   isLoading: false
@@ -26,7 +26,7 @@ export const userSlice = createSlice({
         state.isLoading = true;
       })
       .addCase(registerUserAction.fulfilled, (state, action) => {
-        state.user = action.payload.user;
+        state.user = action.payload;
         state.isLoading = false;
       })
       .addCase(registerUserAction.rejected, (state, action) => {
@@ -37,10 +37,9 @@ export const userSlice = createSlice({
       .addCase(getUserAction.pending, (state) => {
         state.isLoading = true;
         state.error = undefined;
-        state.isLoading = true;
       })
       .addCase(getUserAction.fulfilled, (state, action) => {
-        state.user = action.payload.user;
+        state.user = action.payload;
         state.isLoading = false;
       })
       .addCase(getUserAction.rejected, (state, action) => {
@@ -53,7 +52,7 @@ export const userSlice = createSlice({
         state.error = undefined;
       })
       .addCase(loginUserAction.fulfilled, (state, action) => {
-        state.user = action.payload.user;
+        state.user = action.payload;
         state.isLoading = false;
       })
       .addCase(loginUserAction.rejected, (state, action) => {
@@ -79,11 +78,11 @@ export const userSlice = createSlice({
         state.error = undefined;
       })
       .addCase(updateUserAction.fulfilled, (state, action) => {
-        state.user = action.payload.user;
+        state.user = action.payload;
         state.isLoading = false;
       })
       .addCase(updateUserAction.rejected, (state, action) => {
-        state.error = action.error.message;
+        state.error = action.error?.message;
         state.isLoading = false;
       });
   },

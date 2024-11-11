@@ -5,18 +5,18 @@ import { createSlice } from "@reduxjs/toolkit";
 import { getIngredientsAction } from "./action";
 import type { IIngredientInitialState } from "./types";
 
-const initialState: IIngredientInitialState = {
+export const initialState: IIngredientInitialState = {
   data: [],
   error: undefined,
   isLoading: false,
-  ingredientsMap: new Map(),
+  ingredientsMap: new Map<string, IIngredient>(),
   modal: {
     selectedIngredient: null,
     isSelectedIngredientModalOpen: false
   }
 };
 
-export const ingredietSlice = createSlice({
+export const ingredientSlice = createSlice({
   name: "ingredientSlice", // === reducerPath
   initialState,
   reducers: {
@@ -40,7 +40,7 @@ export const ingredietSlice = createSlice({
         state.isLoading = false;
         state.data = action.payload.data;
 
-        const ingredientsMap = new Map();
+        const ingredientsMap = new Map<string, IIngredient>();
         action.payload.data.forEach((item) => {
           ingredientsMap.set(item._id, item);
         });
@@ -58,6 +58,6 @@ export const ingredietSlice = createSlice({
   }
 });
 
-export const { setSelectedIngredient, closeIngredientModal } = ingredietSlice.actions;
+export const { setSelectedIngredient, closeIngredientModal } = ingredientSlice.actions;
 
-export const { getIngredientsState, getIngredientModal, getIngredienstMapData } = ingredietSlice.selectors;
+export const { getIngredientsState, getIngredientModal, getIngredienstMapData } = ingredientSlice.selectors;

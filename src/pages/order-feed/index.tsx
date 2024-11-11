@@ -19,7 +19,7 @@ export const OrderFeedPage = () => {
   const wsStatus = useAppSelector(getFeedOrderWsStatus);
 
   useEffect(() => {
-    dispatch(wsOrderFeedConnectAction(`${import.meta.env.BASE_WS_URL}/orders/all`));
+    dispatch(wsOrderFeedConnectAction(`${process.env.BASE_WS_URL}/orders/all`));
 
     return () => {
       dispatch(wsOrderFeedDisconnectAction());

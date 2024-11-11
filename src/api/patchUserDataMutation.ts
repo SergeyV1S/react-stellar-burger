@@ -4,7 +4,7 @@ import { checkReponse } from "@utils/checkResponse";
 import type { IGetUserResponse } from "./getUserQuery";
 
 export const patchUserDataMutation = (newUser: IProfileForm) =>
-  fetch(`${import.meta.env.BASE_API_URL}/auth/user`, {
+  fetch(`${process.env.BASE_API_URL}/auth/user`, {
     method: "PATCH",
     headers: {
       "Content-Type": "application/json",
@@ -17,5 +17,5 @@ export const patchUserDataMutation = (newUser: IProfileForm) =>
     })
   })
     .then(checkReponse)
-    .then((jsonRes: IGetUserResponse) => jsonRes)
+    .then((jsonRes: IGetUserResponse) => jsonRes.user)
     .catch((err) => Promise.reject(err));

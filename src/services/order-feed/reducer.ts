@@ -4,7 +4,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import type { IFeedRibbonDataResponse, IInitialState } from "./types";
 import { EWsStatuses } from "./types";
 
-const initialState: IInitialState = {
+export const initialState: IInitialState = {
   ribbonData: null,
   error: null,
   wsStatus: EWsStatuses.CLOSED

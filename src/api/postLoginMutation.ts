@@ -10,7 +10,7 @@ export interface IPostLoginMutationResponse {
 }
 
 export const postLoginMutation = async (userAuthData: ILoginForm) =>
-  await fetch(`${import.meta.env.BASE_API_URL}/auth/login`, {
+  await fetch(`${process.env.BASE_API_URL}/auth/login`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json"
@@ -21,7 +21,7 @@ export const postLoginMutation = async (userAuthData: ILoginForm) =>
     .then((jsonRes: IPostLoginMutationResponse) => {
       localStorage.setItem("access-token", jsonRes.accessToken.replace("Bearer ", ""));
       localStorage.setItem("refresh-token", jsonRes.refreshToken);
-      return jsonRes;
+      return jsonRes.user;
     })
     .catch((error) => {
       throw error;

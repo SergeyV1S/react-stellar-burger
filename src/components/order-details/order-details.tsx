@@ -22,8 +22,10 @@ export const OrderDetails = () => {
   return (
     <>
       {order && (
-        <div className={orderDetails.container}>
-          <p className={"text text_type_digits-large " + orderDetails.digits}>{order.order.number}</p>
+        <div className={orderDetails.container} data-testid='order_modal'>
+          <p className={"text text_type_digits-large " + orderDetails.digits} data-testid='order_modal_number'>
+            {order.order.number}
+          </p>
           <p className='text text_type_main-medium'>идентификатор заказа</p>
           <img src={checkmark} alt='checkmark' />
           <div className={orderDetails.text_group}>

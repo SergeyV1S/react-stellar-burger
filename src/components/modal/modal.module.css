@@ -27,6 +27,8 @@
   position: absolute;
   right: 40px;
   top: 49px;
+  background-color: transparent;
+  border: none;
 
   & :hover {
     cursor: pointer;

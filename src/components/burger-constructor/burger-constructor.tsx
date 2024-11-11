@@ -66,7 +66,7 @@ export const BurgerConstructor = () => {
   return (
     <section className={burgerConstructor.wrapper}>
       <div ref={dropTargetConstructorRef} className={burgerConstructor.burger_constructor_wrapper}>
-        <div className={burgerConstructor.bun_wrapper}>
+        <div className={burgerConstructor.bun_wrapper} data-testid='up_bun_constructor_item'>
           {bun ? (
             <ConstructorElement
               type='top'
@@ -83,7 +83,7 @@ export const BurgerConstructor = () => {
             </div>
           )}
         </div>
-        <div className={burgerConstructor.ingredients_wrapper}>
+        <div className={burgerConstructor.ingredients_wrapper} data-testid='igredient_constructor_item'>
           {ingredients.length !== 0 ? (
             ingredients.map((ingredient, index) => (
               <IngredientElement
@@ -100,7 +100,7 @@ export const BurgerConstructor = () => {
             </div>
           )}
         </div>
-        <div className={burgerConstructor.bun_wrapper}>
+        <div className={burgerConstructor.bun_wrapper} data-testid='down_bun_constructor_item'>
           {bun ? (
             <ConstructorElement
               type='bottom'
@@ -125,6 +125,7 @@ export const BurgerConstructor = () => {
         <Button
           disabled={!bun || ingredients.length === 0}
           onClick={createOrder}
+          data-testid='create_order_button'
           htmlType='button'
           type='primary'
           size='large'

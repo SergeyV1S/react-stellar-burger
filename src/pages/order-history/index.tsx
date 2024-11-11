@@ -20,7 +20,7 @@ export const OrderHistoryPage = () => {
 
   useEffect(() => {
     dispatch(
-      wsProfileOrderConnectAction(`${import.meta.env.BASE_WS_URL}/orders?token=${localStorage.getItem("access-token")}`)
+      wsProfileOrderConnectAction(`${process.env.BASE_WS_URL}/orders?token=${localStorage.getItem("access-token")}`)
     );
 
     return () => {

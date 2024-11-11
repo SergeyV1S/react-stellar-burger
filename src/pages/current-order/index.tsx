@@ -26,22 +26,22 @@ export const CurrentOrderPage = () => {
             <img src={currentItem.image_large} alt={currentItem.name} />
             <p className='text text_type_main-medium mb-8'>{currentItem.name}</p>
             <div className={currentOrderPageStyles.compound_container}>
-              <div className={currentOrderPageStyles.compound_item}>
+              <section className={currentOrderPageStyles.compound_item}>
                 <p className='text text_type_main-small text_color_inactive'>Калории,ккал</p>
                 <p className='text text_type_digits-default text_color_inactive'>{currentItem.calories}</p>
-              </div>
-              <div className={currentOrderPageStyles.compound_item}>
+              </section>
+              <section className={currentOrderPageStyles.compound_item}>
                 <p className='text text_type_main-small text_color_inactive'>Белки, г</p>
                 <p className='text text_type_digits-default text_color_inactive'>{currentItem.proteins}</p>
-              </div>
-              <div className={currentOrderPageStyles.compound_item}>
+              </section>
+              <section className={currentOrderPageStyles.compound_item}>
                 <p className='text text_type_main-small text_color_inactive'>Жиры, г</p>
                 <p className='text text_type_digits-default text_color_inactive'>{currentItem.fat}</p>
-              </div>
-              <div className={currentOrderPageStyles.compound_item}>
+              </section>
+              <section className={currentOrderPageStyles.compound_item}>
                 <p className='text text_type_main-small text_color_inactive'>Углеводы, г</p>
                 <p className='text text_type_digits-default text_color_inactive'>{currentItem.carbohydrates}</p>
-              </div>
+              </section>
             </div>
           </div>
         </div>

@@ -47,10 +47,10 @@ export const Modal = ({ children }: IModalProps) => {
   return createPortal(
     <menu type='popup' className={modal.wrapper}>
       <ModalOverlay closeModal={closeModal} />
-      <div className={modal.container}>
-        <span className={modal.close} onClick={closeModal}>
+      <div className={modal.container} data-testid='modal_container'>
+        <button className={modal.close} onClick={closeModal}>
           <CloseIcon type='primary' />
-        </span>
+        </button>
         {children}
       </div>
     </menu>,

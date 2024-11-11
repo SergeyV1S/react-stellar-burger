@@ -10,7 +10,7 @@ export interface IPostCreateMutationResponse {
 }
 
 export const postCreateUserMutation = async (data: IRegisterForm) =>
-  await fetch(`${import.meta.env.BASE_API_URL}/auth/register`, {
+  await fetch(`${process.env.BASE_API_URL}/auth/register`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json"
@@ -21,7 +21,7 @@ export const postCreateUserMutation = async (data: IRegisterForm) =>
     .then((jsonRes: IPostCreateMutationResponse) => {
       localStorage.setItem("access-token", jsonRes.accessToken.replace("Bearer ", ""));
       localStorage.setItem("refresh-token", jsonRes.refreshToken);
-      return jsonRes;
+      return jsonRes.user;
     })
     .catch((error) => {
       throw error;

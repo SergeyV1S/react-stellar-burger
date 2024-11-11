@@ -5,5 +5,5 @@ interface IModalOverlayProps {
 }
 
 export const ModalOverlay = ({ closeModal }: IModalOverlayProps) => (
-  <div className={modalOverlay.wrapper} onClick={closeModal} />
+  <div className={modalOverlay.wrapper} onClick={closeModal} data-testid='modal_overlay' />
 );
