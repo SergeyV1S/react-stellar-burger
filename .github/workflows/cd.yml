@@ -27,7 +27,7 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
-      - name: Build and Push shift-delivery Image
+      - name: Build and Push stellar-burger Image
         uses: docker/build-push-action@v6
         with:
           context: .
@@ -61,6 +61,7 @@ jobs:
           DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
           DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
           BASE_API_URL: ${{ secrets.BASE_API_URL }}
+          BASE_WS_URL: ${{ secrets.BASE_WS_URL }}
           REPOSITORY_NAME: ${{ secrets.REPOSITORY_NAME }}
           PORT: ${{ secrets.PORT }}
         run: |
@@ -68,12 +69,12 @@ jobs:
 
           echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin
 
-          docker container rm -f shift-delivery || true
+          docker container rm -f stellar-burger || true
 
           docker system prune -a -f
 
           docker pull $DOCKER_USERNAME/$REPOSITORY_NAME:latest
 
-          docker run -d --restart unless-stopped -p ${PORT}:80 --name shift-delivery -e BASE_API_URL=$BASE_API_URL $DOCKER_USERNAME/$REPOSITORY_NAME:latest
+          docker run -d --restart unless-stopped -p ${PORT}:80 --name stellar-burger -e BASE_API_URL=$BASE_API_URL -e BASE_WS_URL=$BASE_WS_URL $DOCKER_USERNAME/$REPOSITORY_NAME:latest
 
           EOF

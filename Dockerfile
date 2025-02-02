@@ -1,27 +1,25 @@
-FROM node:20.11-alpine AS builder
+FROM node:22.12.0-alpine AS builder
 
 WORKDIR /var/www
 
-COPY package.json yarn.lock ./
+ARG BASE_API_URL="${BASE_API_URL}"
+ARG BASE_WS_URL="${BASE_WS_URL}"
 
+COPY package.json yarn.lock ./
 RUN yarn install --frozen-lockfile
 
 COPY . .
 
 RUN yarn build
 
-FROM node:20.11-alpine
+FROM nginx:stable-alpine AS production
 
-WORKDIR /var/www
-
-COPY --from=builder /var/www/node_modules ./node_modules
-COPY --from=builder /var/www/dist ./dist
-
-COPY package.json yarn.lock ./
+COPY --from=builder /var/www/dist /usr/share/nginx/html
+COPY nginx.conf /etc/nginx/conf.d/default.conf
 
 ENV BASE_API_URL="${BASE_API_URL}"
 ENV BASE_WS_URL="${BASE_WS_URL}"
 
-EXPOSE 5173
+EXPOSE 80
 
-CMD ["yarn", "preview", "--host", "0.0.0.0", "--port", "5173"]
+CMD ["nginx", "-g", "daemon off;"]
