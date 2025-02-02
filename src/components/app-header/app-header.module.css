@@ -5,7 +5,7 @@
 
 .container {
   width: 100%;
-  width: 1280px;
+  max-width: 1280px;
   display: grid;
   grid-template-columns: 383px 1fr 207px;
   align-items: center;
@@ -40,4 +40,73 @@
 .account {
   display: flex;
   align-items: center;
+}
+
+.mobile_header {
+  width: 95%;
+  max-width: 640px;
+  padding: 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #1c1c21;
+  z-index: 100;
+}
+
+.mobile_nav_wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 95%;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 100;
+}
+
+.mobile_nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 95%;
+  height: 100vh;
+  background-color: #1c1c21;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 20px;
+  transform: translateX(-100%);
+  transition: transform 0.3s ease-in-out;
+}
+
+.mobile_nav_heading {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  padding: 14px 0;
+}
+
+.mobile_nav_wrapper .mobile_nav {
+  transform: translateX(0);
+}
+
+.mobile_nav_close {
+  background: none;
+  border: none;
+}
+
+.mobile_menu_content {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.mobile_menu_link {
+  color: white;
+  font-size: 20px;
+  text-decoration: none;
+  padding: 14px 0;
+}
+
+.mobile_menu_link:hover {
+  color: #4d90fe;
 }
