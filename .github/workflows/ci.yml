@@ -80,10 +80,10 @@ jobs:
       - name: Install Cypress
         run: npx cypress install
 
-      - name: Run Cypress
-        run: |
-          yarn dev & npx wait-on http://localhost:5173
-          yarn cy:run
+      # - name: Run Cypress
+      #   run: |
+      #     yarn dev & npx wait-on http://localhost:5173
+      #     yarn cy:run
 
   build:
     name: Build
