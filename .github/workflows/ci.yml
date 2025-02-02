@@ -79,7 +79,7 @@ jobs:
 
       - name: Run Cypress
         run: |
-          yarn dev
+          yarn dev & npx wait-on http://localhost:5173
           yarn cy:run
 
   build:
