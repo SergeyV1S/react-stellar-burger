@@ -36,6 +36,7 @@ jobs:
           tags: ${{ secrets.DOCKER_USERNAME }}/${{ secrets.REPOSITORY_NAME }}:latest
           build-args: |
             BASE_API_URL=${{ secrets.BASE_API_URL }}
+            BASE_WS_URL=${{ secrets.BASE_WS_URL }}
 
   deploy:
     if: github.event.pull_request.merged == true
