@@ -42,22 +42,25 @@
   align-items: center;
 }
 
-.mobile_header {
-  width: 94%;
+.mobile_header_wrapper {
+  width: 100%;
   max-width: 768px;
+  background-color: #1c1c21;
+  z-index: 100;
+}
+
+.mobile_header_container {
   padding: 16px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #1c1c21;
-  z-index: 100;
 }
 
 .mobile_nav_wrapper {
   position: fixed;
   top: 0;
   left: 0;
-  width: 94%;
+  width: 95%;
   height: 100vh;
   background-color: rgba(0, 0, 0, 0.5);
   z-index: 100;

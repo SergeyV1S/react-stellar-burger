@@ -2,7 +2,7 @@
 import { useOrderList } from "@hooks/useOrderList";
 import { getCurrentOrderAction } from "@services/order";
 import { useAppDispatch, useAppSelector } from "@services/store";
-import { translateOrderStatus } from "@utils/translateOrderStatus";
+import { translateOrderStatus } from "@utils/index";
 import { CurrencyIcon, FormattedDate } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useEffect } from "react";
 import { useLocation, useParams } from "react-router-dom";

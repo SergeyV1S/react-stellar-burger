@@ -1,0 +1,16 @@
+.navigation {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  margin-top: 40px;
+}
+
+.button {
+  border-bottom: 1px solid #ffff;
+  border-radius: 0;
+  padding-bottom: 28px;
+  color: #ffff;
+}
+
+.button_active {
+  border-bottom: 1px solid #4c4cff;
+}

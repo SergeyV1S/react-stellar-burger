@@ -6,17 +6,21 @@ import {
 } from "@services/order-feed";
 import { getFeedRibbonOrders } from "@services/order-feed";
 import { useAppDispatch, useAppSelector } from "@services/store";
+import { useIsMobile } from "@src/context";
 import { useEffect } from "react";
 
 import { Spinner } from "@components/loader";
 import { OrderList } from "@components/order-list";
 
+import { OrderFeedMobile } from "./components";
+import { FeedStatistic } from "./components/statistic";
 import orderFeedStyles from "./order-feed.module.css";
 
 export const OrderFeedPage = () => {
   const dispatch = useAppDispatch();
   const orderRibbon = useAppSelector(getFeedRibbonOrders);
   const wsStatus = useAppSelector(getFeedOrderWsStatus);
+  const isMobile = useIsMobile();
 
   useEffect(() => {
     dispatch(wsOrderFeedConnectAction(`${process.env.BASE_WS_URL}/orders/all`));
@@ -28,52 +32,18 @@ export const OrderFeedPage = () => {
 
   return (
     <div className={orderFeedStyles.wrapper}>
-      <h1 className='text text_type_main-large mb-5 mt-10'>Лента заказов</h1>
+      <h1 className={orderFeedStyles.heading + " text text_type_main-large"}>Лента заказов</h1>
       {wsStatus === EWsStatuses.OPEN && orderRibbon ? (
-        <div className={orderFeedStyles.container}>
-          <section className={orderFeedStyles.orderlist_wrapper}>
-            <OrderList orders={orderRibbon.orders} path='/order-feed' />
-          </section>
-          <section className={orderFeedStyles.order_ribbon}>
-            <div className={orderFeedStyles.order_statuses}>
-              <div>
-                <h3 className='text text_type_main-medium mb-6'>Готовы:</h3>
-                <div className={orderFeedStyles.status_column}>
-                  {orderRibbon &&
-                    orderRibbon.orders
-                      .filter((orderForFilter) => orderForFilter.status === "done")
-                      .slice(0, 10)
-                      .map((order) => (
-                        <p className={`text text_type_digits-default ${orderFeedStyles.done_orders}`} key={order._id}>
-                          {order.number}
-                        </p>
-                      ))}
-                </div>
-              </div>
-              <div>
-                <h3 className='text text_type_main-medium mb-6'>В работе:</h3>
-                <div className={orderFeedStyles.status_column}>
-                  {orderRibbon &&
-                    orderRibbon.orders
-                      .filter((orderForFilter) => orderForFilter.status !== "done")
-                      .map((order) => (
-                        <p className='text text_type_digits-default' key={order._id}>
-                          {order.number}
-                        </p>
-                      ))}
-                </div>
-              </div>
-            </div>
-            <div className=''>
-              <h3 className='text text_type_main-medium'>Выполнено за все время: </h3>
-              <p className={`text text_type_digits-large ${orderFeedStyles.digits}`}>{orderRibbon.total}</p>
-            </div>
-            <div className=''>
-              <h3 className='text text_type_main-medium'>Выполнено за сегодня: </h3>
-              <p className={`text text_type_digits-large ${orderFeedStyles.digits}`}>{orderRibbon.totalToday}</p>
-            </div>
-          </section>
-        </div>
+        isMobile ? (
+          <OrderFeedMobile orderRibbon={orderRibbon} />
+        ) : (
+          <div className={orderFeedStyles.container}>
+            <section className={orderFeedStyles.orderlist_wrapper}>
+              <OrderList orders={orderRibbon.orders} path='/order-feed' />
+            </section>
+            <FeedStatistic orderRibbon={orderRibbon} isMobile={isMobile} />
+          </div>
+        )
       ) : (
         <div className='spinner_wrapper'>
           <Spinner />

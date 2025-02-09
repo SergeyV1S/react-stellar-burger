@@ -1,5 +1,5 @@
 import type { IProfileForm } from "@pages/profile/types/profileForm";
-import { checkReponse } from "@utils/checkResponse";
+import { checkReponse } from "@utils/index";
 
 import type { IGetUserResponse } from "./getUserQuery";
 

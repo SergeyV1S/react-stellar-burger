@@ -8,8 +8,8 @@ export const AppHeaderMobile = () => {
   const [isNavigationOpen, setIsNavigationOpen] = useState(false);
 
   return (
-    <>
-      <div className={appHeader.mobile_header}>
+    <div className={appHeader.mobile_header_wrapper}>
+      <div className={appHeader.mobile_header_container}>
         <img src='/logo.png' alt='logo' />
         <button onClick={() => setIsNavigationOpen(true)} className={appHeader.mobile_nav_close}>
           <ListIcon type='primary' />
@@ -40,6 +40,6 @@ export const AppHeaderMobile = () => {
           </div>
         </div>
       )}
-    </>
+    </div>
   );
 };

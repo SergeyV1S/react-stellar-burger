@@ -1,4 +1,4 @@
-import { checkReponse } from "@utils/checkResponse";
+import { checkReponse } from "@utils/index";
 
 interface IPostRefreshTokenResponse {
   success: boolean;

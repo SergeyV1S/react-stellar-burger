@@ -1,5 +1,5 @@
 import type { IResetForm } from "@pages/reset-password/types";
-import { checkReponse } from "@utils/checkResponse";
+import { checkReponse } from "@utils/index";
 
 export interface IPostResetPasswordMutationResponse {
   success: boolean;
