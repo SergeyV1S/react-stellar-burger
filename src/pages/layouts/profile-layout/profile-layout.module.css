@@ -17,6 +17,18 @@
   flex-direction: column;
 }
 
+@media screen and (max-width: 768px) {
+  .nav {
+    display: none;
+  }
+
+  .container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
 .link_button {
   color: #8585ad;
   background-color: transparent;
