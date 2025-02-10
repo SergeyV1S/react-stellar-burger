@@ -34,13 +34,16 @@ export const OrderInfo = () => {
     <div className={state ? orderInfoStyles.modal_container : orderInfoStyles.page_container}>
       {currentOrder ? (
         <div className={orderInfoStyles.content}>
-          <p className={`text text_type_digits-default ${orderInfoStyles.order_number}`}>#{currentOrder.number}</p>
+          <p className={cn("text text_type_digits-default", orderInfoStyles.order_number)}>#{currentOrder.number}</p>
           <div className={orderInfoStyles.info}>
             <h1 className={cn("text", isMobile ? "text_type_main-default" : "text_type_main-medium")}>
               {currentOrder.name}
             </h1>
             <p
-              className={`text text_type_main-default ${currentOrder.status === "done" && orderInfoStyles.done_order}`}
+              className={cn(
+                "text text_type_main-default",
+                currentOrder.status === "done" && orderInfoStyles.done_order
+              )}
             >
               {translateOrderStatus(currentOrder.status)}
             </p>
@@ -58,7 +61,7 @@ export const OrderInfo = () => {
             <p className='text text_type_main-default text_color_inactive'>
               <FormattedDate date={new Date(currentOrder.updatedAt)} />
             </p>
-            <p className={`text text_type_digits-medium ${orderInfoStyles.price}`}>
+            <p className={cn("text text_type_digits-medium", orderInfoStyles.price)}>
               <span>{countTotalOrderCost(currentOrder.ingredients)}</span>
               <CurrencyIcon type='primary' />
             </p>
