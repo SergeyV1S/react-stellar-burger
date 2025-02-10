@@ -1,6 +1,7 @@
 import { useForm } from "@hooks/useForm";
 import { useAppDispatch, useAppSelector } from "@services/store";
 import { getUserStore, updateUserAction } from "@services/user";
+import { cn } from "@src/utils";
 import { Button, EmailInput, Input, PasswordInput } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useEffect } from "react";
 
@@ -36,7 +37,7 @@ export const ProfilePage = () => {
 
   return (
     <form onSubmit={submitHandler} className={profilePageStyles.container}>
-      <h1 className={profilePageStyles.heading + " mb-6 text text_type_main-large"}>Профиль</h1>
+      <h1 className={cn(profilePageStyles.heading, "mb-6 text text_type_main-large")}>Профиль</h1>
       <Input
         name='name'
         placeholder='Имя'

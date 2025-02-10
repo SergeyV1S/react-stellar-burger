@@ -2,7 +2,8 @@
 import { useOrderList } from "@hooks/useOrderList";
 import { getCurrentOrderAction } from "@services/order";
 import { useAppDispatch, useAppSelector } from "@services/store";
-import { translateOrderStatus } from "@utils/index";
+import { useIsMobile } from "@src/context";
+import { cn, translateOrderStatus } from "@utils/index";
 import { CurrencyIcon, FormattedDate } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useEffect } from "react";
 import { useLocation, useParams } from "react-router-dom";
@@ -15,6 +16,7 @@ import { findOrderData } from "./utils/findOrderData";
 export const OrderInfo = () => {
   const { orderId } = useParams();
   const { state } = useLocation();
+  const isMobile = useIsMobile();
 
   const dispatch = useAppDispatch();
   const currentOrder = useAppSelector(findOrderData(+orderId!));
@@ -34,7 +36,9 @@ export const OrderInfo = () => {
         <div className={orderInfoStyles.content}>
           <p className={`text text_type_digits-default ${orderInfoStyles.order_number}`}>#{currentOrder.number}</p>
           <div className={orderInfoStyles.info}>
-            <h1 className='text text_type_main-medium'>{currentOrder.name}</h1>
+            <h1 className={cn("text", isMobile ? "text_type_main-default" : "text_type_main-medium")}>
+              {currentOrder.name}
+            </h1>
             <p
               className={`text text_type_main-default ${currentOrder.status === "done" && orderInfoStyles.done_order}`}
             >
@@ -42,7 +46,7 @@ export const OrderInfo = () => {
             </p>
           </div>
           <div className={orderInfoStyles.compound_container}>
-            <p className='text text_type_main-medium mb-6'>Состав:</p>
+            <p className={cn("text", isMobile ? "text_type_main-default" : "text_type_main-medium mb-6")}>Состав:</p>
             <div className={orderInfoStyles.ingredients_container}>
               {orderIngredients &&
                 orderIngredients.map((orderIngredient, index) => (

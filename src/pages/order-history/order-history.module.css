@@ -8,6 +8,17 @@
   width: 100%;
 }
 
+.heading {
+  display: none;
+}
+
+@media screen and (max-width: 768px) {
+  .heading {
+    display: block;
+    text-align: center;
+  }
+}
+
 .was_not_detected {
   text-align: center;
 }

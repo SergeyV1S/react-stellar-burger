@@ -7,6 +7,7 @@ import {
 } from "@services/profile-order";
 import { useAppDispatch, useAppSelector } from "@services/store";
 import { Spinner } from "@src/components/loader";
+import { cn } from "@src/utils";
 import { useEffect } from "react";
 
 import { OrderList } from "@components/order-list";
@@ -31,6 +32,7 @@ export const OrderHistoryPage = () => {
   return (
     <section className={orderHistoryStyles.wrapper}>
       <div className={orderHistoryStyles.container}>
+        <h1 className={cn(orderHistoryStyles.heading, "mb-6 text text_type_main-large")}>История заказов</h1>
         {wsStatus === EWsStatuses.OPEN && orderRibbon ? (
           orderRibbon.orders.length === 0 ? (
             <p className={orderHistoryStyles.was_not_detected + " text text_type_main-default"}>
