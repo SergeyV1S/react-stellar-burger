@@ -134,6 +134,8 @@
   align-items: center;
   gap: 16px;
   font-size: 20px;
+  border: none;
+  background: transparent;
   text-decoration: none;
   padding: 14px 0;
 }

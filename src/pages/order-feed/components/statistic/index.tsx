@@ -1,4 +1,5 @@
 import type { IFeedRibbonDataResponse } from "@services/order-feed";
+import { cn } from "@src/utils";
 
 import orderStatisticStyles from "./order-statistic.module.css";
 
@@ -18,7 +19,7 @@ export const FeedStatistic = ({ orderRibbon, isMobile }: IFeedStatisticProps) =>
               .filter((orderForFilter) => orderForFilter.status === "done")
               .slice(0, 10)
               .map((order) => (
-                <p className={`text text_type_digits-default ${orderStatisticStyles.done_orders}`} key={order._id}>
+                <p className={cn("text text_type_digits-default", orderStatisticStyles.done_orders)} key={order._id}>
                   {order.number}
                 </p>
               ))}
@@ -42,11 +43,27 @@ export const FeedStatistic = ({ orderRibbon, isMobile }: IFeedStatisticProps) =>
       <h3 className={isMobile ? "text text_type_main-medium" : "text text_type_main-medium"}>
         Выполнено за все время:{" "}
       </h3>
-      <p className={`text text_type_digits-large ${orderStatisticStyles.digits}`}>{orderRibbon.total}</p>
+      <p
+        className={cn(
+          "text",
+          isMobile ? "text_type_digits-medium" : "text_type_digits-large",
+          orderStatisticStyles.digits
+        )}
+      >
+        {orderRibbon.total}
+      </p>
     </div>
     <div>
       <h3 className={isMobile ? "text text_type_main-medium" : "text text_type_main-medium"}>Выполнено за сегодня: </h3>
-      <p className={`text text_type_digits-large ${orderStatisticStyles.digits}`}>{orderRibbon.totalToday}</p>
+      <p
+        className={cn(
+          "text",
+          isMobile ? "text_type_digits-medium" : "text_type_digits-large",
+          orderStatisticStyles.digits
+        )}
+      >
+        {orderRibbon.totalToday}
+      </p>
     </div>
   </section>
 );

@@ -1,6 +1,7 @@
 import { useForm } from "@hooks/useForm";
 import { useAppDispatch, useAppSelector } from "@services/store";
 import { getUserStore, loginUserAction } from "@services/user";
+import { cn } from "@src/utils";
 import { Button, EmailInput, PasswordInput } from "@ya.praktikum/react-developer-burger-ui-components";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 
@@ -28,31 +29,31 @@ export const LoginPage = () => {
 
   return (
     <form onSubmit={submitHandler} className={loginPageStyles.container}>
-      <h1 className='text text_type_main-medium'>Вход</h1>
+      <h1 className='text text_type_main-large'>Вход</h1>
       <EmailInput
         placeholder='E-mail'
         onChange={handleChange}
         value={formState.email}
         name='email'
-        extraClass='mt-6 mb-6'
+        extraClass='input mb-6 mt-6'
       />
       <PasswordInput
         placeholder='Пароль'
         onChange={handleChange}
         value={formState.password}
-        extraClass='mb-6'
+        extraClass='input mb-6'
         name='password'
       />
       <Button htmlType='submit' disabled={!formState.email || !formState.password} extraClass='mb-20'>
         Войти
       </Button>
-      <div className={`${loginPageStyles.link_container} mb-4`}>
+      <div className={cn(loginPageStyles.link_container, "mb-4")}>
         <p className='text text_type_main-default text_color_inactive'>Вы - новый пользователь?</p>
         <Link to='/register' className='text text_type_main-default'>
           Зарегестрироваться
         </Link>
       </div>
-      <div className={`${loginPageStyles.link_container}`}>
+      <div className={loginPageStyles.link_container}>
         <p className='text text_type_main-default text_color_inactive'>Забыли пароль?</p>
         <Link to='/forgot-password' className='text text_type_main-default'>
           Восстановить пароль

@@ -1,7 +1,9 @@
+import { useAppSelector } from "@services/store";
+import { getUserStore } from "@services/user";
 import { cn } from "@src/utils";
 import { BurgerIcon, CloseIcon, ListIcon, ProfileIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useState } from "react";
-import { Link, NavLink, useLocation } from "react-router-dom";
+import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
 
 import { Accordion } from "../accordion";
 import appHeaderStyles from "./app-header.module.css";
@@ -9,6 +11,8 @@ import appHeaderStyles from "./app-header.module.css";
 export const AppHeaderMobile = () => {
   const [isNavigationOpen, setIsNavigationOpen] = useState(false);
   const location = useLocation();
+  const navigate = useNavigate();
+  const { user } = useAppSelector(getUserStore);
   const isPersonalRoom = location.pathname === "/profile" || location.pathname === "/profile/orders";
 
   return (
@@ -36,25 +40,9 @@ export const AppHeaderMobile = () => {
             </button>
           </div>
           <nav className={appHeaderStyles.mobile_menu_content}>
-            <Accordion
-              heading={
-                <>
-                  <ProfileIcon type={isPersonalRoom ? "primary" : "secondary"} />
-                  <span
-                    className={cn(
-                      "text text_type_main-default",
-                      appHeaderStyles.mobile_accordion_header,
-                      isPersonalRoom ? appHeaderStyles.mobile_menu_link_not_active : "text_color_inactive"
-                    )}
-                  >
-                    Личный кабинет
-                  </span>
-                </>
-              }
-            >
+            {!user.email ? (
               <NavLink
-                to='/profile'
-                end
+                to='/login'
                 onClick={() => setIsNavigationOpen(false)}
                 className={({ isActive }) =>
                   cn(
@@ -64,29 +52,70 @@ export const AppHeaderMobile = () => {
                   )
                 }
               >
-                <span>Профиль</span>
+                {({ isActive }) => (
+                  <>
+                    <ProfileIcon type={isActive ? "primary" : "secondary"} />
+                    <span>Войти</span>
+                  </>
+                )}
               </NavLink>
-              <NavLink
-                to='/profile/orders'
-                onClick={() => setIsNavigationOpen(false)}
-                className={({ isActive }) =>
-                  cn(
-                    "text text_type_main-small",
-                    appHeaderStyles.mobile_menu_link,
-                    isActive ? appHeaderStyles.mobile_menu_link_not_active : "text_color_inactive"
-                  )
+            ) : (
+              <Accordion
+                heading={
+                  <>
+                    <ProfileIcon type={isPersonalRoom ? "primary" : "secondary"} />
+                    <span
+                      className={cn(
+                        "text text_type_main-default",
+                        appHeaderStyles.mobile_accordion_header,
+                        isPersonalRoom ? appHeaderStyles.mobile_menu_link_not_active : "text_color_inactive"
+                      )}
+                    >
+                      Личный кабинет
+                    </span>
+                  </>
                 }
               >
-                <span>История заказов</span>
-              </NavLink>
-              <Link
-                to='#'
-                onClick={() => setIsNavigationOpen(false)}
-                className={cn("text text_type_main-small text_color_inactive", appHeaderStyles.mobile_menu_link)}
-              >
-                <span>Выход</span>
-              </Link>
-            </Accordion>
+                <NavLink
+                  to='/profile'
+                  end
+                  onClick={() => setIsNavigationOpen(false)}
+                  className={({ isActive }) =>
+                    cn(
+                      "text text_type_main-small",
+                      appHeaderStyles.mobile_menu_link,
+                      isActive ? appHeaderStyles.mobile_menu_link_not_active : "text_color_inactive"
+                    )
+                  }
+                >
+                  Профиль
+                </NavLink>
+                <NavLink
+                  to='/profile/orders'
+                  onClick={() => setIsNavigationOpen(false)}
+                  className={({ isActive }) =>
+                    cn(
+                      "text text_type_main-small",
+                      appHeaderStyles.mobile_menu_link,
+                      isActive ? appHeaderStyles.mobile_menu_link_not_active : "text_color_inactive"
+                    )
+                  }
+                >
+                  История заказов
+                </NavLink>
+                <button
+                  onClick={() => {
+                    setIsNavigationOpen(false);
+                    localStorage.removeItem("access-token");
+                    localStorage.removeItem("refresh-token");
+                    navigate("/login");
+                  }}
+                  className={cn("text text_type_main-small text_color_inactive", appHeaderStyles.mobile_menu_link)}
+                >
+                  Выход
+                </button>
+              </Accordion>
+            )}
             <NavLink
               to='/'
               onClick={() => setIsNavigationOpen(false)}

@@ -24,3 +24,9 @@
 .digits {
   text-shadow: 4px 4px 32px #3333ff;
 }
+
+@media screen and (max-width: 768px) {
+  .digits {
+    text-shadow: 4px 4px 20px #3333ff;
+  }
+}

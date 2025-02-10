@@ -25,22 +25,27 @@ export const RegisterPage = () => {
 
   return (
     <form onSubmit={submitHandler} className={registerPageStyles.container}>
-      <h1 className='text text_type_main-medium'>Регистрация</h1>
+      <h1 className='text text_type_main-large'>Регистрация</h1>
       <Input
         name='name'
         placeholder='Имя'
         value={formState.name}
         onChange={handleChange}
-        extraClass='mt-6 mb-6'
+        extraClass='input mb-6 mt-6'
         errorText='Пользователь с таким именем уже существует'
-        size='default'
       />
-      <EmailInput placeholder='E-mail' onChange={handleChange} value={formState.email} name='email' extraClass='mb-6' />
+      <EmailInput
+        placeholder='E-mail'
+        onChange={handleChange}
+        value={formState.email}
+        name='email'
+        extraClass='input mb-6'
+      />
       <PasswordInput
         placeholder='Пароль'
         onChange={handleChange}
         value={formState.password}
-        extraClass='mb-6'
+        extraClass='input mb-6'
         name='password'
       />
       <Button

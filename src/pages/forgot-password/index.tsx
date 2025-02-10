@@ -30,7 +30,7 @@ export const ForgotPasswordPage = () => {
         placeholder='Введите e-mail'
         value={formState.email}
         onChange={handleChange}
-        extraClass='mt-6 mb-6'
+        extraClass='input mt-6 mb-6'
       />
       <Button htmlType='submit' disabled={!formState.email} extraClass='mb-20'>
         Восстановить

@@ -44,7 +44,7 @@ export const ProfilePage = () => {
         value={formState.name}
         onChange={handleChange}
         icon='EditIcon'
-        extraClass={"input" + " mt-6 mb-6"}
+        extraClass={"input mb-6"}
         errorText='Пользователь с таким именем уже существует'
         size='default'
       />
@@ -54,13 +54,13 @@ export const ProfilePage = () => {
         value={formState.email}
         isIcon
         name='email'
-        extraClass={"input" + " mb-6"}
+        extraClass={cn("input", "mb-6")}
       />
       <PasswordInput
         placeholder='Пароль'
         onChange={handleChange}
         value={formState.password}
-        extraClass={"input" + " mb-6"}
+        extraClass={cn("input", "mb-6")}
         name='password'
       />
       <div className={profilePageStyles.button_container}>
