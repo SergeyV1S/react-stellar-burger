@@ -9,6 +9,7 @@
   left: 1%;
   top: 35%;
 }
+
 @media screen and (max-width: 1128px) {
   .constructor_element {
     font-size: 14px;
