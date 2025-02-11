@@ -8,6 +8,7 @@ import {
 import { createOrderAction, getIsModalOrder } from "@services/order";
 import { useAppDispatch, useAppSelector } from "@services/store";
 import { getUserStore } from "@services/user";
+import { cn } from "@src/utils";
 import { Button, ConstructorElement, CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useMemo } from "react";
 import { useDrop } from "react-dnd";
@@ -69,6 +70,7 @@ export const BurgerConstructor = () => {
         <div className={burgerConstructor.bun_wrapper} data-testid='up_bun_constructor_item'>
           {bun ? (
             <ConstructorElement
+              extraClass={burgerConstructor.constructor_element}
               type='top'
               isLocked={true}
               text={bun.name + " (верх)"}
@@ -76,9 +78,7 @@ export const BurgerConstructor = () => {
               thumbnail={bun.image}
             />
           ) : (
-            <div
-              className={`${burgerConstructor.no_ingredients_container} ${burgerConstructor.no_bun_top} ${bunDndtyles}`}
-            >
+            <div className={cn(burgerConstructor.no_ingredients_container, burgerConstructor.no_bun_top, bunDndtyles)}>
               <p className='text text_type_main-default'>Перетащите булку в эту область</p>
             </div>
           )}
@@ -95,7 +95,7 @@ export const BurgerConstructor = () => {
               />
             ))
           ) : (
-            <div className={`${burgerConstructor.no_ingredients_container} ${ingredientDndStyles}`}>
+            <div className={cn(burgerConstructor.no_ingredients_container, ingredientDndStyles)}>
               <p className='text text_type_main-default'>Перетащите ингредиент в эту область</p>
             </div>
           )}
@@ -103,6 +103,7 @@ export const BurgerConstructor = () => {
         <div className={burgerConstructor.bun_wrapper} data-testid='down_bun_constructor_item'>
           {bun ? (
             <ConstructorElement
+              extraClass={burgerConstructor.constructor_element}
               type='bottom'
               isLocked={true}
               text={bun.name + " (низ)"}
@@ -111,7 +112,7 @@ export const BurgerConstructor = () => {
             />
           ) : (
             <div
-              className={`${burgerConstructor.no_ingredients_container} ${burgerConstructor.no_bun_bottom} ${bunDndtyles}`}
+              className={cn(burgerConstructor.no_ingredients_container, burgerConstructor.no_bun_bottom, bunDndtyles)}
             >
               <p className='text text_type_main-default'>Перетащите булку в эту область</p>
             </div>

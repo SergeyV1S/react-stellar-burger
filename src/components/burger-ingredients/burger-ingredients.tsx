@@ -1,6 +1,8 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { getIngredientModal, getIngredientsState } from "@services/ingredient";
 import { useAppSelector } from "@services/store";
+import { useIsMobile } from "@src/context";
+import { cn } from "@src/utils";
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useRef, useState } from "react";
 
@@ -14,6 +16,7 @@ import { checkTabPosition } from "./utils";
 export const BurgerIngredients = () => {
   // Хуки
   const [currentTab, setCurrentTab] = useState("bun");
+  const isMobile = useIsMobile();
 
   const { data } = useAppSelector(getIngredientsState);
   const { isSelectedIngredientModalOpen } = useAppSelector(getIngredientModal);
@@ -48,7 +51,7 @@ export const BurgerIngredients = () => {
 
   return (
     <section className={burgerIngredients.container}>
-      <h1 className='text text_type_main-large'>Соберите бургер</h1>
+      <h1 className={cn("text pl-5", isMobile ? "text_type_main-medium" : "text_type_main-large")}>Соберите бургер</h1>
       <div className={burgerIngredients.tab_menu_container}>
         <Tab value='bun' active={currentTab === "bun"} onClick={selectTab}>
           Булки
@@ -63,7 +66,7 @@ export const BurgerIngredients = () => {
       <div ref={ingredientsRef} onScroll={checkPosition} className={burgerIngredients.ingredients}>
         {ingredientTypesData.map((ingredientType) => (
           <div key={ingredientType.type}>
-            <h2 ref={ingredientType.ref} id={ingredientType.type} className='text text_type_main-medium'>
+            <h2 ref={ingredientType.ref} id={ingredientType.type} className='text text_type_main-medium ml-5'>
               {ingredientType.name}
             </h2>
             <div className={burgerIngredients.type_block_container}>
