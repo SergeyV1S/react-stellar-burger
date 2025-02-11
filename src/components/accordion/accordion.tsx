@@ -2,7 +2,7 @@ import { cn } from "@src/utils";
 import { ChevronDown, ChevronUp } from "lucide-react";
 import { useState } from "react";
 
-import accordionStyles from "./Accordion.module.css";
+import accordionStyles from "./accordion.module.css";
 
 interface IAccordionProps extends React.ComponentProps<"button"> {
   heading: string | React.ReactNode;
