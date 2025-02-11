@@ -13,3 +13,9 @@
   justify-content: center;
   gap: 8px;
 }
+
+@media screen and (max-width: 500px) {
+  .link_container {
+    flex-direction: column;
+  }
+}

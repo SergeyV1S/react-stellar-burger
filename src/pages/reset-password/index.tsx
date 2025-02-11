@@ -32,7 +32,7 @@ export const ResetPasswordPage = () => {
         placeholder='password'
         value={formState.password}
         onChange={handleChange}
-        extraClass='mt-6 mb-6'
+        extraClass='input mt-6 mb-6'
         size='default'
       />
       <Input
@@ -40,7 +40,7 @@ export const ResetPasswordPage = () => {
         placeholder='Введите код из письма'
         value={formState.token}
         onChange={handleChange}
-        extraClass='mt-6 mb-6'
+        extraClass='input mt-6 mb-6'
         errorText='Введите код из письма'
         size='default'
       />

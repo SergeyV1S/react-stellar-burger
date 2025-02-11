@@ -1,6 +1,6 @@
 .compound_item {
   display: grid;
-  grid-template-columns: 64px 1fr 200px;
+  grid-template-columns: 64px 1fr 120px;
   align-items: center;
   column-gap: 16px;
 }
@@ -16,8 +16,10 @@
   margin-left: -12px;
   background: linear-gradient(64deg, #801ab2, #4c4cff);
   color: #ffffff;
-  font-weight: normal;
-  font-size: 24px;
+}
+
+.body {
+  text-wrap: wrap;
 }
 
 .image_wrapper::before {
@@ -45,4 +47,33 @@
   align-items: center;
   justify-content: center;
   gap: 8px;
+}
+
+@media screen and (max-width: 500px) {
+  .compound_item {
+    grid-template-columns: 36px 1fr 95px;
+  }
+
+  .price {
+    font-size: 18px;
+  }
+
+  .body {
+    font-size: 14px;
+  }
+
+  .image_wrapper {
+    width: 39px;
+    height: 39px;
+  }
+
+  .image_wrapper::before {
+    width: 35px;
+    height: 35px;
+  }
+
+  .image {
+    height: 25px;
+    z-index: 1;
+  }
 }

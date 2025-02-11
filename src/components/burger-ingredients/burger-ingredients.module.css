@@ -1,5 +1,6 @@
 .container {
   margin-top: 40px;
+  flex-basis: 50%;
 }
 
 .type_block_container {
@@ -20,6 +21,37 @@
 }
 
 .tab_menu_container {
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
   margin-top: 20px;
+}
+
+@media screen and (max-width: 1000px) {
+  .container {
+    flex-basis: 100%;
+  }
+  .type_block_container {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .tab_menu_container {
+    margin: 0 20px;
+  }
+}
+
+@media screen and (max-width: 640px) {
+  .type_block_container {
+    grid-template-columns: repeat(2, 1fr);
+    justify-items: center;
+  }
+
+  .type_block_container {
+    gap: 0;
+  }
+
+  .tab_menu_container {
+    grid-template-columns: repeat(1, 1fr);
+  }
 }

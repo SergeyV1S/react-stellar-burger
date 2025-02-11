@@ -1,6 +1,4 @@
 .ingredients_container {
-  padding-left: 32px;
-  padding-right: 8px;
   position: relative;
   cursor: grab;
   transition: transform 0.3s ease;
@@ -8,6 +6,12 @@
 
 .drag_icon_wrapper {
   position: absolute;
-  left: 0;
+  left: 1%;
   top: 35%;
+}
+
+@media screen and (max-width: 1128px) {
+  .constructor_element {
+    font-size: 14px;
+  }
 }

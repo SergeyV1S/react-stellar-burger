@@ -63,6 +63,7 @@ export const IngredientElement = ({ removeIngredient, ingredient, index, moveIng
         <DragIcon type='primary' />
       </div>
       <ConstructorElement
+        extraClass={burgerIngredientElement.constructor_element}
         handleClose={() => removeIngredient(ingredient)}
         text={ingredient.name}
         price={ingredient.price}

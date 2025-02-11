@@ -3,6 +3,33 @@
   max-width: 480px;
 }
 
+.heading {
+  display: none;
+  text-align: center;
+}
+
 .button_container {
   text-align: end;
+}
+
+.button {
+  margin-bottom: 80px;
+}
+
+@media screen and (max-width: 768px) {
+  .button_container {
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: center;
+    gap: 10px;
+    text-align: center;
+  }
+
+  .heading {
+    display: block;
+  }
+
+  .button {
+    margin-bottom: 0px;
+  }
 }

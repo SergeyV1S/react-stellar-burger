@@ -1,6 +1,6 @@
 import type { IUser } from "@interfaces/user";
 
-import { fetchWithRefresh } from "../utils/fetchWithRefresh";
+import { fetchWithRefresh } from "../utils";
 
 export interface IGetUserResponse {
   success: boolean;

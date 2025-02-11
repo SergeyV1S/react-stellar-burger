@@ -1,6 +1,6 @@
 import type { IIngredient } from "@interfaces/ingredient";
 import type { EOrderStatus } from "@interfaces/order";
-import { translateOrderStatus } from "@utils/translateOrderStatus";
+import { translateOrderStatus } from "@utils/index";
 import { CurrencyIcon, FormattedDate } from "@ya.praktikum/react-developer-burger-ui-components";
 import { Link, useLocation } from "react-router-dom";
 

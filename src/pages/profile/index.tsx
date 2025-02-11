@@ -1,6 +1,7 @@
 import { useForm } from "@hooks/useForm";
 import { useAppDispatch, useAppSelector } from "@services/store";
 import { getUserStore, updateUserAction } from "@services/user";
+import { cn } from "@src/utils";
 import { Button, EmailInput, Input, PasswordInput } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useEffect } from "react";
 
@@ -36,13 +37,14 @@ export const ProfilePage = () => {
 
   return (
     <form onSubmit={submitHandler} className={profilePageStyles.container}>
+      <h1 className={cn(profilePageStyles.heading, "mb-6 text text_type_main-large")}>Профиль</h1>
       <Input
         name='name'
         placeholder='Имя'
         value={formState.name}
         onChange={handleChange}
         icon='EditIcon'
-        extraClass='mt-6 mb-6'
+        extraClass={"input mb-6"}
         errorText='Пользователь с таким именем уже существует'
         size='default'
       />
@@ -52,13 +54,13 @@ export const ProfilePage = () => {
         value={formState.email}
         isIcon
         name='email'
-        extraClass='mb-6'
+        extraClass={cn("input", "mb-6")}
       />
       <PasswordInput
         placeholder='Пароль'
         onChange={handleChange}
         value={formState.password}
-        extraClass='mb-6'
+        extraClass={cn("input", "mb-6")}
         name='password'
       />
       <div className={profilePageStyles.button_container}>
@@ -72,7 +74,7 @@ export const ProfilePage = () => {
           }
           htmlType='reset'
           type='secondary'
-          extraClass='mb-20'
+          extraClass={profilePageStyles.button}
         >
           Отмена
         </Button>
@@ -84,7 +86,7 @@ export const ProfilePage = () => {
               formState.password === formState.defaultPassword) ||
             isLoading
           }
-          extraClass='mb-20'
+          extraClass={profilePageStyles.button}
         >
           Сохранить
         </Button>

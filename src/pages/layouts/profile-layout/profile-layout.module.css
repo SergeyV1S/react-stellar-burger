@@ -17,6 +17,29 @@
   flex-direction: column;
 }
 
+@media screen and (max-width: 880px) {
+  .container {
+    grid-template-columns: 230px 1fr;
+    column-gap: 40px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .nav {
+    display: none;
+  }
+
+  .wrapper {
+    height: 80vh;
+  }
+
+  .container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
 .link_button {
   color: #8585ad;
   background-color: transparent;

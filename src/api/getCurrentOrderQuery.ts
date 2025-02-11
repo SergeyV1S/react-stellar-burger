@@ -1,5 +1,5 @@
 import type { IFeedOrderData } from "@interfaces/order";
-import { checkReponse } from "@utils/checkResponse";
+import { checkReponse } from "@utils/index";
 
 export interface IGetCurrentOrderResponse {
   success: boolean;
