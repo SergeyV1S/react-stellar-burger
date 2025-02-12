@@ -7,6 +7,7 @@ import {
 import { getFeedRibbonOrders } from "@services/order-feed";
 import { useAppDispatch, useAppSelector } from "@services/store";
 import { useIsMobile } from "@src/context";
+import { cn } from "@src/utils";
 import { useEffect } from "react";
 
 import { Spinner } from "@components/loader";
@@ -32,7 +33,7 @@ export const OrderFeedPage = () => {
 
   return (
     <div className={orderFeedStyles.wrapper}>
-      <h1 className={orderFeedStyles.heading + " text text_type_main-large"}>Лента заказов</h1>
+      <h1 className={cn(orderFeedStyles.heading, "text text_type_main-large")}>Лента заказов</h1>
       {wsStatus === EWsStatuses.OPEN && orderRibbon ? (
         isMobile ? (
           <OrderFeedMobile orderRibbon={orderRibbon} />

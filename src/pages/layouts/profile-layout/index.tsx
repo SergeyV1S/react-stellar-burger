@@ -1,5 +1,6 @@
 import { useAppDispatch } from "@services/store";
 import { logoutUserAction } from "@services/user";
+import { cn } from "@src/utils";
 import { Button } from "@ya.praktikum/react-developer-burger-ui-components";
 import { NavLink, Outlet, useMatch, useNavigate } from "react-router-dom";
 
@@ -20,7 +21,7 @@ export const ProfileLayout = () => {
             to='/profile'
             end
             className={({ isActive }) =>
-              (isActive ? profileLayout.active_link : profileLayout.link) + " text text_type_main-medium"
+              cn(isActive && profileLayout.active_link, profileLayout.link, "text text_type_main-medium")
             }
           >
             Профиль
@@ -28,7 +29,7 @@ export const ProfileLayout = () => {
           <NavLink
             to='/profile/orders'
             className={({ isActive }) =>
-              (isActive ? profileLayout.active_link : profileLayout.link) + " text text_type_main-medium"
+              cn(isActive && profileLayout.active_link, profileLayout.link, "text text_type_main-medium")
             }
           >
             История заказов
@@ -36,7 +37,7 @@ export const ProfileLayout = () => {
           <Button
             htmlType='button'
             onClick={logout}
-            className={profileLayout.link_button + " text text_type_main-medium"}
+            className={cn(profileLayout.link_button, "text text_type_main-medium")}
           >
             Выйти
           </Button>
