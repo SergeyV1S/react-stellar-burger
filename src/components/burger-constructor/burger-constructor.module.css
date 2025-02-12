@@ -1,25 +1,27 @@
 .wrapper {
   margin-top: 100px;
   flex-basis: 50%;
+  width: 100%;
 }
 
 .burger_constructor_wrapper {
   display: flex;
   flex-direction: column;
   gap: 16px;
-}
-
-.content {
-  position: relative;
+  width: 100%;
+  align-items: end;
 }
 
 .ingredients_wrapper {
   display: flex;
-  flex-direction: column;
   gap: 16px;
+  align-items: center;
+  justify-content: center;
   height: 100%;
-  max-height: 464px;
-  overflow-y: scroll;
+  flex-direction: column;
+  width: 100%;
+  max-height: 40vh;
+  overflow-y: auto;
 }
 
 .button_container {
@@ -45,6 +47,13 @@
 
 .no_ingredients_dnd_hover {
   border: 1px dashed green;
+}
+
+.bun_wrapper {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .no_bun_top {

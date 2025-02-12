@@ -1,6 +1,6 @@
 import type { IIngredient } from "@interfaces/ingredient";
 import type { EOrderStatus } from "@interfaces/order";
-import { translateOrderStatus } from "@utils/index";
+import { cn, translateOrderStatus } from "@utils/index";
 import { CurrencyIcon, FormattedDate } from "@ya.praktikum/react-developer-burger-ui-components";
 import { Link, useLocation } from "react-router-dom";
 
@@ -38,10 +38,13 @@ export const OrderCard = ({
           <FormattedDate className='text text_type_main-default text_color_inactive' date={new Date(createdAt)} />
         </div>
         <div>
-          <p className={`text text_type_main-medium text_color_primary ${orderCardStyles.title}`}>{name}</p>
+          <p className={cn("text text_type_main-medium text_color_primary", orderCardStyles.title)}>{name}</p>
           {isProfile && (
             <p
-              className={`text text_type_main-default text_color_primary mt-2 ${status === "done" && orderCardStyles.done_order}`}
+              className={cn(
+                "text text_type_main-default text_color_primary mt-2",
+                status === "done" && orderCardStyles.done_order
+              )}
             >
               {translateOrderStatus(status)}
             </p>
@@ -58,7 +61,7 @@ export const OrderCard = ({
               />
             ))}
           </div>
-          <p className={`text text_type_digits-default ${orderCardStyles.cost}`}>
+          <p className={cn("text text_type_digits-default", orderCardStyles.cost)}>
             {totalCost}
             <CurrencyIcon type='primary' />
           </p>

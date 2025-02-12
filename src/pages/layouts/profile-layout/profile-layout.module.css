@@ -47,6 +47,11 @@
   cursor: pointer;
   text-align: left;
   height: 64px;
+  transition: color 0.2s linear;
+}
+
+.link_button:hover {
+  color: #4c4cff;
 }
 
 .link {
@@ -54,11 +59,13 @@
   align-items: center;
   color: #8585ad;
   height: 64px;
+  transition: color 0.2s linear;
+}
+
+.link:hover {
+  color: #4c4cff;
 }
 
 .active_link {
-  display: flex;
-  align-items: center;
   color: white;
-  height: 64px;
 }

@@ -1,15 +1,16 @@
+import { cn } from "@src/utils";
 import { BurgerIcon, ListIcon, Logo, ProfileIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import { NavLink } from "react-router-dom";
 
 import appHeader from "./app-header.module.css";
 
 export const AppHeader = () => (
-  <header className={appHeader.wrapper + " pt-4 pb-4"}>
+  <header className={cn(appHeader.wrapper, "pt-4 pb-4")}>
     <div className={appHeader.container}>
       <nav className={appHeader.nav}>
         <NavLink
           to='/'
-          className={({ isActive }) => (isActive ? appHeader.active_link : appHeader.link) + " pl-5 pr-5 pb-4 pt-4"}
+          className={({ isActive }) => cn(isActive && appHeader.active_link, appHeader.link, "pl-5 pr-5 pb-4 pt-4")}
         >
           {({ isActive }) => (
             <>
@@ -20,7 +21,7 @@ export const AppHeader = () => (
         </NavLink>
         <NavLink
           to='order-feed'
-          className={({ isActive }) => (isActive ? appHeader.active_link : appHeader.link) + " pl-5 pr-5 pb-4 pt-4"}
+          className={({ isActive }) => cn(isActive && appHeader.active_link, appHeader.link, "pl-5 pr-5 pb-4 pt-4")}
         >
           {({ isActive }) => (
             <>
@@ -35,7 +36,7 @@ export const AppHeader = () => (
       </div>
       <NavLink
         to='/profile'
-        className={({ isActive }) => (isActive ? appHeader.active_link : appHeader.link) + " pl-5 pr-5 pb-4 pt-4"}
+        className={({ isActive }) => cn(isActive && appHeader.active_link, appHeader.link, "pl-5 pr-5 pb-4 pt-4")}
       >
         {({ isActive }) => (
           <>

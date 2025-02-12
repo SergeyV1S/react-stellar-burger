@@ -35,7 +35,7 @@ export const OrderHistoryPage = () => {
         <h1 className={cn(orderHistoryStyles.heading, "mb-6 text text_type_main-large")}>История заказов</h1>
         {wsStatus === EWsStatuses.OPEN && orderRibbon ? (
           orderRibbon.orders.length === 0 ? (
-            <p className={orderHistoryStyles.was_not_detected + " text text_type_main-default"}>
+            <p className={cn(orderHistoryStyles.was_not_detected, "text text_type_main-default")}>
               Недавних заказов не обнаружено
             </p>
           ) : (
