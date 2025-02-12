@@ -15,7 +15,13 @@
   margin: 40px;
 }
 
+.image {
+  width: 100%;
+  height: 100%;
+}
+
 .ingredients {
+  width: 100%;
   display: flex;
   flex-direction: column;
   text-align: center;
@@ -35,4 +41,14 @@
   flex-direction: column;
   gap: 8px;
   align-items: center;
+}
+
+@media screen and (max-width: 640px) {
+  .compound_container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+  }
 }
