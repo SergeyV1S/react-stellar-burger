@@ -2,11 +2,11 @@
 
 ---
 
-##This project was completed as part of the training program "React developer" in Yandex Practicum.
+## This project was completed as part of the training program "React developer" in Yandex Practicum.
 
 [Project link](https://stellar-burger.igniz.ru/)
 
-###The project used technologies such as: React, ReduxToolkit, ReactDND, React-Router-Dom, WebsocketAPI, Jest, Cypress.
+### The project used technologies such as: React, ReduxToolkit, ReactDND, React-Router-Dom, WebsocketAPI, Jest, Cypress.
 
 ---
 
